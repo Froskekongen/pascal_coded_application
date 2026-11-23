@@ -1,0 +1,351 @@
+\section{Smartphone activity recognition on held-out subjects (UCI HAR)}
+\label{app:har}
+
+\subsection{Split, representation summary, and fitting protocol}
+The UCI Human Activity Recognition (HAR) benchmark~\cite{har} records six
+smartphone activities (walking, walking upstairs, walking downstairs, sitting,
+standing, and laying) at \(50\,\mathrm{Hz}\) in fixed windows of \(R = 128\)
+samples (\(2.56\,\mathrm{s}\)). We use the official subject-disjoint partition:
+\(7{,}352\) training windows from \(21\) participants and \(2{,}947\) test
+windows from \(9\) held-out participants. Each window supplies three-axis body
+acceleration \(b_r \in \R^3\), angular velocity \(\omega_r \in \R^3\), and total
+acceleration \(a_r \in \R^3\), from which we form the gravitational component
+\(g_r = a_r - b_r\). No additional filtering or re-segmentation is applied.
+
+Recognizing both static postures and dynamic gaits with a single linear readout
+calls for complementary views of each window: gravitational orientation and
+ordered cross-axis motion in the time domain, oscillation cadence and harmonic
+spread in the frequency domain, and frame-invariant magnitude, alignment, and
+short-lag persistence. The \emph{compact368} representation concatenates three
+corresponding branches whose feature counts are summarized up front in
+Table~\ref{tab:compact-blocks}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\emph{compact368} component & Nominal & Retained \\
+\midrule
+Raw sensor \(P=3\) QR-Pascal depth-two logsignature (\(18\) channels) & 171 & 171 \\
+Spectral shape (\(20\) scalar \(P=3\) QR-Pascal depth-two logsignatures) & 120 & 100 \\
+Spectral scale (mean and std of unnormalized bin amplitudes, \(20\) signals) & 40 & 40 \\
+Quadratic geometric streams (mean, std, skewness of \(12\) streams) & 36 & 36 \\
+Instantaneous cosine alignment (mean and std of \(3\) cross-triad streams) & 6 & 6 \\
+Window-level linear trends (\(q_1\)-weighted trend across all \(15\) streams) & 15 & 15 \\
+\midrule
+Total & 388 & 368 \\
+\bottomrule
+\end{tabular}
+\caption{Feature breakdown of \emph{compact368} before and after applying the
+training-only variance mask, which removes the \(20\) constant unit-mass
+spectral endpoints.}
+\label{tab:compact-blocks}
+\end{table}
+
+Every experiment on the official UCI HAR split in this section uses an identical,
+strictly training-fitted preprocessing and classification pipeline:
+\begin{enumerate}
+\item \emph{Sensor calibration:} All per-axis training means and standard
+deviations (raw and spectral branches) and per-triad root-mean-square scales
+(geometric branch) are estimated across the \(7{,}352\) training windows only
+and applied unchanged to test windows.
+\item \emph{Constant-column variance mask:} Before fitting the classifier,
+feature column \(j\) is discarded if its training population standard deviation
+satisfies \(\sigma^{\mathrm{train}}_j \leq 10^{-6}\max_i |F^{\mathrm{train}}_{ij}|\).
+On HAR this removes precisely the \(20\) unit-sum spectral endpoints, leaving
+\(368\) columns.
+\item \emph{Feature standardization and ridge readout:} Each retained column is
+standardized using its training mean and training population standard deviation.
+Writing \(F \in \R^{N_{\mathrm{train}} \times d}\) for the standardized feature
+matrix and \(Y \in \{\pm 1\}^{N_{\mathrm{train}} \times 6}\) for one-versus-rest
+target indicators (\(+1\) for the target activity, \(-1\) otherwise), we solve
+the closed-form ridge problem with an unpenalized intercept \(b \in \R^6\) and
+fixed penalty \(\alpha = 10\):
+\begin{equation}\label{eq:har-ridge}
+ \min_{b \in \R^6,\, W \in \R^{d \times 6}}
+ \|Y - \mathbf 1 b^\top - F W\|_F^2 + \alpha \|W\|_F^2.
+\end{equation}
+Test windows are standardized with the frozen training parameters and assigned
+to \(\arg\max_{c} \bigl(b_c + (F_{\mathrm{test}} W)_{ic}\bigr)\).
+\end{enumerate}
+
+\subsection{Specification of the three feature branches}
+
+\paragraph{1. Raw sensor branch: posture levels and temporal order (171 features).}
+To preserve static gravitational orientation across windows, we take the six raw
+channels \((a_r, \omega_r) \in \R^6\) and standardize each axis using the global
+mean and population standard deviation computed across all \(7{,}352 \times 128\)
+training samples, \emph{without} centering individual windows. Denoting the
+standardized reading at sample \(r \in \{0, \ldots, 127\}\) by \(x_r \in \R^6\),
+we treat scaled readings \(x_r / 128\) as increments and lift them with the
+\(P = 3\) orthonormal QR-Pascal weights \(q_p(r)\) of Section~\ref{app:qr}:
+\[
+ v_r^{(c, p)} = \frac{x_r^c\,q_p(r)}{128},
+ \qquad c \in \{1, \ldots, 6\},\quad p \in \{0, 1, 2\}.
+\]
+Lifted coordinates are ordered by sensor axis \(c\) first and QR copy \(p\)
+second, and accumulated from \(y_0 = 0\) without an added clock channel. Because
+\(q_0(r) = 1/\sqrt{128}\), the constant-copy endpoint equals
+\(\sum_{r=0}^{127} x_r^c / 128^{3/2} = \bar x^c / \sqrt{128}\), retaining the
+window mean alongside linear and quadratic temporal moments and ordered
+cross-channel areas. The depth-two logsignature of this \(18\)-channel path
+contributes \(18\) endpoints and \(\binom{18}{2} = 153\) signed areas
+\(J_{ij} = \tfrac12(B_{ij} - B_{ji})\), totaling \(171\) features.
+
+\paragraph{2. Spectral branch: frequency shape and amplitude scale (140 retained features).}
+To summarize rhythmic cadence and harmonic spread, we start from five
+three-axis triads: \(b, g, \omega\) (length \(n = 128\)) and the
+unscaled first differences \(\Delta b_r = b_{r+1} - b_r\) and
+\(\Delta \omega_r = \omega_{r+1} - \omega_r\) (length \(n = 127\)). Each triad is
+standardized per axis using training-set statistics as in the raw branch, after
+which we append its instantaneous Euclidean norm \(\|x_r\|\) \emph{in the time
+domain} to obtain \(20\) scalar signals (\(12\) of length \(128\) and \(8\) of
+length \(127\)). Forming \(\|x_r\|\) prior to the Fourier transform captures
+nonlinear envelope modulations; its power spectrum is distinct from the sum of
+the three individual axis spectra. The power spectrum of each resulting scalar
+signal is invariant under circular shifts of that signal. A circular shift of
+the raw window can change its first-difference spectra, since differencing
+omits the wraparound step.
+
+For each scalar signal \(x_0, \ldots, x_{n-1}\), we compute the Parseval-scaled
+one-sided discrete Fourier power spectrum over \(K = \lfloor n/2 \rfloor + 1\)
+bins (\(K = 65\) for \(n = 128\), \(K = 64\) for \(n = 127\)):
+\[
+ \widehat x_k = \sum_{r=0}^{n-1} x_r e^{-2\pi i k r / n}, \qquad
+ e_k = w_k \left|\frac{\widehat x_k}{n}\right|^2, \qquad
+ E = \sum_{k=0}^{K-1} e_k = \frac{1}{n}\sum_{r=0}^{n-1} x_r^2,
+\]
+where \(w_k = 1\) at DC (\(k = 0\)) and, when \(n\) is even, at the Nyquist bin
+(\(k = n/2\)), and \(w_k = 2\) at all other bins, including the highest bin for
+odd \(n\). Normalized power shares are \(p_k = e_k / E\), and unnormalized bin
+amplitudes are
+\(a_k = \sqrt{e_k}\). Treating each signal's shares \(p_k\) independently as
+scalar increments ordered by bin \(k = 0, \ldots, K-1\) and lifting with the
+three QR weights \((q_0(k), q_1(k), q_2(k))\) gives \(3 + \binom{3}{2} = 6\)
+depth-two logsignature coordinates per spectrum, with the three areas stored at
+scale \(\sqrt 2\,J_{ij} = (B_{ij} - B_{ji})/\sqrt 2\) as analyzed
+in~\eqref{eq:spectral-qr-scale}. Because \(\sum_{k=0}^{K-1} p_k = 1\), the first
+endpoint \(q_0(0)\sum_k p_k = 1/\sqrt K\) is constant across windows and removed
+by the variance mask, leaving \(20 \times 5 = 100\) nonconstant spectral-shape
+features (with no cross-spectrum areas). Appending the mean and population
+standard deviation of \(a_0, \ldots, a_{K-1}\) for each signal adds
+\(20 \times 2 = 40\) amplitude-scale features.
+
+\paragraph{3. Geometric branch: magnitude, persistence, and alignment (57 features).}
+To capture sensor intensity, inter-triad alignment, and short-lag autocorrelation
+independently of coordinate-axis sign conventions, we calibrate the uncentered
+physical triads \(b, g, \omega\) by dividing each triad by its scalar root mean
+square over all three axes, time samples, and training windows. Using one scalar
+RMS per triad rather than per-axis centering ensures that the calibrated vectors
+\(u_1(r), u_2(r), u_3(r) \in \R^3\) transform covariantly under any constant
+orthogonal rotation \(O \in \mathrm{O}(3)\) applied simultaneously to all three
+triads. From \(u_1, u_2, u_3\) we form \(12\) rotation-invariant quadratic
+streams,
+\[
+ \|u_i(r)\|^2 \quad (1 \leq i \leq 3), \qquad
+ \langle u_i(r), u_j(r)\rangle \quad (1 \leq i < j \leq 3), \qquad
+ \langle u_i(r), u_i(r - \tau)\rangle \quad (1 \leq i \leq 3;\ \tau \in \{2, 5\}),
+\]
+where lags \(\tau = 2\) and \(\tau = 5\) correspond to \(40\,\mathrm{ms}\) and
+\(100\,\mathrm{ms}\) (giving valid lengths \(L = 128, 126, 123\)), together with
+three instantaneous cosine-similarity streams
+\(\langle u_i(r), u_j(r)\rangle / (\|u_i(r)\|\|u_j(r)\|)\) (\(1 \leq i < j \leq 3\)).
+Within each window, every stream \(z_0, \ldots, z_{L-1}\) contributes its mean
+\(\bar z\) and population standard deviation \(\sigma_z\); each of the \(12\)
+quadratic streams additionally contributes its skewness
+\(L^{-1}\sum_{r=0}^{L-1} y_r^3\), where \(y_r = (z_r - \bar z)/\sigma_z\); and all
+\(15\) streams contribute their linear QR-Pascal trend
+\[
+ T(z) = \frac{1}{L}\sum_{r=0}^{L-1} q_1(r) y_r,
+\]
+which is positive when standardized stream values increase toward the end of the
+window. Taken alone, these \(36 + 6 + 15 = 57\) features constitute the
+\emph{geometry57} representation.
+
+\begin{remark}[Numerical safeguards and archived floating-point conventions]
+To guard against degenerate denominators without altering well-conditioned
+windows, per-axis training standard deviations and per-triad training RMS scales
+are floored at \(10^{-8}\); spectral total power uses \(\max(E, 10^{-20})\),
+with a unit-mass check after normalization that rejects zero-power inputs
+(all evaluated HAR spectra summed to one to machine precision);
+cosine-similarity denominators use \(\max(\|u_i\|\|u_j\|, 10^{-12})\);
+and within-window standardized streams set \(y_r = 0\) identically whenever
+\(\sigma_z^2 \leq 10^{-12}\) (otherwise flooring \(\sigma_z\) at \(10^{-8}\)). To
+follow the archived rounding convention, raw and spectral signature tensors
+are accumulated in binary64 and cast to binary32 immediately before extracting
+upper-triangular areas, whereas geometric summaries and the ridge solve remain in
+binary64 (\nolinkurl{reproduction/uci_har.py}).
+\end{remark}
+
+\subsection{Standalone blocks, supplied baseline, and single-block deletions}
+\label{app:ablations}
+On the \(2{,}947\) held-out subject test windows, \emph{compact368} achieves
+\(98.03\%\) accuracy (\(58\) errors). Two complementary ablations clarify how its
+components contribute to the \(\alpha = 10\) linear readout: fitting the readout
+to individual blocks in isolation (Table~\ref{tab:har-standalone}), and removing
+one block at a time from the full representation (Table~\ref{tab:har-deletions}).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Standalone representation or baseline & Features & Accuracy (\%) & Errors \\
+\midrule
+Raw QR-Pascal logsignature only & 171 & 81.98 & 531 \\
+Spectral QR-Pascal shape only (no amplitude scale) & 100 & 82.90 & 504 \\
+Geometric branch (\emph{geometry57}) only & 57 & 85.14 & 438 \\
+Supplied UCI HAR hand-engineered baseline & 561 & 95.72 & 126 \\
+Full \emph{compact368} & 368 & 98.03 & 58 \\
+\bottomrule
+\end{tabular}
+\caption{Standalone branch evaluations and the 561-feature benchmark baseline on
+the official subject-disjoint UCI HAR split (\(2{,}947\) test windows) under the
+identical \(\alpha = 10\) ridge readout.}
+\label{tab:har-standalone}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Leave-one-out deletion from \emph{compact368} & Retained features & Accuracy (\%) & Errors & \(\Delta\) Errors \\
+\midrule
+All blocks retained (\emph{compact368}) & 368 & 98.03 & 58 & \(0\) \\
+Remove raw QR-Pascal branch (\(171\)) & 197 & 96.17 & 113 & \(+55\) \\
+Remove spectral QR-Pascal shape (\(100\)) & 268 & 96.78 & 95 & \(+37\) \\
+Remove spectral amplitude mean/std (\(40\)) & 328 & 97.15 & 84 & \(+26\) \\
+Remove cross-triad cosine mean/std (\(6\)) & 362 & 96.34 & 108 & \(+50\) \\
+Remove quadratic stream mean/std/skew (\(36\)) & 332 & 97.42 & 76 & \(+18\) \\
+Remove geometric/cosine linear trends (\(15\)) & 353 & 97.86 & 63 & \(+5\) \\
+\bottomrule
+\end{tabular}
+\caption{Single-block deletions from \emph{compact368} on the official
+subject-disjoint UCI HAR split (\(2{,}947\) test windows).}
+\label{tab:har-deletions}
+\end{table}
+
+Taken alone, each individual branch makes between \(438\) and \(531\) errors
+(\(81.98\%\)--\(85.14\%\)), well below both the 561-feature engineered baseline
+(\(95.72\%\), \(126\) errors) and their concatenation (\(98.03\%\), \(58\)
+errors). Conversely, Table~\ref{tab:har-deletions} shows that deleting any major
+component substantially increases test errors even when all remaining blocks are
+present: dropping the raw Pascal branch adds \(55\) errors, dropping the six
+cross-triad cosine features adds \(50\) errors, dropping the spectral Pascal
+shape coordinates adds \(37\) errors, and dropping the \(40\) unnormalized
+amplitude summaries adds \(26\) errors (confirming empirically why unit-normalized
+spectra require separate energy summaries). Because ridge weights are refitted
+for each subset and correlated signal properties are shared across branches,
+these error increments measure conditional usefulness to the linear readout
+rather than isolated causal effects. Aggregate error counts are reported because
+per-window subject-indexed predictions were not saved in the original
+\emph{compact368} archive.
+
+\subsection{Conventional signature replacements and staircase-projection verification}
+To test what Pascal increment coding contributes beyond conventional path
+signatures within the same pipeline, an archived \(187\)-configuration diagnostic
+study replaced either the raw branch or the spectral branch with uncoded
+clock-augmented signatures while holding the remaining \emph{compact368} features
+and the \(\alpha = 10\) readout fixed.
+
+\paragraph{Replacing the raw sensor branch.}
+Keeping the \(140\) spectral and \(57\) geometric features fixed (\(197\)
+columns), we replaced the \(171\)-feature raw QR-Pascal block with ordinary
+tensor and logsignatures (up to \(1{,}600\) retained raw coordinates) built from
+the same six standardized sensor axes. The strongest conventional replacement in
+this setting used a clock-augmented, origin-anchored \emph{lead--lag} path: for
+each consecutive pair of standardized readings \(x_r, x_{r+1} \in \R^6\), the
+\(12\) spatial coordinates visit \((x_r, x_r)\), \((x_{r+1}, x_r)\), and
+\((x_{r+1}, x_{r+1})\) in order, augmented by a uniform clock from \(0\) to \(1\)
+and an initial step from the origin \(0 \in \R^{13}\). Removing the deterministic
+clock endpoint and clock--clock square leaves \(13 + 13^2 - 2 = 180\) depth-two
+tensor coordinates. Table~\ref{tab:ordinary-raw} compares this best observed
+lead--lag control against \emph{compact368}, alongside a parallel comparison
+appended to the \(561\) supplied HAR features (where the conventional control
+visits each six-axis reading once with a clock and origin anchor, giving
+\(7 + 7^2 - 2 = 54\) coordinates, against all \(18 + 18^2 = 342\) depth-two
+tensor coordinates of the \(P = 3\) QR-Pascal lift).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Raw sensor branch representation & Raw & Total & Accuracy (\%) & Errors \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Within \emph{compact368} (fixed 140 spectral + 57 geometric features)}} \\
+QR-Pascal \(P=3\), depth-two logsignature (\emph{compact368}) & 171 & 368 & 98.03 & 58 \\
+Clocked anchored lead--lag tensor signature, depth 2 & 180 & 377 & 97.46 & 75 \\
+\midrule
+\multicolumn{5}{@{}l}{\emph{Appended to the 561 supplied UCI HAR features}} \\
+QR-Pascal \(P=3\), depth-two tensor signature & 342 & 903 & 97.12 & 85 \\
+Clocked anchored ordinary tensor signature, depth 2 & 54 & 615 & 97.05 & 87 \\
+\bottomrule
+\end{tabular}
+\caption{Raw-branch replacements on the official subject-disjoint UCI HAR split
+under fixed \(\alpha = 10\) ridge classification (\cite[Table~1]{mainpaper}).}
+\label{tab:ordinary-raw}
+\end{table}
+
+\paragraph{Replacing the spectral branch and checking Theorem~\ref{prop:staircase-projection}.}
+Holding the \(171\) raw features, \(57\) geometric features, and \(40\) spectral
+amplitude summaries fixed (\(268\) columns), we replaced the \(100\)
+QR-Pascal spectral-shape features with ordinary signatures of the two-channel
+frequency--mass staircase \((F, M)\) defined in Subsection~\ref{app:staircase-projection},
+evaluated independently on each of the \(20\) normalized spectra across depths
+\(2\) through \(5\). Because every spectrum has fixed staircase endpoint
+\((1, 1)\), words consisting purely of \(F\) letters or purely of \(M\) letters
+are constant and discarded (removing both endpoints from the logsignatures).
+Table~\ref{tab:ordinary-spectral} reports the resulting dimensions and test
+scores, concluding with the explicit linear projection of the depth-five
+staircase tensor onto the \(P=3\) QR-Pascal coordinates.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Spectral shape branch & Spectral & Total & Accuracy (\%) & Errors \\
+\midrule
+QR-Pascal \(P=3\), depth-two logsignature (\emph{compact368}) & 100 & 368 & 98.03 & 58 \\
+Ordinary \((F,M)\) staircase logsignature, depth 2 & 20 & 288 & 97.49 & 74 \\
+Ordinary \((F,M)\) staircase logsignature, depth 3 & 60 & 328 & 97.79 & 65 \\
+Ordinary \((F,M)\) staircase tensor signature, depth 3 & 160 & 428 & 97.83 & 64 \\
+Ordinary \((F,M)\) staircase logsignature, depth 4 & 120 & 388 & 97.83 & 64 \\
+Ordinary \((F,M)\) staircase tensor signature, depth 4 & 440 & 708 & 98.00 & 59 \\
+Ordinary \((F,M)\) staircase logsignature, depth 5 & 240 & 508 & 97.93 & 61 \\
+Ordinary \((F,M)\) staircase tensor signature, depth 5 & 1,040 & 1,308 & 97.83 & 64 \\
+\midrule
+Depth-five staircase projected to \(P=3\) QR-Pascal & 100 & 368 & 98.03 & 58 \\
+\bottomrule
+\end{tabular}
+\caption{Spectral-shape replacements within \emph{compact368} (with the other
+\(268\) raw, amplitude-scale, and geometric features held fixed) on the official
+UCI HAR split. Counts are retained columns, including linear dependencies among
+tensor words. (The depth-two staircase tensor with \(40\) spectral columns also
+achieves \(97.49\%\), \(74\) errors.)}
+\label{tab:ordinary-spectral}
+\end{table}
+
+Table~\ref{tab:ordinary-spectral} illustrates three distinct theoretical points
+from Section~\ref{app:depth-and-ridge}:
+\begin{enumerate}
+\item \emph{Expressive depth versus compactness:} Raising staircase depth from
+two (\(74\) errors) to four in tensor coordinates (\(59\) errors, \(98.00\%\))
+essentially matches \emph{compact368} (\(58\) errors, \(98.03\%\)---a single
+test window, which is descriptively tied), using \(440\) spectral columns
+(\(708\) total) in place of \(100\) (\(368\) total). Continuing to all \(1{,}040\)
+unprojected depth-five tensor columns slightly increases errors to \(64\) under
+the fixed isotropic penalty \(\alpha = 10\).
+\item \emph{Fixed-endpoint ridge sensitivity:} At depth three, the staircase
+logsignature (\(60\) spectral columns, \(65\) errors) and staircase tensor
+signature (\(160\) spectral columns, \(64\) errors) span the \emph{exact same}
+affine linear function space by~\eqref{eq:fixed-endpoint-span}, yet yield
+slightly different ridge fits because redundant tensor words alter the singular
+values of the standardized feature matrix (Subsection~\ref{app:fixed-endpoints}).
+\item \emph{Numerical verification of the staircase projection.} The archived
+self-check compares the projected and directly computed QR-Pascal coordinates
+on synthetic spectra with absolute tolerance \(10^{-7}\) and relative tolerance
+\(10^{-6}\). For the final row of Table~\ref{tab:ordinary-spectral}, the archived
+run reports \emph{identical class predictions on all \(2{,}947\) test windows}
+after replacing the \(100\) spectral-shape features by the projection. The
+mathematical identity holds for all spectra by Theorem~\ref{prop:staircase-projection}.
+\end{enumerate}
+\FloatBarrier

@@ -1,0 +1,117 @@
+{
+  "ordinary_full": {
+    "nominal_dimension": 325,
+    "exact_constant_positions": [
+      0
+    ],
+    "exact_constant_values": [
+      1.0
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0
+    ],
+    "coordinates_removed": 0
+  },
+  "ordinary_local": {
+    "nominal_dimension": 73,
+    "exact_constant_positions": [
+      0
+    ],
+    "exact_constant_values": [
+      1.0
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0
+    ],
+    "coordinates_removed": 0
+  },
+  "offset_full": {
+    "nominal_dimension": 1275,
+    "exact_constant_positions": [
+      0,
+      25,
+      74
+    ],
+    "exact_constant_values": [
+      1.0,
+      0.51,
+      0.08330000000000001
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0,
+      25,
+      74
+    ],
+    "coordinates_removed": 0
+  },
+  "offset_local": {
+    "nominal_dimension": 267,
+    "exact_constant_positions": [
+      0,
+      25,
+      74
+    ],
+    "exact_constant_values": [
+      1.0,
+      0.51,
+      0.08330000000000001
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0,
+      25,
+      74
+    ],
+    "coordinates_removed": 0
+  },
+  "moments_only": {
+    "nominal_dimension": 50,
+    "exact_constant_positions": [
+      0,
+      25
+    ],
+    "exact_constant_values": [
+      1.0,
+      0.51
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0,
+      25
+    ],
+    "coordinates_removed": 0
+  },
+  "moments_plus_ordinary_local": {
+    "nominal_dimension": 98,
+    "exact_constant_positions": [
+      0,
+      25
+    ],
+    "exact_constant_values": [
+      1.0,
+      0.51
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0,
+      25
+    ],
+    "coordinates_removed": 0
+  },
+  "offset_clock_control": {
+    "nominal_dimension": 171,
+    "exact_constant_positions": [
+      0,
+      25,
+      74
+    ],
+    "exact_constant_values": [
+      1.0,
+      0.51,
+      0.08330000000000001
+    ],
+    "near_constant_positions_relative_tolerance_1e_12": [
+      0,
+      25,
+      74
+    ],
+    "coordinates_removed": 0
+  }
+}

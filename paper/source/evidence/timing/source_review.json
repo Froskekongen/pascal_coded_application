@@ -1,0 +1,64 @@
+{
+  "checked_date": "2026-10-16",
+  "published_source": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2023.1233037/full",
+  "published_settings": {
+    "epochs": 60,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "learning_rates": [
+      0.0001,
+      0.0003,
+      0.001
+    ],
+    "schedule": "Cosine Annealing Decay",
+    "selection": "best validation accuracy",
+    "reported_seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "DCL_architecture_described": "C64-C64-C64-C64-LSTM64",
+    "table2_UCI_HAR_SpikeDCL_percent": {
+      "mean": 98.86,
+      "sd": 0.28
+    }
+  },
+  "upstream_commit": "ef1969d940fb62d94af6600fcae880f51930b7dd",
+  "source_access": "Pinned files read through GitHub connector; direct web GitHub fetch returned cache miss.",
+  "pinned_files": {
+    "main.py": {
+      "url": "https://github.com/Intelligent-Computing-Lab-Panda/SNN_HAR/blob/ef1969d940fb62d94af6600fcae880f51930b7dd/main.py",
+      "git_blob_sha": "8368008206aae033cc78a4c1fde8e11b90b0d8a6",
+      "findings": [
+        "batch_size default64",
+        "n_epoch default60",
+        "Adam optimizer",
+        "no cosine schedule in supervised train loop",
+        "SDCL constructed with LSTM_units128",
+        "seed1000+r",
+        "best validation model checkpoint"
+      ]
+    },
+    "models/spike.py": {
+      "url": "https://github.com/Intelligent-Computing-Lab-Panda/SNN_HAR/blob/ef1969d940fb62d94af6600fcae880f51930b7dd/models/spike.py",
+      "git_blob_sha": "7c9d97fd3f90e9186738bc008228aa732055e17b",
+      "findings": [
+        "SDCL extends DeepConvLSTM",
+        "four convolution, batchnorm and LIF blocks",
+        "zero dropout in SDCL",
+        "LIF loops sequentially over time"
+      ]
+    }
+  },
+  "neural_runner_dependency_available": {
+    "fitlog": false,
+    "einops": false,
+    "torchvision": false,
+    "matplotlib": false,
+    "seaborn": false
+  },
+  "neural_timing_status": "Not executed; no accelerator exposed and unprovisioned neural environment with missing runner dependencies and unreconciled paper/runner configurations. Used authorized fallback, not a claim that CPU execution is impossible.",
+  "comparison_limit": "No matched neural runtime, numerical speedup ratio, latency superiority, or energy comparison. Report measured Pascal costs and documented neural training requirements only."
+}

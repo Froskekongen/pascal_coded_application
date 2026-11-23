@@ -1,0 +1,367 @@
+{
+  "completed_units": [
+    "dsads",
+    "kimore_ex1_fold0",
+    "kimore_ex1_fold1",
+    "kimore_ex1_fold2",
+    "kimore_ex1_fold3",
+    "kimore_ex1_fold4",
+    "kimore_ex2_fold0",
+    "kimore_ex2_fold1",
+    "kimore_ex2_fold2",
+    "kimore_ex2_fold3",
+    "kimore_ex2_fold4",
+    "kimore_ex3_fold0",
+    "kimore_ex3_fold1",
+    "kimore_ex3_fold2",
+    "kimore_ex3_fold3",
+    "kimore_ex3_fold4",
+    "kimore_ex4_fold0",
+    "kimore_ex4_fold1",
+    "kimore_ex4_fold2",
+    "kimore_ex4_fold3",
+    "kimore_ex4_fold4",
+    "kimore_ex5_fold0",
+    "kimore_ex5_fold1",
+    "kimore_ex5_fold2",
+    "kimore_ex5_fold3",
+    "kimore_ex5_fold4",
+    "natops",
+    "ninapro_s1_reps1",
+    "ninapro_s1_reps10",
+    "ninapro_s1_reps2",
+    "ninapro_s1_reps5",
+    "uci_har",
+    "utd_mhad"
+  ],
+  "missing_units": [],
+  "incomplete_units": [],
+  "exploratory": "Designed after old test results; these are targeted follow-up experiments, not independent confirmation.",
+  "checks": [
+    "Saved split indices, model order, selected flags/parameters and every CSV test metric independently verified",
+    "KIMORE includes all 25 exercise/folds, matching cohort metadata and exactly one held-out prediction per recording",
+    "Original/new selected comparisons verify identical test indices and targets"
+  ],
+  "kimore_aggregation": "Pool five held-out subject folds within each exercise; macro rows are unweighted arithmetic means of five exercise MAEs, RMSEs and R2s. Their RMSE/R2 are not metrics of the globally pooled cohort.",
+  "contrast_interpretation": "Positive gains favor candidate. Each family tunes lambda/gamma independently; differences combine representation and regularization selection, not frozen-coefficient interventions. No best-test model is selected.",
+  "dsads_selectors": "Primary tunes on six inner training-subject holdouts; subject7 tunes on the original separate validation subject. Both fit subjects1-6 and test subject8.",
+  "plots": [
+    "examples/pascal_transfer/followup/results/classification.png",
+    "examples/pascal_transfer/followup/results/classification.svg",
+    "examples/pascal_transfer/followup/results/ninapro_mae.png",
+    "examples/pascal_transfer/followup/results/ninapro_mae.svg",
+    "examples/pascal_transfer/followup/results/ninapro_rmse.png",
+    "examples/pascal_transfer/followup/results/ninapro_rmse.svg",
+    "examples/pascal_transfer/followup/results/kimore.png",
+    "examples/pascal_transfer/followup/results/kimore.svg"
+  ],
+  "plot_note": null,
+  "comparisons": [
+    {
+      "dataset": "dsads",
+      "unit": "dsads",
+      "selector": "primary",
+      "candidate": "pool_bounded_stateful_spectral_clipped",
+      "baseline": "spectral_factorized_log",
+      "n_test": 1140,
+      "accuracy_gain_pp": 2.368421052631575,
+      "fewer_errors": 27,
+      "candidate_only_correct": 44,
+      "baseline_only_correct": 17,
+      "both_correct": 899,
+      "both_wrong": 180,
+      "old_metrics": {
+        "accuracy": 0.8035087719298246,
+        "macro_f1": 0.7811677273263707,
+        "errors": 224
+      },
+      "new_metrics": {
+        "accuracy": 0.8271929824561404,
+        "macro_f1": 0.8122467897955644,
+        "errors": 197
+      }
+    },
+    {
+      "dataset": "dsads",
+      "unit": "dsads",
+      "selector": "subject7",
+      "candidate": "moments",
+      "baseline": "spectral_factorized_log",
+      "n_test": 1140,
+      "accuracy_gain_pp": 6.842105263157894,
+      "fewer_errors": 78,
+      "candidate_only_correct": 103,
+      "baseline_only_correct": 25,
+      "both_correct": 891,
+      "both_wrong": 121,
+      "old_metrics": {
+        "accuracy": 0.8035087719298246,
+        "macro_f1": 0.7811677273263707,
+        "errors": 224
+      },
+      "new_metrics": {
+        "accuracy": 0.8719298245614036,
+        "macro_f1": 0.8680447817555725,
+        "errors": 146
+      }
+    },
+    {
+      "dataset": "natops",
+      "unit": "natops",
+      "selector": "primary",
+      "candidate": "pool_occupation",
+      "baseline": "pool_raw_tensor",
+      "n_test": 180,
+      "accuracy_gain_pp": -2.777777777777779,
+      "fewer_errors": -5,
+      "candidate_only_correct": 5,
+      "baseline_only_correct": 10,
+      "both_correct": 157,
+      "both_wrong": 8,
+      "old_metrics": {
+        "accuracy": 0.9277777777777778,
+        "macro_f1": 0.9279014807429563,
+        "errors": 13
+      },
+      "new_metrics": {
+        "accuracy": 0.9,
+        "macro_f1": 0.8990955342001131,
+        "errors": 18
+      }
+    },
+    {
+      "dataset": "ninapro",
+      "unit": "ninapro_s1_reps1",
+      "selector": "primary",
+      "candidate": "moments_clipped",
+      "baseline": "lagged_mav",
+      "n_test": 1940,
+      "mae_reduction": 2.274501247064947,
+      "rmse_reduction": 4.207145156785366,
+      "r2_gain": 0.22940493570115394,
+      "old_metrics": {
+        "mae": 16.944261784728983,
+        "rmse": 26.985513970868574,
+        "r2": 0.20207441458497066
+      },
+      "new_metrics": {
+        "mae": 14.669760537664036,
+        "rmse": 22.77836881408321,
+        "r2": 0.4314793502861246
+      }
+    },
+    {
+      "dataset": "ninapro",
+      "unit": "ninapro_s1_reps10",
+      "selector": "primary",
+      "candidate": "pool_bounded_stateful_spectral_clipped",
+      "baseline": "ordinary_raw_tensor",
+      "n_test": 1940,
+      "mae_reduction": 3.4020710088401174,
+      "rmse_reduction": 21.32091846002617,
+      "r2_gain": 1.5168786777253422,
+      "old_metrics": {
+        "mae": 17.46472457483663,
+        "rmse": 43.12534948244401,
+        "r2": -1.0378220529121762
+      },
+      "new_metrics": {
+        "mae": 14.062653565996513,
+        "rmse": 21.804431022417837,
+        "r2": 0.479056624813166
+      }
+    },
+    {
+      "dataset": "ninapro",
+      "unit": "ninapro_s1_reps2",
+      "selector": "primary",
+      "candidate": "lagged_mav_emg_spectral",
+      "baseline": "moments",
+      "n_test": 1940,
+      "mae_reduction": -0.7605186086373816,
+      "rmse_reduction": -0.12180402254650247,
+      "r2_gain": -0.006683795993656316,
+      "old_metrics": {
+        "mae": 15.750483469442274,
+        "rmse": 24.978880727952895,
+        "r2": 0.31632932606895814
+      },
+      "new_metrics": {
+        "mae": 16.511002078079656,
+        "rmse": 25.100684750499397,
+        "r2": 0.3096455300753018
+      }
+    },
+    {
+      "dataset": "ninapro",
+      "unit": "ninapro_s1_reps5",
+      "selector": "primary",
+      "candidate": "pool_bounded_stateful_spectral_clipped",
+      "baseline": "ordinary_raw_tensor",
+      "n_test": 1940,
+      "mae_reduction": 3.5136397053373347,
+      "rmse_reduction": 21.26096187927506,
+      "r2_gain": 1.5288076194425806,
+      "old_metrics": {
+        "mae": 17.49513096927544,
+        "rmse": 43.44295152481316,
+        "r2": -1.0679481716386743
+      },
+      "new_metrics": {
+        "mae": 13.981491263938105,
+        "rmse": 22.1819896455381,
+        "r2": 0.4608594478039063
+      }
+    },
+    {
+      "dataset": "utd_mhad",
+      "unit": "utd_mhad",
+      "selector": "primary",
+      "candidate": "pool_bounded_local",
+      "baseline": "pool_raw_log",
+      "n_test": 430,
+      "accuracy_gain_pp": 2.7906976744186074,
+      "fewer_errors": 12,
+      "candidate_only_correct": 37,
+      "baseline_only_correct": 25,
+      "both_correct": 322,
+      "both_wrong": 46,
+      "old_metrics": {
+        "accuracy": 0.8069767441860465,
+        "macro_f1": 0.7966491529582749,
+        "errors": 83
+      },
+      "new_metrics": {
+        "accuracy": 0.8348837209302326,
+        "macro_f1": 0.8280944639935023,
+        "errors": 71
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_ex1",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 71,
+      "mae_reduction": -1.5001467925907255,
+      "rmse_reduction": -9.532673686901484,
+      "r2_gain": -3.20968422035736,
+      "old_metrics": {
+        "mae": 5.57591856644013,
+        "rmse": 7.603418476845908,
+        "r2": 0.21318204282889552
+      },
+      "new_metrics": {
+        "mae": 7.0760653590308555,
+        "rmse": 17.136092163747392,
+        "r2": -2.9965021775284644
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_ex2",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 72,
+      "mae_reduction": 2.759091276405246,
+      "rmse_reduction": 7.8433708960680555,
+      "r2_gain": 1.4372786984306916,
+      "old_metrics": {
+        "mae": 9.711168600081967,
+        "rmse": 16.7578988444787,
+        "r2": -1.0045202214227347
+      },
+      "new_metrics": {
+        "mae": 6.952077323676721,
+        "rmse": 8.914527948410644,
+        "r2": 0.4327584770079568
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_ex3",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 75,
+      "mae_reduction": 1.2405668355330395,
+      "rmse_reduction": 1.824364832194818,
+      "r2_gain": 0.3414739022184332,
+      "old_metrics": {
+        "mae": 6.824277617919828,
+        "rmse": 9.457354188279242,
+        "r2": 0.020432560042615844
+      },
+      "new_metrics": {
+        "mae": 5.583710782386788,
+        "rmse": 7.6329893560844235,
+        "r2": 0.36190646226104906
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_ex4",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 72,
+      "mae_reduction": 1.3018737486227385,
+      "rmse_reduction": 1.6397750295933609,
+      "r2_gain": 0.2937636001536774,
+      "old_metrics": {
+        "mae": 7.263237768472788,
+        "rmse": 9.26962944417771,
+        "r2": 0.08911191872061175
+      },
+      "new_metrics": {
+        "mae": 5.961364019850049,
+        "rmse": 7.629854414584349,
+        "r2": 0.38287551887428917
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_ex5",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 73,
+      "mae_reduction": 0.7551667348113273,
+      "rmse_reduction": 1.8114488212493614,
+      "r2_gain": 0.3120766797062504,
+      "old_metrics": {
+        "mae": 6.836596165336976,
+        "rmse": 9.414973594968412,
+        "r2": 0.10266992553785836
+      },
+      "new_metrics": {
+        "mae": 6.081429430525649,
+        "rmse": 7.603524773719051,
+        "r2": 0.4147466052441088
+      }
+    },
+    {
+      "dataset": "kimore",
+      "unit": "kimore_mean_exercises",
+      "selector": "primary",
+      "candidate": "validation_selected_mixture",
+      "baseline": "validation_selected_mixture",
+      "n_test": 363,
+      "mae_reduction": 0.9113103605563252,
+      "rmse_reduction": 0.7172571784408224,
+      "r2_gain": -0.16501826796966151,
+      "old_metrics": {
+        "mae": 7.242239743650337,
+        "rmse": 10.500654909749993,
+        "r2": -0.11582475485855064
+      },
+      "new_metrics": {
+        "mae": 6.330929383094012,
+        "rmse": 9.783397731309172,
+        "r2": -0.28084302282821216
+      }
+    }
+  ]
+}

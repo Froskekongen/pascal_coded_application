@@ -1,0 +1,194 @@
+\section{Landmark trajectories and interaction graphs (NATOPS)}
+\label{app:natops}
+
+\subsection{Anchored displacement path and interaction graphs}
+Whereas smartphone accelerometry relies on persistent gravitational levels,
+skeletal landmark sequences describe gestures through coordinated spatial motion
+from an initial posture. The NATOPS benchmark~\cite{natopsoriginal,natops} provides a clean
+setting to probe which cross-channel interactions benefit from Pascal coding in a
+small-sample, high-width regime: six aircraft-handling command gestures are
+recorded over \(51\) frames across eight 3D body landmarks (left and right hand
+tips, elbows, wrists, and thumbs, giving \(24\) spatial coordinates), split into
+\(180\) training and \(180\) test sequences (\(30\) per gesture class in each
+split). Because \(N_{\mathrm{train}} = 180\) (\(144\) per cross-validation fold)
+while depth-two feature counts reach \(1{,}275\), both regularization tuning and
+graph-based interaction restriction play a central role.
+
+We construct paths from uncentered landmark displacements without temporal
+resampling. Given landmark vectors \(h_r \in \R^{24}\) for frames
+\(0 \leq r \leq 50\), we append a unit-duration clock channel \(r/50\) at channel
+index \(0\) and prepend the origin anchor \(x_0 = 0 \in \R^{25}\):
+\[
+ x_0 = 0 \in \R^{25}, \qquad
+ x_{r+1} = \Bigl(\frac{r}{50},\, h_r\Bigr) \in \R^{25}, \qquad
+ z_r = x_{r+1} - x_r \quad (0 \leq r \leq 50).
+\]
+This produces \(R = 51\) increments: an initial-pose step \(z_0 = (0, h_0)\) with
+zero clock advance, followed by \(50\) frame-to-frame displacement steps
+\(z_r = (1/50,\, h_r - h_{r-1})\) for \(1 \leq r \leq 50\). The ordinary
+first-level endpoint \(\sum_{r=0}^{50} z_r = (1, h_{50})\) therefore records the
+final landmark configuration relative to the origin, while signed areas against
+\(z_0\) retain sensitivity to the starting pose.
+
+Applying the unmodified \(P = 2\) normalized Pascal lift~\eqref{eq:app-pascal}
+with weights \(b_0(r) = 1\) and \(b_1(r) = u_r = r/50\) in copy-major order forms
+\(50\)-channel lifted increments \(v_r = (z_r, u_r z_r) \in \R^{50}\), where
+channels \(0, \ldots, 24\) are the ordinary increments and channels
+\(25, \ldots, 49\) are their linearly position-weighted copies. All evaluated
+maps use depth-two logsignatures over the \emph{entire} \(51\)-step sequence,
+contrasting two undirected interaction graphs \(E\) on the \(C = 25\) input
+channels via the dimension formula~\eqref{eq:graph-dimension}:
+\begin{itemize}
+\item \emph{Full interaction graph (\(E_{\mathrm{full}}\)):} Retains all
+\(|E_{\mathrm{full}}| = \binom{25}{2} = 300\) unordered channel pairs. At
+\(P = 1\), this gives \(25 + 300 = 325\) coordinates; at \(P = 2\),
+\eqref{eq:graph-dimension} gives \(50 + 4(300) + 25\binom{2}{2} = 1{,}275 = 50 + \binom{50}{2}\)
+coordinates.
+\item \emph{Local interaction graph (\(E_{\mathrm{local}}\)):} Restricts
+cross-channel edges to the \(24\) clock--spatial pairs \(\{0, c\}\)
+(\(1 \leq c \leq 24\)) plus the \(8 \times \binom{3}{2} = 24\) within-landmark
+\((x, y, z)\) coordinate pairs, giving \(|E_{\mathrm{local}}| = 48\) edges
+(omitting cross-landmark spatial areas). Here ``local'' refers strictly to
+kinematic channel locality, not temporal windowing. At \(P = 1\), this gives
+\(25 + 48 = 73\) coordinates; at \(P = 2\),~\eqref{eq:graph-dimension} gives
+\(50 + 4(48) + 25 = 267\) coordinates (\(50\) endpoints, \(192\) cross-channel
+copy areas, and \(25\) same-channel separation areas \(J_{c_0 c_1}\)).
+\end{itemize}
+
+\subsection{Nested filtration of the nine feature maps}
+Passing from an ordinary depth-two logsignature (\(P=1\)) to its \(P=2\) Pascal
+counterpart adds three algebraically distinct groups of features:
+\begin{enumerate}
+\item the \(25\) position-weighted endpoints \(\sum_{r=0}^{50} u_r z_r\)
+(\emph{moments});
+\item \(73\) additional signed areas involving the weighted clock copy \(T_1\) or
+clock--spatial copy pairings (bringing the total number of clock-related areas
+from \(24\) to \(1 + 4 \times 24 = 97\), namely the clock self-area \(J_{T_0 T_1}\)
+plus all four copy pairings across the \(24\) spatial channels); and
+\item additional \emph{coded spatial--spatial areas} not involving the clock:
+\(96\) in the local graph (\(24\) single-channel separation areas \(J_{c_0 c_1}\)
+plus \(3 \times 24 = 72\) within-landmark cross-copy areas) and \(852\) in the
+full graph (\(24\) single-channel separation areas plus \(3 \times \binom{24}{2} = 828\)
+spatial cross-copy areas).
+\end{enumerate}
+
+To separate these contributions, we evaluate a nested four-step filtration of
+coordinate sets within both the full and local graphs,
+\[
+ \text{Ordinary} \subset \text{Moments + ordinary}
+ \subset \text{Coded-clock control} \subset \text{Pascal},
+\]
+together with the \(50\) coded endpoints alone (\emph{Moments only}), giving the
+nine feature maps in Table~\ref{tab:natops-maps}. Nominal feature counts include
+the constant clock coordinates \(s_{T_0} = 1\), \(s_{T_1} = 51/100\), and
+\(J_{T_0 T_1}\) wherever retained. These map to zero under standardization. Nonconstant
+dependent coordinates still contribute to the ridge Gram matrix. For each
+spatial channel \(c\), for example,
+\(J_{T_0 c_1} - 2J_{T_1 c_0} = s_{T_1}(s_{c_0} - s_{c_1})\)
+(\nolinkurl{evidence/natops/verify_offset.py}).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrp{8.4cm}@{}}
+\toprule
+Feature map & Features & Retained endpoints and signed-area subsets \\
+\midrule
+Ordinary full & 325 & \(25\) ordinary endpoints \(+\) all \(300\) ordinary areas (\(24\) clock--spatial \(+\) \(276\) spatial). \\
+Moments + ordinary full\(^*\) & 350 & \(50\) coded endpoints \(+\) all \(300\) ordinary areas. \\
+Coded-clock control (full)\(^*\) & 423 & \(50\) coded endpoints \(+\) \(97\) coded-clock areas \(+\) \(276\) ordinary spatial areas. \\
+Pascal full & 1,275 & \(50\) coded endpoints \(+\) all \(1{,}225\) coded areas (\(97\) clock \(+\) \(1{,}128\) coded spatial). \\
+\midrule
+Ordinary local & 73 & \(25\) ordinary endpoints \(+\) \(48\) ordinary local areas (\(24\) clock--spatial \(+\) \(24\) within-landmark). \\
+Moments + ordinary local & 98 & \(50\) coded endpoints \(+\) \(48\) ordinary local areas. \\
+Coded-clock control (local) & 171 & \(50\) coded endpoints \(+\) \(97\) coded-clock areas \(+\) \(24\) ordinary within-landmark areas. \\
+Pascal local & 267 & \(50\) coded endpoints \(+\) \(217\) coded local areas (\(97\) clock \(+\) \(120\) coded local spatial). \\
+\midrule
+Moments only & 50 & \(50\) coded endpoints only (no signed areas). \\
+\bottomrule
+\end{tabular}
+\caption{Coordinate filtration of the nine evaluated NATOPS depth-two
+logsignature maps. \(^*\)Full-graph intermediate controls added after the initial
+seven outcomes were observed, using the identical cross-validation rule.}
+\label{tab:natops-maps}
+\end{table}
+
+\subsection{Shared cross-validation protocol, results, and paired analysis}
+Every representation selects its ridge penalty on the exact same training
+partition splits. Using five-fold stratified cross-validation on the \(180\)
+training sequences (\(36\) validation sequences per fold, shuffled once with seed
+\texttt{20261003}), we evaluate \(\alpha \in \{10^k : k = -6, \ldots, 6\}\) for a
+one-versus-rest ridge classifier with intercept (Cholesky solver). Within each
+fold, columnwise standardization (\texttt{StandardScaler}) is fitted on the \(144\)
+fold-training sequences only. For each map, \(\alpha\) is chosen to maximize the
+total number of correct validation predictions across all \(180\) training
+sequences (equivalently mean five-fold validation accuracy), breaking exact ties
+in favor of the smaller penalty \(\alpha\). The scaler and ridge classifier are
+then refitted on all \(180\) training sequences at the selected \(\alpha\) and
+evaluated once on the \(180\) test sequences. The seven unstarred maps and their
+selected penalties were frozen prior to test evaluation; the two starred
+full-graph controls were added afterward under the identical fold split and tie
+rule. Table~\ref{tab:natops-results} reports both cross-validation and held-out
+test results across all nine maps.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Feature map & Features & Selected \(\alpha\) & CV / 180 & CV (\%) & Test / 180 & Test (\%) \\
+\midrule
+Ordinary full & 325 & \(10\) & 166 & 92.22 & 163 & 90.56 \\
+Moments + ordinary full\(^*\) & 350 & \(10\) & 168 & 93.33 & 166 & 92.22 \\
+Coded-clock control (full)\(^*\) & 423 & \(100\) & 166 & 92.22 & 163 & 90.56 \\
+Pascal full & 1,275 & \(10\) & 166 & 92.22 & 173 & 96.11 \\
+\midrule
+Ordinary local & 73 & \(10\) & 167 & 92.78 & 167 & 92.78 \\
+Moments + ordinary local & 98 & \(1\) & 167 & 92.78 & 165 & 91.67 \\
+Coded-clock control (local) & 171 & \(10\) & 169 & 93.89 & 168 & 93.33 \\
+Pascal local & 267 & \(10\) & 169 & 93.89 & 165 & 91.67 \\
+\midrule
+Moments only & 50 & \(0.1\) & 143 & 79.44 & 142 & 78.89 \\
+\bottomrule
+\end{tabular}
+\caption{NATOPS cross-validation selections and held-out test performance across
+all nine maps (\cite[Table~2]{mainpaper}). \(^*\)Controls added after the initial
+seven test outcomes.}
+\label{tab:natops-results}
+\end{table}
+
+Three empirical findings emerge from Table~\ref{tab:natops-results}:
+\begin{enumerate}
+\item \emph{Performance of the endpoints-only control.} The \(50\) ordinary and
+position-weighted endpoints (\emph{Moments only}) achieve \(79.44\%\) CV and
+\(78.89\%\) test accuracy (\(142/180\)), below the maps that include signed areas
+on this split.
+\item \emph{Divergence between the full and local interaction graphs:} On the
+full interaction graph, Pascal coding increases test accuracy from \(90.56\%\)
+(\(163/180\) for \emph{Ordinary full}, \(\alpha = 10\)) to \(96.11\%\)
+(\(173/180\) for \emph{Pascal full}, \(\alpha = 10\)). Neither adding weighted
+endpoints alone (\(166/180\), \(92.22\%\)) nor adding all \(97\) coded-clock
+areas (\(163/180\), \(90.56\%\), selecting \(\alpha = 100\)) reproduces that
+gain; at the sequence level, \emph{Pascal full} corrects \(12\) errors of
+\emph{Ordinary full} while introducing \(2\) (\(161\) both correct, \(5\) both
+wrong; descriptive exact two-sided McNemar \(p = 53/4096 \approx 0.0129\)), and
+corrects \(11\) errors of \emph{Coded-clock control (full)} while introducing
+\(1\). On the restricted local graph, however, \emph{Pascal local} scores
+\(165/180\) (\(91.67\%\)) against \(167/180\) (\(92.78\%\)) for \emph{Ordinary
+local} and \(168/180\) (\(93.33\%\)) for \emph{Coded-clock control (local)}. Four
+pre-specified paired comparisons of \emph{Pascal local} against \emph{Ordinary
+local}, \emph{Ordinary full}, \emph{Moments + ordinary local}, and
+\emph{Coded-clock control (local)} give unadjusted two-sided exact McNemar
+\(p\)-values between \(0.55\) and \(1.00\), and \(1.00\) after Holm adjustment.
+\item \emph{Cross-validation ranking and regularization confounding:} Displaying
+CV and test scores side by side highlights an important small-sample caveat. On
+the \(180\) training sequences, five-fold CV assigns \(92.22\%\) (\(166/180\)) to
+\emph{Pascal full}, slightly \emph{below} the local maps (\(92.78\%\)--\(93.89\%\));
+thus training-only model selection across graphs would choose a local map rather
+than \emph{Pascal full}. Furthermore, passing from \emph{Coded-clock control
+(full)} (\(423\) features, \(\alpha = 100\)) to \emph{Pascal full} (\(1{,}275\)
+features, \(\alpha = 10\)) simultaneously introduces both within-landmark and
+cross-landmark coded spatial areas, triples the ambient dimension, and shifts the
+selected penalty by an order of magnitude. The contrast therefore points to
+informative coded spatial--spatial interactions in the full map, without
+isolating cross-landmark edges from feature width and ridge geometry.
+\end{enumerate}
+\FloatBarrier

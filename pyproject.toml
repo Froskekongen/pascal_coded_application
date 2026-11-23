@@ -1,0 +1,14 @@
+[project]
+name = "pascal-coded-application"
+version = "0.1.0"
+description = "Reproduce the paper's UCI HAR and NATOPS examples."
+readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "numpy==2.4.4",
+    "scikit-learn==1.8.0",
+    "scipy==1.17.1",
+    "tensorsig",
+    "threadpoolctl==3.6.0",
+    "torch>=2.14",
+]

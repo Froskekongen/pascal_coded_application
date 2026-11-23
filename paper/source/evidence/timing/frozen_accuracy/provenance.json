@@ -1,0 +1,61 @@
+{
+  "packaged_date": "2026-10-16",
+  "accuracy_files": "Byte-for-byte copies of frozen 11 October random-window evidence; originals unchanged.",
+  "source_files": "Current retained implementation files used by the 16 October timing verifier; their hashes match timing/run.json. They contain later optional variants and are not claimed to be identical to historical run.json source hashes.",
+  "files": [
+    {
+      "original_path": "examples/uci_har/spikedcl_results/summary.csv",
+      "packaged_path": "frozen_accuracy/summary.csv",
+      "bytes": 1330,
+      "sha256": "aa61d762ceecd513ebd4dbfa497cb2bd50c3839bd3b745c0b495eecf35fd7061"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_results/results.csv",
+      "packaged_path": "frozen_accuracy/results.csv",
+      "bytes": 4368,
+      "sha256": "9fa3893310f55ca7319734a9b7a9715be3857ca309a7c8624d81ea55a5220604"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_results/run.json",
+      "packaged_path": "frozen_accuracy/run.json",
+      "bytes": 23635,
+      "sha256": "e344a15f1ea67be6681bfae2aab96d5354237d497c8990d38de406e7b86ea4d6"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_results/predictions.npz",
+      "packaged_path": "frozen_accuracy/predictions.npz",
+      "bytes": 121807,
+      "sha256": "94a3c826ed1962c388f9bc2ca6d223d1a0bf9c0d4a54a0b1818c161835b016ec"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_results/split_verification.json",
+      "packaged_path": "frozen_accuracy/split_verification.json",
+      "bytes": 4519,
+      "sha256": "e624d989f0d3a347dbfe8216a7fd6d27a5d093b601595ccf92e49197a2a393f4"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_results/numerical_verification.json",
+      "packaged_path": "frozen_accuracy/numerical_verification.json",
+      "bytes": 6976,
+      "sha256": "e15fc3c35cb9da220ce36914c6e547ebe5504bc0643e174f5d24bac22cc063ff"
+    },
+    {
+      "original_path": "examples/uci_har/benchmark.py",
+      "packaged_path": "frozen_accuracy/sources/benchmark.py",
+      "bytes": 12252,
+      "sha256": "711c97351f06aebb5624653f3a539ffae3ae4be3353520f7b26102c81b3b56da"
+    },
+    {
+      "original_path": "examples/uci_har/retained_features.py",
+      "packaged_path": "frozen_accuracy/sources/retained_features.py",
+      "bytes": 18450,
+      "sha256": "388de0ddf26f3d99fd5b76ea565b7f74c8fd6c509eb64da6828afcbe3fdb62a7"
+    },
+    {
+      "original_path": "examples/uci_har/spikedcl_benchmark.py",
+      "packaged_path": "frozen_accuracy/sources/spikedcl_benchmark.py",
+      "bytes": 15728,
+      "sha256": "52b43199efd4b33df82c0bbf4972abf9c715f290efc26307b285aaa73a72f2a3"
+    }
+  ]
+}

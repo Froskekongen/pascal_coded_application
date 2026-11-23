@@ -1,0 +1,172 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\input{common/macros.tex}
+\usepackage{microtype,mathtools,array}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+\setcounter{tocdepth}{2}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\hypersetup{
+  pdftitle={Building Activity Representations with Pascal-Coded Signatures: A Mathematical and Experimental Companion},
+  pdfauthor={Erlend Aune; Fabian N. Harang}
+}
+
+\title{Building Activity Representations with Pascal-Coded Signatures:\\[.3em]
+\large A Mathematical and Experimental Companion}
+\author{Erlend Aune$^{1}$ \quad Fabian N. Harang$^{2}$\\[.4em]
+\small $^{1}$Cognite; Norwegian University of Science and Technology (NTNU), Trondheim\\
+\small $^{2}$BI Norwegian Business School;\\
+\small Centre for Sustainable, Risk-Averse and Ethical Artificial Intelligence\\
+\small (SURE-AI), Simula Research Laboratory}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\phantomsection
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+Sequential observations from human activity combine three qualitatively different
+phenomena: static postures that persist across an observation window, transient
+movements distinguished by the ordering and timing of displacements, and periodic
+motions whose energy concentrates at characteristic frequencies. When such
+sequences are mapped to features through path signatures and classified by a
+linear readout, two design questions govern what the classifier can see. First,
+what physical or statistical quantity should each discrete path increment
+represent? Second, how can positional spacing along a sequence---whether across
+time steps or across frequency bins---be exposed at signature depth two without
+expanding ordinary signatures to high truncation depths?
+
+This document is a standalone mathematical and experimental companion to
+\emph{Building Activity Representations with Pascal-Coded
+Signatures}~\cite{mainpaper}, fleshing out the mathematical details, worked
+examples, feature specifications, diagnostic controls, and reproduction guides
+behind the main paper. The exposition is self-contained: every path
+construction, signature coordinate, algebraic identity, and experimental
+protocol is defined from first principles, assuming only familiarity with
+multivariable calculus, linear algebra, and the basic definition of
+iterated-integral path signatures.
+
+\paragraph{Relation to the main paper.}
+Readers consulting this companion alongside~\cite{mainpaper} can map the two
+texts directly as follows:
+\begin{itemize}
+\item \emph{Increment coding and depth-two separation} (\cite[Sections~1--2,
+Fig.~1, Eqs.~(1)--(4)]{mainpaper}): Section~\ref{app:construction} introduces
+depth-two tensor and logsignature coordinates, defines the Pascal increment
+lift, works through the two-rise hand-movement example in detail, and formulates
+observation conventions for movement, posture, and frequency spectra
+(\cite[Section~3, Eq.~(5)]{mainpaper}).
+\item \emph{Polynomial bases, shift algebra, and Volterra structure}
+(\cite[Section~2, concluding paragraph; Section~4, opening paragraph]{mainpaper}):
+Section~\ref{app:offsets} interprets the lift as a linear compression of exact
+slot labels, establishes equivalence with monomial bases and the canonical
+positive-diagonal QR orthogonal basis, derives the Vandermonde shift group and
+twisted Chen concatenation law, and identifies the lift at all depths as a
+position-only Volterra signature.
+\item \emph{Comparison with higher-depth ordinary signatures}
+(\cite[Section~2 and Section~3, concluding paragraph]{mainpaper}):
+Section~\ref{app:depth-and-ridge} derives the piecewise-linear interpolation
+correction between depth-two coded areas and depth-three clocked signatures,
+exhibits an explicit depth-three collision counterexample, proves the exact
+depth-\((2P-1)\) scalar staircase projection theorem, and analyzes how ridge
+regularization interacts with fixed-endpoint coordinate transformations.
+\item \emph{Smartphone activity recognition}
+(\cite[Sections~4--5, Table~1]{mainpaper}): Section~\ref{app:har} gives the
+complete specification of the \emph{compact368} representation on the official
+subject-disjoint UCI HAR split, evaluates standalone blocks and single-block
+deletions, and examines conventional lead--lag and spectral-staircase
+replacements, closing with a numerical verification of the depth-five staircase
+projection.
+\item \emph{Landmark gesture trajectories}
+(\cite[Section~5, Table~2]{mainpaper}): Section~\ref{app:natops} specifies the
+anchored displacement path on NATOPS, organizes the nine evaluated feature maps
+as a nested filtration across full and local channel-interaction graphs, and
+reports cross-validation behavior, selected penalties, and paired sequence
+comparisons.
+\item \emph{Additional transfer and computational studies}:
+Section~\ref{app:additional} extends the empirical analysis beyond~\cite{mainpaper}
+with two focused studies: cross-participant transfer on the 15-sensor DSADS
+benchmark and an analysis of the subject-mixed random-window UCI HAR protocol
+and single-thread CPU pipeline runtime relative to SpikeDCL. The end matter
+provides a unified index mapping paper and companion claims to executable
+reproduction scripts and archived evidence.
+\end{itemize}
+
+\paragraph{Mathematical status and empirical scope.}
+The two parts of this companion establish different kinds of conclusions, and
+it is useful to state that boundary once at the outset. Part~I
+(Sections~\ref{app:construction}--\ref{app:depth-and-ridge}) proves exact
+algebraic and analytical statements about discrete increment lifts, polynomial
+basis changes, concatenated segments, and iterated integrals. These results
+characterize what chosen coordinates represent and which linear spans coincide;
+they do not imply universal reductions in feature count or runtime, since
+lifting \(C\) input channels by \(P\) polynomial copies produces \(PC\) channels
+and quadratically many pairwise areas.
+Part~I combines established signature and polynomial identities with explicit
+derivations for the increment lifts studied here.
+
+Part~II (Sections~\ref{app:har}--\ref{app:additional}) studies how these
+representation choices interact with linear ridge classifiers on public
+activity and gesture datasets. Throughout every experiment, all data-dependent
+quantities---axis standardization, triad RMS calibration, constant-column
+variance masks, final feature scaling, and cross-validated ridge penalties---are
+fitted strictly on training partitions without access to held-out test windows.
+At the same time, because these public benchmarks informed the iterative design
+of the feature families, all empirical results should be read as exploratory
+studies of representation geometry rather than pre-registered confirmatory
+trials.
+
+\paragraph{Notation and standing conventions.}
+Unless stated otherwise, a discrete sequence of length \(R \geq 2\) is indexed
+from zero by \(r \in \{0, \ldots, R-1\}\), with normalized grid points
+\(u_r := r/(R-1) \in [0, 1]\). For scalar data, \(z=(z_r)_{r=0}^{R-1}\)
+lists real-valued path increments, rather than accumulated positions.
+Vectors in \(\R^C\) or \(\R^d\) carry the standard
+Euclidean inner product \(\langle u, v\rangle = \sum_i u_i v_i\) and norm
+\(\|u\| = \sqrt{\langle u, u\rangle}\); for a matrix \(M\), \(\|M\|_F\) denotes
+the Frobenius norm \(\sqrt{\sum_{i,j} M_{ij}^2}\). Letters in a signature word
+\(i_1 \cdots i_k\) are written in chronological integration order from left to
+right, so \(S^{ij}(y) = \int_{0 < t_1 < t_2 < R} dy_{t_1}^i \, dy_{t_2}^j\).
+For any finite sequence \(z_0, \ldots, z_{N-1} \in \R\), sample means and
+standard deviations use the population normalization
+\(\bar z = N^{-1}\sum_{r=0}^{N-1} z_r\) and
+\(\sigma_z = \sqrt{N^{-1}\sum_{r=0}^{N-1}(z_r - \bar z)^2}\).
+
+\clearpage
+\tableofcontents
+\clearpage
+
+\part{Mathematical Foundations}
+\input{appendix_construction.tex}
+\FloatBarrier\Needspace{10\baselineskip}
+\input{appendix_offsets.tex}
+\FloatBarrier\Needspace{10\baselineskip}
+\input{appendix_meanings.tex}
+
+\clearpage
+\part{Experimental Studies}
+\input{appendix_har.tex}
+\FloatBarrier\Needspace{10\baselineskip}
+\input{appendix_natops.tex}
+\FloatBarrier\Needspace{10\baselineskip}
+\input{appendix_transfer.tex}
+
+\clearpage
+\input{appendix_reproducibility.tex}
+\input{common/ai_disclosure.tex}
+\Needspace{8\baselineskip}
+\input{references.tex}
+\end{document}

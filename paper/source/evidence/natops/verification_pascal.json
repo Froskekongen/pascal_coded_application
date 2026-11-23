@@ -1,0 +1,132 @@
+{
+  "all_checks_passed": true,
+  "arithmetic": "Python standard-library fractions.Fraction",
+  "scope": "Exact construction and complete tensor levels zero through three; no dataset access or learner fitting",
+  "verifier_sha256": "ffdec47164079d764818aa9d7cef47657ffce14f29e1a99acd84c9edbf1937d5",
+  "check_counts": {
+    "P1_ordinary_signature.coordinates": 15,
+    "P1_ordinary_signature.word_sets": 1,
+    "P2_linear_signature.coordinates": 85,
+    "P2_linear_signature.word_sets": 1,
+    "basis_increment_map": 5,
+    "basis_inverse": 5,
+    "basis_signature_inverse.coordinates": 484,
+    "basis_signature_inverse.word_sets": 5,
+    "basis_signature_naturality.coordinates": 484,
+    "basis_signature_naturality.word_sets": 5,
+    "constant_copy": 203,
+    "constant_copy_projection.coordinates": 53,
+    "constant_copy_projection.word_sets": 5,
+    "first_code": 35,
+    "full_moment_inversion_signed_vectors": 18,
+    "last_code": 35,
+    "linear_copy": 168,
+    "normalized_definition": 203,
+    "normalized_short_block_chen.coordinates": 529,
+    "normalized_short_block_chen.word_sets": 5,
+    "pascal_shift": 378,
+    "shift_group": 486,
+    "shift_inverse": 54,
+    "short_block_agrees_with_unnormalized.coordinates": 1143,
+    "short_block_agrees_with_unnormalized.word_sets": 11,
+    "singleton_no_zero_denominator": 3,
+    "unnormalized_block_chen.coordinates": 529,
+    "unnormalized_block_chen.word_sets": 5,
+    "weights_in_unit_interval": 203
+  },
+  "total_checks": 5156,
+  "signature_basis_cases_R_P_C": [
+    [
+      2,
+      1,
+      2
+    ],
+    [
+      3,
+      2,
+      2
+    ],
+    [
+      5,
+      3,
+      2
+    ],
+    [
+      4,
+      4,
+      1
+    ],
+    [
+      6,
+      3,
+      1
+    ]
+  ],
+  "concatenation_cases_R_P_C_block_lengths": [
+    [
+      3,
+      1,
+      2,
+      [
+        1,
+        2
+      ]
+    ],
+    [
+      5,
+      3,
+      2,
+      [
+        2,
+        3
+      ]
+    ],
+    [
+      6,
+      4,
+      1,
+      [
+        3,
+        3
+      ]
+    ],
+    [
+      4,
+      4,
+      1,
+      [
+        1,
+        3
+      ]
+    ],
+    [
+      7,
+      4,
+      1,
+      [
+        2,
+        1,
+        4
+      ]
+    ]
+  ],
+  "negative_shift_range": [
+    -4,
+    4
+  ],
+  "full_moment_inversion_R_range": [
+    2,
+    7
+  ],
+  "full_moment_inversion_channel_range": [
+    1,
+    3
+  ],
+  "conventions": [
+    "Global normalized Pascal weights require 1 <= P <= R and R >= 2.",
+    "Singleton blocks use only their constant local copy; higher global copies come from the rectangular shift map.",
+    "Blocks partition one increment sequence without inserting basepoints or changing original channels or clocks.",
+    "Negative shifts use generalized binomial coefficients and express algebraic rebasing.",
+    "Tensor naturality is tested against independent direct iterated-integral enumeration, including repeated-segment factorials."
+  ]
+}

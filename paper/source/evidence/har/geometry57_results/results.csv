@@ -1,0 +1,2 @@
+model,features,head,ridge_alpha,accuracy,macro_f1,errors
+geometry57,57,ridge,10,0.8513742789277231,0.8488095345478782,438

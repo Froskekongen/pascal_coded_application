@@ -1,0 +1,299 @@
+\documentclass[a4paper]{esannV2}
+\input{preamble.tex}
+\begin{document}
+\title{Building Activity Representations with\\Pascal-Coded Signatures}
+\author{Erlend Aune$^{1}$ \quad Fabian N. Harang$^{2}$\\
+$^{1}$Cognite; Norwegian University of Science and Technology (NTNU), Trondheim\\
+$^{2}$BI Norwegian Business School;\\
+Centre for Sustainable, Risk-Averse and Ethical Artificial Intelligence\\
+(SURE-AI), Simula Research Laboratory}
+\maketitle
+\begin{abstract}
+Movement timing can distinguish activities with the same displacement.
+We study a polynomial
+lift of path increments that exposes selected positional interactions as
+endpoints and signed areas. Expressed in a Pascal basis, these coordinates admit
+explicit temporal and spectral interpretations. We explain their relation to
+ordinary signatures, distinguish signature depth from feature dimension, and construct
+features that retain sensor levels, movement and rhythm. In exploratory
+experiments, 368 features with a linear ridge classifier achieve 98.03\% accuracy
+on UCI HAR's official split: smartphone motion recordings of six everyday
+activities, with different participants for training and testing.
+Conventional-signature controls and a
+landmark gesture example clarify the roles of compactness, channel interactions
+and representation choice. Code and extended technical notes can be found at:\\
+\url{https://github.com/Froskekongen/pascal_coded_application}.
+\end{abstract}
+
+\section{From activity observations to path features}
+Activity recognition can depend on movement timing even when overall displacement
+is unchanged. The two hand-height paths
+in Figure~\ref{fig:movement} start at zero, finish at two, and have the same
+average height, but place their rises at the interval ends or middle. A useful
+representation should expose this distinction to a simple classifier.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=.98\linewidth]{evidence/natops/movement_schedules.pdf}
+\caption{Two unit rises with the same initial, final and average heights.
+Their spacing distinguishes the two schedules.}
+\label{fig:movement}
+\end{figure}
+
+Path signatures describe sequential data through iterated integrals.
+Their use in activity recognition depends on how observations are turned into
+paths and which interactions are retained~\cite{yang,generalised}.
+FRUITS weights iterated sums
+by index separation~\cite{fruits}, while Volterra signatures admit exponential,
+fractional and polynomial memory kernels~\cite{volterra}.
+We study a fixed polynomial lift of discrete increments, expressed in a
+Pascal basis. Our contribution is the interpretation and use of its depth-two
+coordinates, together with observation designs that expose posture, movement
+and rhythm to a linear readout.
+
+\section{Polynomial coding at depth two}
+Let $z_0,\ldots,z_{R-1}\in\R^C$, with $R\geq2$,
+be the increments of a piecewise-linear path; for observed positions, $z_r=x_{r+1}-x_r$.
+The first two signature levels are
+\begin{equation}
+ s_i=\sum_r z_r^i,\qquad
+ B_{ij}=\sum_{r<t}z_r^i z_t^j+\frac12\sum_r z_r^i z_r^j.
+ \label{eq:signature}
+\end{equation}
+The endpoint $s$ records net displacement, while $B$ records ordered
+interactions. Since $B_{ij}+B_{ji}=s_i s_j$, the order-sensitive part is the
+signed area
+\begin{equation}
+ J_{ij}=\frac12(B_{ij}-B_{ji})
+       =\frac12\sum_{r<t}(z_r^i z_t^j-z_r^j z_t^i),\qquad
+ B_{ij}=\frac12s_i s_j+J_{ij}.
+ \label{eq:area}
+\end{equation}
+The area is closed by the endpoint chord. Endpoints and areas for $i<j$
+form the depth-two logsignature.
+Although $(s,B)$ and $(s,J)$ determine each other, a linear readout of the
+former also has access to quadratic endpoint products.
+
+These sums record order but do not explicitly weight increment separation.
+An unclocked spatial signature cannot distinguish timings of the same geometric
+traversal~\cite{generalised}. A time channel captures timing in the full signature,
+but low-depth truncations can still merge differently timed movements. We
+therefore construct a path whose endpoints summarize increment positions and
+whose selected areas weight their separation.
+
+\paragraph{Making position visible.}
+We attach $P$ polynomially weighted copies to each increment,
+for $1\leq P\leq R$:
+\begin{equation}
+ b_p(r)=\binom rp\binom{R-1}p^{-1},\qquad
+ v_r=(b_p(r)z_r)_{p=0}^{P-1},\qquad 0\leq r<R,
+ \label{eq:lift}
+\end{equation}
+where $\binom rp=0$ for $r<p$. The signature of the path accumulated
+from $v_r$ is the \emph{Pascal-coded signature}: $b_0(r)=1$ retains the
+original increments, $b_1(r)=r/(R-1)$ adds a linear position weight with values
+between 0 and 1, and further copies add higher degrees. The weights act on
+increments, not positions.
+
+\paragraph{A distinction between two schedules.}
+The one-dimensional paths in Figure~\ref{fig:movement} have increments
+$z=(z_r)_{r=0}^{3}$: $(1,0,0,1)$ (spread) or $(0,1,1,0)$ (central).
+Clocked increments $\tilde z_r=(1/4,z_r)$ give both paths endpoint $(1,2)$
+and zero signed area by~\eqref{eq:area}.
+
+For $R=4$, the weights \mbox{$u_r:=r/(R-1)$} satisfy
+$(u_0,u_1,u_2,u_3)=(0,\tfrac13,\tfrac23,1)$.
+Accumulating $v_r=(z_r,u_rz_r)\in\R^2$ gives both paths endpoint $(2,1)$
+(total and position-weighted rise). By~\eqref{eq:area}, $J_{01}$ is the signed
+area between coordinates $0$ (original) and $1$ (weighted):
+\begin{equation}
+ J_{01}=\frac12\sum_{r<t}(u_t-u_r)z_rz_t.
+ \label{eq:sep}
+\end{equation}
+The rise separations $1-0=1$ and $\tfrac23-\tfrac13=\tfrac13$ give areas
+$1/2$ and $1/6$. A linear readout separates the schedules at depth two;
+the clocked paths first differ at depth three.
+
+Both representations use two channels. Weighted second-order interactions
+expose spacing and can be easier to interpret than higher-order terms at
+comparable cost.
+No general depth bound follows; in full coding, $P$ copies increase $C$
+channels to $PC$, so lower depth alone implies no computational saving.
+
+The binomial basis makes index shifts lower-triangular via Vandermonde's
+identity, so locally coded segment signatures concatenate without revisiting
+raw steps. At fixed $R$, it spans the same space as monomials of degree below
+$P$. The resulting signature is also a Volterra signature~\cite{volterra} with
+a position-only kernel held constant on each increment interval.
+
+\section{What should the increments represent?}
+The increments determine what information the features retain. For body
+landmarks, differences between successive positions record movement but lose the
+starting pose. We include this pose by adding a step from a fixed origin to the
+first position, as in our gesture experiment. For inertial sensors, steady
+readings can indicate posture. Taking differences would remove these steady
+levels. We instead use scaled readings as increments, $z_r:=a_r/R$, so the
+endpoint $s:=R^{-1}\sum_r a_r$ is the average reading. Additional polynomially
+weighted copies add timing information while retaining this average.
+
+For rhythm, Fourier analysis separates oscillations by frequency (how quickly
+they repeat). With our normalization, total Fourier power
+is the average squared reading, a measure of signal strength.
+For nonzero signals, dividing each frequency's power by the total gives its energy
+share $p_k\geq0$, with $\sum_k p_k=1$. We order $K\geq2$ equally spaced
+nonnegative frequencies from low to high, using the normalized grid
+$u_k:=k/(K-1)$. Zero frequency represents a constant level. We apply the Pascal
+lift~\eqref{eq:lift} to the shares as increments, $z_k:=p_k$.
+
+The first endpoint coordinate is their sum, $1$. The second is the
+so-called spectral centroid $s_1:=\sum_k u_kp_k$: the energy-weighted average frequency
+on this grid. The signed area describes how widely the energy is spread:
+\begin{equation}
+ J_{01}=\frac12\sum_{k<l}(u_l-u_k)p_kp_l
+       =\frac14\mathbb E|U-V|,
+ \label{eq:spectrum}
+\end{equation}
+where $U,V$ are independent frequency draws with $\Pr(U=u_k)=p_k$.
+Their average absolute separation, $\mathbb E|U-V|$, is the Gini mean
+difference~\cite{gini}.
+
+Splitting a peak into two equal peaks, equally far above
+and below it, preserves the centroid but increases $J_{01}$. Power ignores
+where oscillations start in their cycle (phase). Normalization also removes
+overall strength, which we retain through separate amplitude summaries.
+
+An ordinary signature recovers the same summaries from a two-channel staircase
+$(F,M)$: $F$ advances through $u_k$; $M$ accumulates power shares while
+$F$ is fixed. Here $S^{MFM}=2J_{01}$. At fixed $K\geq3$, the scalar $P=3$
+Pascal endpoints and areas are fixed linear combinations of staircase tensor
+coordinates through depth five. The companion gives the derivation from
+polynomial one-form signature calculus~\cite[Lem.~4.1]{polynomialoneforms}.
+
+\section{A representation for phone activities}
+We build \emph{compact368} from three feature blocks to recognize
+UCI HAR's six activities from smartphone sensors (50\,Hz, 128-sample
+windows)~\cite{har}. To improve conditioning, we weight increments by $Q_{rp}$
+from $W=QH$, $W_{rp}=b_p(r)$, with $Q$ orthonormal and $H$ upper triangular
+with positive diagonal. This QR gives identical $Q$ for ascending Pascal or
+monomial columns in exact arithmetic.
+
+\paragraph{Sensor levels and temporal interactions: 171 features.}
+To retain posture, we standardize total acceleration and gyroscope (three axes
+each) using training-sample means and population standard deviations, without
+centering windows separately. Readings divided by 128 become increments. Three copies
+give 18 channels and $18+\binom{18}{2}=171$ endpoints and areas. The
+constant-copy endpoint is the standardized window mean divided by
+$\sqrt{128}$, so static posture remains represented.
+
+\paragraph{Spectral shape and scale: 140 features.}
+We use five triads: body acceleration,
+gravity (total minus body acceleration),
+gyroscope, and first differences of body acceleration and gyroscope.
+After training-set axis standardization, we append each triad's norm to obtain
+20 scalar signals. Each normalized one-sided power spectrum contributes five
+nonconstant coordinates from its three-copy logsignature; the constant
+mass endpoint is removed. Means and population standard deviations of
+unnormalized bin amplitudes add 40 scale features.
+
+\paragraph{Strength, persistence and alignment: 57 features.}
+We scale body acceleration, gravity and gyroscope by their training RMS.
+Twelve streams (three squared norms, three simultaneous pairwise dot products
+and six self-dot products at 40 and 100\,ms lags) contribute means, standard
+deviations and skewness. Three pairwise cosine-similarity streams add means
+and standard deviations. Standardized linear trends are retained for all fifteen streams.
+
+After training-only feature standardization and constant-column removal, these
+features feed a one-versus-rest ridge classifier with targets $+1/-1$, an
+unpenalized intercept and largest-score prediction.
+
+\section{Empirical illustrations and their scope}
+
+We replace each coded branch of \emph{compact368} in turn with a conventional
+signature (Table~\ref{tab:har}). Both studies are exploratory because these
+feature families grew out of iterative work on public benchmarks. On the official UCI
+HAR split (7,352 training windows from 21 subjects; 2,947 test windows from
+nine other subjects), the replacement controls come from a 187-configuration
+comparison. Every row uses training-only input and feature scaling with a fixed
+ridge penalty $\alpha=10$.
+
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Representation & Features & Accuracy & Errors\\
+\midrule
+\emph{compact368} &368&98.03\%&58\\
+Raw branch: lead--lag tensor, depth 2 &377&97.46\%&75\\
+Spectral branch: staircase tensor, depth 4 &708&98.00\%&59\\
+Supplied UCI HAR features &561&95.72\%&126\\
+\bottomrule
+\end{tabular}
+\caption{Exploratory HAR comparisons on the official subject-disjoint split.
+Each replacement retains the other \emph{compact368} blocks; counts are retained
+columns.}
+\label{tab:har}
+\end{table}
+
+The raw control uses a clock-augmented, origin-anchored lead--lag path;
+the staircase spectral control has more coordinates but only one extra error.
+
+\paragraph{Landmark trajectories.}
+
+On NATOPS~\cite{natopsoriginal,natops}, we compare channel interactions using depth-two
+logsignatures of six gestures
+tracked across eight 3D landmarks over 51 frames (180 training and 180 test
+sequences). Appending a clock and prepending an origin anchor yields a
+25-channel path, which $P=2$ coding~\eqref{eq:lift} lifts to 50 channels (Table~\ref{tab:natops}).
+The \emph{full} regime retains all pairwise areas, whereas the \emph{local}
+regime restricts areas to clock--channel and within-landmark coordinate pairs
+across copies, plus the 25 same-channel copy areas; intermediate controls isolate
+weighted endpoints and coded-clock areas. For each map, $\alpha\in\{10^k\}_{k=-6}^6$
+is selected via shared five-fold stratified CV with in-fold standardization before
+refitting on all 180 training sequences.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Representation&Features&CV (\%)&Correct&Test (\%)\\
+\midrule
+Ordinary full&325&92.2&163/180&90.6\\
+Moments + ordinary full$^*$&350&93.3&166/180&92.2\\
+Coded-clock control (full)$^*$&423&92.2&163/180&90.6\\
+Pascal full&1,275&92.2&173/180&96.1\\
+\midrule
+Ordinary local&73&92.8&167/180&92.8\\
+Moments + ordinary local&98&92.8&165/180&91.7\\
+Coded-clock control (local)&171&93.9&168/180&93.3\\
+Pascal local&267&93.9&165/180&91.7\\
+\bottomrule
+\end{tabular}
+\caption{NATOPS with shared training CV. Nominal counts include constant and
+dependent coordinates. Moments add weighted endpoints; coded-clock controls
+also add areas involving a clock copy. $^*$Controls added after the initial
+seven outcomes.}
+\label{tab:natops}
+\end{table}
+
+Coding improves the full map on test, though not the local map or CV (both
+full maps select $\alpha=10$ at 92.2\% CV, below the local maps), correcting
+12 ordinary-full errors while introducing two. This retrospective contrast
+suggests useful coded spatial interactions, without isolating cross-landmark
+effects from width and regularization. Computations use
+\texttt{tensorsig}~\cite{tensorsig}.
+
+\section{Conclusions and future work}
+Pascal-coded logsignatures capture posture, timing and rhythm for linear readouts, with encouraging
+exploratory accuracy on HAR and gesture trajectories. Future work includes
+pre-registered subject-disjoint benchmarks, structured channel-pair
+selection and learned positional bases to limit dimension.
+
+
+
+\input{common/ai_disclosure.tex}
+% The official ESANN example sets the bibliography in footnotesize.
+\begin{footnotesize}
+\input{references_main.tex}
+\end{footnotesize}
+\end{document}

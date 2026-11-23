@@ -1,0 +1,160 @@
+{
+  "name": "Two-copy position-coded increment signature diagnostic on NATOPS",
+  "frozen_utc": "2026-10-03T13:54:23.937439+00:00",
+  "design_status": "post-primary retrospective diagnostic; all previous ordinary and clock test outcomes known",
+  "known_prior_test_correct": {
+    "first_level": 48,
+    "full": 163,
+    "local": 167,
+    "skeleton": 165,
+    "bilateral": 167,
+    "clock_only": 140
+  },
+  "scope": "Exactly seven specified representations; fixed P=2; no data-dependent choice of coding order or additional models",
+  "pre_outcome_design_amendment": {
+    "recorded_utc": "2026-10-03T13:54:23.939057+00:00",
+    "status": "seventh control added before initial protocol freeze, data access, fitting or any new offset test outcomes",
+    "reason": "Theory audit: coded clock areas encode higher spatial moments; first coded moments alone do not isolate weighted spatial interactions",
+    "added_model": "offset_clock_control, 171 coordinates:50 first levels,97 coded areas involving either clock copy,24 original within-landmark spatial areas",
+    "added_comparison": "offset_local versus offset_clock_control; fixed Holm family increased from3 to4"
+  },
+  "data": {
+    "NATOPS_TRAIN.ts": {
+      "url": "https://zenodo.org/records/11206248/files/NATOPS_TRAIN.ts?download=1",
+      "bytes": 2119514,
+      "md5": "9638c27c76d8a7d8be585f6b03b6c022",
+      "sha256": "3567f0aa297e89327215ee1147537e06f7bdc51f48ac8d2c39aaa34fb1eab1b7"
+    },
+    "NATOPS_TEST.ts": {
+      "url": "https://zenodo.org/records/11206248/files/NATOPS_TEST.ts?download=1",
+      "bytes": 2119227,
+      "md5": "b4fdd06b13f16ef24f9e2aa23fe112d3",
+      "sha256": "3a9a41a948c30d19db6b9e0ec44d946d42199c4f8724c2aa6e8b71b28612404e"
+    }
+  },
+  "channel_order": [
+    "time",
+    "left_hand_tip_x",
+    "left_hand_tip_y",
+    "left_hand_tip_z",
+    "right_hand_tip_x",
+    "right_hand_tip_y",
+    "right_hand_tip_z",
+    "left_elbow_x",
+    "left_elbow_y",
+    "left_elbow_z",
+    "right_elbow_x",
+    "right_elbow_y",
+    "right_elbow_z",
+    "left_wrist_x",
+    "left_wrist_y",
+    "left_wrist_z",
+    "right_wrist_x",
+    "right_wrist_y",
+    "right_wrist_z",
+    "left_thumb_x",
+    "left_thumb_y",
+    "left_thumb_z",
+    "right_thumb_x",
+    "right_thumb_y",
+    "right_thumb_z"
+  ],
+  "path": {
+    "raw_spatial_channels": 24,
+    "resampling": "none",
+    "time": "numpy.linspace(0,1,51)",
+    "basepoint": "prepend all-zero 25-vector AFTER time augmentation",
+    "interpolation": "piecewise linear",
+    "reset": false,
+    "progress": false,
+    "other_preprocessing": "none; no per-sequence centring/scaling"
+  },
+  "offset": {
+    "P": 2,
+    "R": 51,
+    "z": "51 increments after normalized-time augmentation and prepended all-zero basepoint",
+    "index": "r=0,...,50, including basepoint-to-first-observation increment at r=0",
+    "position": "u_r=r/(R-1)=r/50",
+    "lift": "v_r=(z_r,u_r*z_r)",
+    "order": "code block then original channel; first25 P0, next25 P1",
+    "interpretation": "depth-two piecewise-linear logsignature of the cumulative lifted increments, not multiplication of path coordinates by position"
+  },
+  "features": {
+    "all_first_levels_retained": true,
+    "area": "0.5*sum_{r<s}(v_r[i]*v_s[j]-v_r[j]*v_s[i]) for i<j",
+    "ordinary_local_pairs": "24 time-spatial pairs and24 within-landmark XYZ pairs",
+    "offset_local_pairs": "all4 code-copy pairs for every ordinary_local edge plus25 same-original-channel cross-code pairs",
+    "offset_clock_control_pairs": "all97 coded pairs involving either clock copy plus24 code0 within-landmark spatial pairs; subset of offset_local",
+    "constant_or_redundant_coordinates": "Retained identically; dimensions nominal; StandardScaler uses its standard constant-column handling"
+  },
+  "learner": {
+    "class": "sklearn.linear_model.RidgeClassifier",
+    "solver": "cholesky",
+    "fit_intercept": true,
+    "class_weight": null,
+    "scaling": "StandardScaler fit only on each CV training fold, then on all official training rows for refit",
+    "alpha_grid": [
+      1e-06,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0,
+      100000.0,
+      1000000.0
+    ],
+    "selection": "maximum exact mean validation accuracy; lowest alpha on ties"
+  },
+  "cv": {
+    "folds": "reuse exactly the previous saved five stratified training folds",
+    "seed_of_original_split": 20261003,
+    "alpha_grid": [
+      1e-06,
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0,
+      1000.0,
+      10000.0,
+      100000.0,
+      1000000.0
+    ],
+    "selection": "maximum exact mean validation accuracy; lowest alpha on ties"
+  },
+  "test_access_policy": "Within this run, save all seven training-only alpha choices before first test fetch; earlier test scores already known",
+  "paired_comparisons": {
+    "reference": "offset_local",
+    "others": [
+      "ordinary_local",
+      "ordinary_full",
+      "moments_plus_ordinary_local",
+      "offset_clock_control"
+    ],
+    "test": "two-sided exact McNemar; Holm adjustment across four comparisons",
+    "status": "descriptive retrospective diagnostic; not proof of general superiority"
+  },
+  "provenance": {
+    "prior_primary_protocol_sha256": "51e647f49a5123e5785a28e5079be815b67948ac982e0f8f0021e3053f1dc404",
+    "prior_primary_results_sha256": "e5383dcbcd59245a704d600941109d6bf4f0d81804c3c3d278efef629992817a",
+    "prior_clock_results_sha256": "8fdf5b93bd9d4033de5b83d543781ae1997afd6de658c7c17158f26e8ba1296e",
+    "original_helper_source_sha256": "6f5fea6d8acb72a2016959be9053f43c980e3b59d7a0490e4337f28669afd38c",
+    "common_py": "Shared loading, path preparation and learner functions copied verbatim from original helper source"
+  },
+  "frozen_files": {
+    "run_experiment.py": "d38d12dee3dc763589455e3eac4a1c67c267506804c34f8d3230d2f6b2e0466a",
+    "common.py": "de53540ad24ade6e048ef97ed22c349ac28d7c388f612dbde89f2b675f18b213",
+    "folds.json": "c8613470202051096de581672249a15c309056f957826df1f69fb75e2af055f2",
+    "models.json": "310dfcd533dd77da35b2190d3145a21148fa12b509acc2a0097656326c3520cd",
+    "requirements.txt": "a5b92ff11201c8bc75632288016338ae48e3b556e6a92ccd88740971c6dc1954"
+  },
+  "freeze_python": "3.12.5 (v3.12.5:ff3bc82f7c9, Aug  7 2024, 05:32:06) [Clang 13.0.0 (clang-1300.0.29.30)]"
+}

@@ -1,0 +1,1648 @@
+{
+  "status": "passed",
+  "scope": "Recompute accuracy and macro-F1 from saved confusion matrices; verify official split sizes, disjoint subject lists and fixed alpha. No models or accuracy experiments rerun. Transfer numerical summary checked against saved selected/aggregate CSV and existing verification artifact.",
+  "har_rows_verified": 190,
+  "har_main_rows": [
+    {
+      "source": "retained_results",
+      "key": "compact368",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "retained_results",
+      "key": "pool803",
+      "features": 803,
+      "accuracy": 0.9809976247030879,
+      "macro_f1": 0.9813981683337065,
+      "errors": 56
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_leadlag_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9745503902273498,
+      "macro_f1": 0.9745815431497239,
+      "errors": 75
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_tensor_d4/ridge",
+      "features": 708,
+      "accuracy": 0.9799796403121819,
+      "macro_f1": 0.9802358621401778,
+      "errors": 59
+    }
+  ],
+  "consolidated_variant_counts": {
+    "engineered_561": 1,
+    "retained_compact368": 1,
+    "drop_raw_compact368": 1,
+    "retained_pool803": 1,
+    "drop_raw_pool803": 1,
+    "retained_uci903": 1,
+    "drop_raw_uci903": 1,
+    "ordinary_lift_compact368": 1,
+    "ordinary_lift_pool803": 1,
+    "ordinary_lift_uci903": 1,
+    "ordinary_raw_compact368": 52,
+    "ordinary_raw_pool803": 52,
+    "ordinary_raw_uci903": 52,
+    "drop_spectral_compact368": 1,
+    "ordinary_spectral_compact368": 9,
+    "ordinary_joint_compact368": 6,
+    "drop_trends_compact368": 1,
+    "ordinary_trends_compact368": 1,
+    "drop_amplitude40_compact368": 1,
+    "drop_cosine6_compact368": 1,
+    "drop_invariant36_compact368": 1
+  },
+  "dsads_selected": {
+    "errors": 791,
+    "test_windows": 9120,
+    "accuracy": 0.9132675438596491,
+    "person_accuracy_sample_sd_pp": 3.9269697102161834
+  },
+  "checks": [
+    {
+      "source": "retained_results",
+      "key": "compact368",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "retained_results",
+      "key": "pool803",
+      "features": 803,
+      "accuracy": 0.9809976247030879,
+      "macro_f1": 0.9813981683337065,
+      "errors": 56
+    },
+    {
+      "source": "retained_results",
+      "key": "uci903",
+      "features": 903,
+      "accuracy": 0.9711571089243298,
+      "macro_f1": 0.971555832670096,
+      "errors": 85
+    },
+    {
+      "source": "consolidated_results",
+      "key": "engineered_561/uci_features/ridge",
+      "features": 561,
+      "accuracy": 0.9572446555819477,
+      "macro_f1": 0.9585250779732419,
+      "errors": 126
+    },
+    {
+      "source": "consolidated_results",
+      "key": "retained_compact368/pascal_qr/ridge",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_raw_compact368/none/ridge",
+      "features": 197,
+      "accuracy": 0.9616559212758737,
+      "macro_f1": 0.9613692160114536,
+      "errors": 113
+    },
+    {
+      "source": "consolidated_results",
+      "key": "retained_pool803/pascal_qr/ridge",
+      "features": 803,
+      "accuracy": 0.9809976247030879,
+      "macro_f1": 0.9813981683337065,
+      "errors": 56
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_raw_pool803/none/ridge",
+      "features": 461,
+      "accuracy": 0.9718357651849339,
+      "macro_f1": 0.9714360635589672,
+      "errors": 83
+    },
+    {
+      "source": "consolidated_results",
+      "key": "retained_uci903/pascal_qr/ridge",
+      "features": 903,
+      "accuracy": 0.9711571089243298,
+      "macro_f1": 0.971555832670096,
+      "errors": 85
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_raw_uci903/none/ridge",
+      "features": 561,
+      "accuracy": 0.9572446555819477,
+      "macro_f1": 0.9585250779732419,
+      "errors": 126
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_lift_compact368/explicit_polynomial_path_d2/ridge",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_lift_pool803/explicit_polynomial_path_d2/ridge",
+      "features": 803,
+      "accuracy": 0.9809976247030879,
+      "macro_f1": 0.9813981683337065,
+      "errors": 56
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_lift_uci903/explicit_polynomial_path_d2/ridge",
+      "features": 903,
+      "accuracy": 0.9711571089243298,
+      "macro_f1": 0.971555832670096,
+      "errors": 85
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d2_tensor/ridge",
+      "features": 239,
+      "accuracy": 0.9660671869697998,
+      "macro_f1": 0.965533466516122,
+      "errors": 100
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d2_tensor/ridge",
+      "features": 503,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9740664274797464,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d2_tensor/ridge",
+      "features": 603,
+      "accuracy": 0.9667458432304038,
+      "macro_f1": 0.9670994131926575,
+      "errors": 98
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d2_log/ridge",
+      "features": 218,
+      "accuracy": 0.9541907024092298,
+      "macro_f1": 0.9545340528161402,
+      "errors": 135
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d2_log/ridge",
+      "features": 482,
+      "accuracy": 0.9731930777061418,
+      "macro_f1": 0.9731974386419728,
+      "errors": 79
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d2_log/ridge",
+      "features": 582,
+      "accuracy": 0.9575839837122497,
+      "macro_f1": 0.9588182497841181,
+      "errors": 125
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d3_tensor/ridge",
+      "features": 455,
+      "accuracy": 0.9524940617577197,
+      "macro_f1": 0.9522877065610996,
+      "errors": 140
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d3_tensor/ridge",
+      "features": 719,
+      "accuracy": 0.9613165931455717,
+      "macro_f1": 0.9613204009290969,
+      "errors": 114
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d3_tensor/ridge",
+      "features": 819,
+      "accuracy": 0.9511367492365117,
+      "macro_f1": 0.9518270674035931,
+      "errors": 144
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d3_log/ridge",
+      "features": 288,
+      "accuracy": 0.9555480149304377,
+      "macro_f1": 0.9559634953045261,
+      "errors": 131
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d3_log/ridge",
+      "features": 552,
+      "accuracy": 0.9714964370546318,
+      "macro_f1": 0.9718805502962345,
+      "errors": 84
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d3_log/ridge",
+      "features": 652,
+      "accuracy": 0.9501187648456056,
+      "macro_f1": 0.9514347220527609,
+      "errors": 147
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d4_tensor/ridge",
+      "features": 1751,
+      "accuracy": 0.9575839837122497,
+      "macro_f1": 0.957606030421744,
+      "errors": 125
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d4_tensor/ridge",
+      "features": 2015,
+      "accuracy": 0.9616559212758737,
+      "macro_f1": 0.961619611510811,
+      "errors": 113
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d4_tensor/ridge",
+      "features": 2115,
+      "accuracy": 0.9514760773668137,
+      "macro_f1": 0.9519840434415231,
+      "errors": 143
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_no_clock_d4_log/ridge",
+      "features": 603,
+      "accuracy": 0.9555480149304377,
+      "macro_f1": 0.9556297965959194,
+      "errors": 131
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_no_clock_d4_log/ridge",
+      "features": 867,
+      "accuracy": 0.9660671869697998,
+      "macro_f1": 0.9665537187433423,
+      "errors": 100
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_no_clock_d4_log/ridge",
+      "features": 967,
+      "accuracy": 0.9545300305395318,
+      "macro_f1": 0.9555064708580914,
+      "errors": 134
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_time_d2_tensor/ridge",
+      "features": 251,
+      "accuracy": 0.9714964370546318,
+      "macro_f1": 0.9716021241120117,
+      "errors": 84
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_time_d2_tensor/ridge",
+      "features": 515,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.9747536685225034,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_time_d2_tensor/ridge",
+      "features": 615,
+      "accuracy": 0.9616559212758737,
+      "macro_f1": 0.9629120386979161,
+      "errors": 113
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_time_d2_log/ridge",
+      "features": 224,
+      "accuracy": 0.9721750933152359,
+      "macro_f1": 0.9722978829410257,
+      "errors": 82
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_time_d2_log/ridge",
+      "features": 488,
+      "accuracy": 0.9759077027485579,
+      "macro_f1": 0.9758065216924852,
+      "errors": 71
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_time_d2_log/ridge",
+      "features": 588,
+      "accuracy": 0.9613165931455717,
+      "macro_f1": 0.9625800021473966,
+      "errors": 114
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_time_d3_tensor/ridge",
+      "features": 593,
+      "accuracy": 0.9687818120122158,
+      "macro_f1": 0.9687351615713076,
+      "errors": 92
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_time_d3_tensor/ridge",
+      "features": 857,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9739978077086389,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_time_d3_tensor/ridge",
+      "features": 957,
+      "accuracy": 0.9562266711910418,
+      "macro_f1": 0.9571935304319665,
+      "errors": 129
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_time_d3_log/ridge",
+      "features": 336,
+      "accuracy": 0.9708177807940278,
+      "macro_f1": 0.9707112761615629,
+      "errors": 86
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_time_d3_log/ridge",
+      "features": 600,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.9746402417218617,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_time_d3_log/ridge",
+      "features": 700,
+      "accuracy": 0.9596199524940617,
+      "macro_f1": 0.9607342942211371,
+      "errors": 119
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_time_d4_log/ridge",
+      "features": 924,
+      "accuracy": 0.9633525619273838,
+      "macro_f1": 0.9624414665492159,
+      "errors": 108
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_time_d4_log/ridge",
+      "features": 1188,
+      "accuracy": 0.9725144214455378,
+      "macro_f1": 0.9719803332410374,
+      "errors": 81
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_time_d4_log/ridge",
+      "features": 1288,
+      "accuracy": 0.9535120461486257,
+      "macro_f1": 0.9539978119307201,
+      "errors": 137
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_basepoint_d2_tensor/ridge",
+      "features": 251,
+      "accuracy": 0.9694604682728198,
+      "macro_f1": 0.969601096563309,
+      "errors": 90
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_basepoint_d2_tensor/ridge",
+      "features": 515,
+      "accuracy": 0.9762470308788599,
+      "macro_f1": 0.976115372729922,
+      "errors": 70
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_basepoint_d2_tensor/ridge",
+      "features": 615,
+      "accuracy": 0.9704784526637258,
+      "macro_f1": 0.9706864590692598,
+      "errors": 87
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_basepoint_d2_log/ridge",
+      "features": 224,
+      "accuracy": 0.9643705463182898,
+      "macro_f1": 0.9653203581745663,
+      "errors": 105
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_basepoint_d2_log/ridge",
+      "features": 488,
+      "accuracy": 0.9745503902273498,
+      "macro_f1": 0.974756358161374,
+      "errors": 75
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_basepoint_d2_log/ridge",
+      "features": 588,
+      "accuracy": 0.9623345775364778,
+      "macro_f1": 0.963593228330783,
+      "errors": 111
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_basepoint_d3_tensor/ridge",
+      "features": 593,
+      "accuracy": 0.9708177807940278,
+      "macro_f1": 0.9705972613013986,
+      "errors": 86
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_basepoint_d3_tensor/ridge",
+      "features": 857,
+      "accuracy": 0.9745503902273498,
+      "macro_f1": 0.9742847794788677,
+      "errors": 75
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_basepoint_d3_tensor/ridge",
+      "features": 957,
+      "accuracy": 0.9670851713607058,
+      "macro_f1": 0.9670114940742301,
+      "errors": 97
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_basepoint_d3_log/ridge",
+      "features": 336,
+      "accuracy": 0.9633525619273838,
+      "macro_f1": 0.9639433388256741,
+      "errors": 108
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_basepoint_d3_log/ridge",
+      "features": 600,
+      "accuracy": 0.9728537495758398,
+      "macro_f1": 0.9724898042069151,
+      "errors": 80
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_basepoint_d3_log/ridge",
+      "features": 700,
+      "accuracy": 0.9677638276213099,
+      "macro_f1": 0.967906360639326,
+      "errors": 95
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_basepoint_d4_log/ridge",
+      "features": 924,
+      "accuracy": 0.9677638276213099,
+      "macro_f1": 0.9675895858077626,
+      "errors": 95
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_basepoint_d4_log/ridge",
+      "features": 1188,
+      "accuracy": 0.9731930777061418,
+      "macro_f1": 0.9731132866718061,
+      "errors": 79
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_basepoint_d4_log/ridge",
+      "features": 1288,
+      "accuracy": 0.9670851713607058,
+      "macro_f1": 0.9670828783870243,
+      "errors": 97
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_d2_tensor/ridge",
+      "features": 251,
+      "accuracy": 0.9667458432304038,
+      "macro_f1": 0.9664217198751818,
+      "errors": 98
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_d2_tensor/ridge",
+      "features": 515,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9740827106959276,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_d2_tensor/ridge",
+      "features": 615,
+      "accuracy": 0.9664065151001018,
+      "macro_f1": 0.9668098400685942,
+      "errors": 99
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_d2_log/ridge",
+      "features": 224,
+      "accuracy": 0.9545300305395318,
+      "macro_f1": 0.9549395317329404,
+      "errors": 134
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_d2_log/ridge",
+      "features": 488,
+      "accuracy": 0.9725144214455378,
+      "macro_f1": 0.9723886695551723,
+      "errors": 81
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_d2_log/ridge",
+      "features": 588,
+      "accuracy": 0.9579233118425518,
+      "macro_f1": 0.9591991751679719,
+      "errors": 124
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_d3_tensor/ridge",
+      "features": 593,
+      "accuracy": 0.9633525619273838,
+      "macro_f1": 0.9638736404613694,
+      "errors": 108
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_d3_tensor/ridge",
+      "features": 857,
+      "accuracy": 0.9660671869697998,
+      "macro_f1": 0.9667312055465515,
+      "errors": 100
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_d3_tensor/ridge",
+      "features": 957,
+      "accuracy": 0.9582626399728538,
+      "macro_f1": 0.9593188147425066,
+      "errors": 123
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_d3_log/ridge",
+      "features": 336,
+      "accuracy": 0.9558873430607397,
+      "macro_f1": 0.9562840910014554,
+      "errors": 130
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_d3_log/ridge",
+      "features": 600,
+      "accuracy": 0.9697997964031219,
+      "macro_f1": 0.9702716070667465,
+      "errors": 89
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_d3_log/ridge",
+      "features": 700,
+      "accuracy": 0.9507974211062097,
+      "macro_f1": 0.9520078732408597,
+      "errors": 145
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_d4_log/ridge",
+      "features": 924,
+      "accuracy": 0.9562266711910418,
+      "macro_f1": 0.9564608859637828,
+      "errors": 129
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_d4_log/ridge",
+      "features": 1188,
+      "accuracy": 0.9647098744485918,
+      "macro_f1": 0.9652476153234256,
+      "errors": 104
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_d4_log/ridge",
+      "features": 1288,
+      "accuracy": 0.9511367492365117,
+      "macro_f1": 0.9518686828772319,
+      "errors": 144
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay1_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9741838177208572,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay1_d2_tensor/ridge",
+      "features": 641,
+      "accuracy": 0.9782829996606719,
+      "macro_f1": 0.9782877046833622,
+      "errors": 64
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay1_d2_tensor/ridge",
+      "features": 741,
+      "accuracy": 0.9681031557516118,
+      "macro_f1": 0.9682022124331916,
+      "errors": 94
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay1_d2_log/ridge",
+      "features": 287,
+      "accuracy": 0.9650492025788938,
+      "macro_f1": 0.9660959501708662,
+      "errors": 103
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay1_d2_log/ridge",
+      "features": 551,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.9752807452587545,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay1_d2_log/ridge",
+      "features": 651,
+      "accuracy": 0.9602986087546658,
+      "macro_f1": 0.9614978595194633,
+      "errors": 117
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay1_d3_log/ridge",
+      "features": 1015,
+      "accuracy": 0.9609772650152698,
+      "macro_f1": 0.9611618990393606,
+      "errors": 115
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay1_d3_log/ridge",
+      "features": 1279,
+      "accuracy": 0.9701391245334238,
+      "macro_f1": 0.9696576223830942,
+      "errors": 88
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay1_d3_log/ridge",
+      "features": 1379,
+      "accuracy": 0.9647098744485918,
+      "macro_f1": 0.9645510456704621,
+      "errors": 104
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay2_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9728537495758398,
+      "macro_f1": 0.97256139513967,
+      "errors": 80
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay2_d2_tensor/ridge",
+      "features": 641,
+      "accuracy": 0.9765863590091619,
+      "macro_f1": 0.9764447086442458,
+      "errors": 69
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay2_d2_tensor/ridge",
+      "features": 741,
+      "accuracy": 0.9691211401425178,
+      "macro_f1": 0.9692748813758955,
+      "errors": 91
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay2_d2_log/ridge",
+      "features": 287,
+      "accuracy": 0.9630132337970818,
+      "macro_f1": 0.9638120319685174,
+      "errors": 109
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay2_d2_log/ridge",
+      "features": 551,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9745052179852599,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay2_d2_log/ridge",
+      "features": 651,
+      "accuracy": 0.9596199524940617,
+      "macro_f1": 0.9607226909817631,
+      "errors": 119
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay2_d3_log/ridge",
+      "features": 1015,
+      "accuracy": 0.9602986087546658,
+      "macro_f1": 0.9603725855396278,
+      "errors": 117
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay2_d3_log/ridge",
+      "features": 1279,
+      "accuracy": 0.9711571089243298,
+      "macro_f1": 0.9706435735542467,
+      "errors": 85
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay2_d3_log/ridge",
+      "features": 1379,
+      "accuracy": 0.9647098744485918,
+      "macro_f1": 0.9644896235473693,
+      "errors": 104
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay5_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9677638276213099,
+      "macro_f1": 0.9668863664587386,
+      "errors": 95
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay5_d2_tensor/ridge",
+      "features": 641,
+      "accuracy": 0.9711571089243298,
+      "macro_f1": 0.9703919433360498,
+      "errors": 85
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay5_d2_tensor/ridge",
+      "features": 741,
+      "accuracy": 0.9640312181879878,
+      "macro_f1": 0.9635557768476634,
+      "errors": 106
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay5_d2_log/ridge",
+      "features": 287,
+      "accuracy": 0.9613165931455717,
+      "macro_f1": 0.9616890314036421,
+      "errors": 114
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay5_d2_log/ridge",
+      "features": 551,
+      "accuracy": 0.9681031557516118,
+      "macro_f1": 0.9678596709423357,
+      "errors": 94
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay5_d2_log/ridge",
+      "features": 651,
+      "accuracy": 0.9562266711910418,
+      "macro_f1": 0.9567593932561848,
+      "errors": 129
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_delay5_d3_log/ridge",
+      "features": 1015,
+      "accuracy": 0.9623345775364778,
+      "macro_f1": 0.9623892381290506,
+      "errors": 111
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_delay5_d3_log/ridge",
+      "features": 1279,
+      "accuracy": 0.9701391245334238,
+      "macro_f1": 0.9698708620417905,
+      "errors": 88
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_delay5_d3_log/ridge",
+      "features": 1379,
+      "accuracy": 0.9633525619273838,
+      "macro_f1": 0.9632804014725448,
+      "errors": 108
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_leadlag_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9745503902273498,
+      "macro_f1": 0.9745815431497239,
+      "errors": 75
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_leadlag_d2_tensor/ridge",
+      "features": 641,
+      "accuracy": 0.9769256871394638,
+      "macro_f1": 0.976837413650705,
+      "errors": 68
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_leadlag_d2_tensor/ridge",
+      "features": 741,
+      "accuracy": 0.9681031557516118,
+      "macro_f1": 0.9682102290800471,
+      "errors": 94
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_leadlag_d2_log/ridge",
+      "features": 287,
+      "accuracy": 0.9647098744485918,
+      "macro_f1": 0.9656533660394185,
+      "errors": 104
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_leadlag_d2_log/ridge",
+      "features": 551,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9745323319243314,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_leadlag_d2_log/ridge",
+      "features": 651,
+      "accuracy": 0.9596199524940617,
+      "macro_f1": 0.9608597687484081,
+      "errors": 119
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_leadlag_d3_log/ridge",
+      "features": 1015,
+      "accuracy": 0.9626739056667798,
+      "macro_f1": 0.963045638792781,
+      "errors": 110
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_leadlag_d3_log/ridge",
+      "features": 1279,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.975045521386495,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_leadlag_d3_log/ridge",
+      "features": 1379,
+      "accuracy": 0.9664065151001018,
+      "macro_f1": 0.9664482405881297,
+      "errors": 99
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_leadlag_d2_tensor/ridge",
+      "features": 377,
+      "accuracy": 0.9691211401425178,
+      "macro_f1": 0.9687335444029173,
+      "errors": 91
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_leadlag_d2_tensor/ridge",
+      "features": 641,
+      "accuracy": 0.9755683746182559,
+      "macro_f1": 0.9754139137907321,
+      "errors": 72
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_leadlag_d2_tensor/ridge",
+      "features": 741,
+      "accuracy": 0.9664065151001018,
+      "macro_f1": 0.9668225636860144,
+      "errors": 99
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_leadlag_d2_log/ridge",
+      "features": 287,
+      "accuracy": 0.9704784526637258,
+      "macro_f1": 0.9699911772599715,
+      "errors": 87
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_leadlag_d2_log/ridge",
+      "features": 551,
+      "accuracy": 0.9738717339667459,
+      "macro_f1": 0.9734939227652513,
+      "errors": 77
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_leadlag_d2_log/ridge",
+      "features": 651,
+      "accuracy": 0.9677638276213099,
+      "macro_f1": 0.9681952574353478,
+      "errors": 95
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_integrated_leadlag_d3_log/ridge",
+      "features": 1015,
+      "accuracy": 0.9613165931455717,
+      "macro_f1": 0.9612812539518761,
+      "errors": 114
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_integrated_leadlag_d3_log/ridge",
+      "features": 1279,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.9752774979671902,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_integrated_leadlag_d3_log/ridge",
+      "features": 1379,
+      "accuracy": 0.9613165931455717,
+      "macro_f1": 0.9615144108172754,
+      "errors": 114
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_shift1_d2_tensor/ridge",
+      "features": 401,
+      "accuracy": 0.9735324058364438,
+      "macro_f1": 0.973669564038329,
+      "errors": 78
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_shift1_d2_tensor/ridge",
+      "features": 665,
+      "accuracy": 0.9776043434000679,
+      "macro_f1": 0.9775556388643976,
+      "errors": 66
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_shift1_d2_tensor/ridge",
+      "features": 765,
+      "accuracy": 0.9606379368849678,
+      "macro_f1": 0.9618151999273624,
+      "errors": 116
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_shift1_d2_log/ridge",
+      "features": 299,
+      "accuracy": 0.9721750933152359,
+      "macro_f1": 0.9722814495102529,
+      "errors": 82
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_shift1_d2_log/ridge",
+      "features": 563,
+      "accuracy": 0.9765863590091619,
+      "macro_f1": 0.9765414743884416,
+      "errors": 69
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_shift1_d2_log/ridge",
+      "features": 663,
+      "accuracy": 0.9582626399728538,
+      "macro_f1": 0.9593519881814089,
+      "errors": 123
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_shift1_d3_log/ridge",
+      "features": 1207,
+      "accuracy": 0.9704784526637258,
+      "macro_f1": 0.9701894541984327,
+      "errors": 87
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_shift1_d3_log/ridge",
+      "features": 1471,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.9744884891673579,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_shift1_d3_log/ridge",
+      "features": 1571,
+      "accuracy": 0.9552086868001357,
+      "macro_f1": 0.9560463698160531,
+      "errors": 132
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 401,
+      "accuracy": 0.9721750933152359,
+      "macro_f1": 0.9722005724910173,
+      "errors": 82
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 665,
+      "accuracy": 0.9759077027485579,
+      "macro_f1": 0.9757935216113212,
+      "errors": 71
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 765,
+      "accuracy": 0.9589412962334578,
+      "macro_f1": 0.960060678026724,
+      "errors": 121
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_staircase_leadlag_d2_log/ridge",
+      "features": 299,
+      "accuracy": 0.9718357651849339,
+      "macro_f1": 0.9719235538656283,
+      "errors": 83
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_staircase_leadlag_d2_log/ridge",
+      "features": 563,
+      "accuracy": 0.9762470308788599,
+      "macro_f1": 0.9760993993013812,
+      "errors": 70
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_staircase_leadlag_d2_log/ridge",
+      "features": 663,
+      "accuracy": 0.9599592806243638,
+      "macro_f1": 0.9611423311845302,
+      "errors": 118
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/total_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1207,
+      "accuracy": 0.9697997964031219,
+      "macro_f1": 0.9695822723091091,
+      "errors": 89
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/total_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1471,
+      "accuracy": 0.9759077027485579,
+      "macro_f1": 0.9756570891608494,
+      "errors": 71
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/total_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1571,
+      "accuracy": 0.9548693586698337,
+      "macro_f1": 0.9555128936060328,
+      "errors": 133
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_time_d2_tensor/ridge",
+      "features": 251,
+      "accuracy": 0.9721750933152359,
+      "macro_f1": 0.9723130366487994,
+      "errors": 82
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_time_d2_tensor/ridge",
+      "features": 515,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.9751368319908916,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_time_d2_tensor/ridge",
+      "features": 615,
+      "accuracy": 0.9616559212758737,
+      "macro_f1": 0.9629120386979161,
+      "errors": 113
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_time_d2_log/ridge",
+      "features": 224,
+      "accuracy": 0.9721750933152359,
+      "macro_f1": 0.9722978829410257,
+      "errors": 82
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_time_d2_log/ridge",
+      "features": 488,
+      "accuracy": 0.9759077027485579,
+      "macro_f1": 0.9758065216924852,
+      "errors": 71
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_time_d2_log/ridge",
+      "features": 588,
+      "accuracy": 0.9609772650152698,
+      "macro_f1": 0.9622107156700856,
+      "errors": 115
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_time_d3_tensor/ridge",
+      "features": 593,
+      "accuracy": 0.9694604682728198,
+      "macro_f1": 0.9694846280388663,
+      "errors": 90
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_time_d3_tensor/ridge",
+      "features": 857,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9739429027653133,
+      "errors": 76
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_time_d3_tensor/ridge",
+      "features": 957,
+      "accuracy": 0.9569053274516457,
+      "macro_f1": 0.9579056995820475,
+      "errors": 127
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_time_d3_log/ridge",
+      "features": 336,
+      "accuracy": 0.9708177807940278,
+      "macro_f1": 0.9707303090916787,
+      "errors": 86
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_time_d3_log/ridge",
+      "features": 600,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.9749830763217506,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_time_d3_log/ridge",
+      "features": 700,
+      "accuracy": 0.9602986087546658,
+      "macro_f1": 0.9614276250850949,
+      "errors": 117
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_shift1_d2_tensor/ridge",
+      "features": 401,
+      "accuracy": 0.9735324058364438,
+      "macro_f1": 0.9736918071282644,
+      "errors": 78
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_shift1_d2_tensor/ridge",
+      "features": 665,
+      "accuracy": 0.9769256871394638,
+      "macro_f1": 0.9769022069094672,
+      "errors": 68
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_shift1_d2_tensor/ridge",
+      "features": 765,
+      "accuracy": 0.9596199524940617,
+      "macro_f1": 0.9607707868134688,
+      "errors": 119
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_shift1_d2_log/ridge",
+      "features": 299,
+      "accuracy": 0.9725144214455378,
+      "macro_f1": 0.9726062673823592,
+      "errors": 81
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_shift1_d2_log/ridge",
+      "features": 563,
+      "accuracy": 0.9769256871394638,
+      "macro_f1": 0.9768901770936177,
+      "errors": 68
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_shift1_d2_log/ridge",
+      "features": 663,
+      "accuracy": 0.9589412962334578,
+      "macro_f1": 0.9600537598263353,
+      "errors": 121
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_shift1_d3_log/ridge",
+      "features": 1207,
+      "accuracy": 0.9704784526637258,
+      "macro_f1": 0.970059711552703,
+      "errors": 87
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_shift1_d3_log/ridge",
+      "features": 1471,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.9747584421868439,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_shift1_d3_log/ridge",
+      "features": 1571,
+      "accuracy": 0.9558873430607397,
+      "macro_f1": 0.9567150928032181,
+      "errors": 130
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 401,
+      "accuracy": 0.9718357651849339,
+      "macro_f1": 0.9718760529483556,
+      "errors": 83
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 665,
+      "accuracy": 0.9762470308788599,
+      "macro_f1": 0.9761635062090743,
+      "errors": 70
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_staircase_leadlag_d2_tensor/ridge",
+      "features": 765,
+      "accuracy": 0.9582626399728538,
+      "macro_f1": 0.9593542072681664,
+      "errors": 123
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_staircase_leadlag_d2_log/ridge",
+      "features": 299,
+      "accuracy": 0.9718357651849339,
+      "macro_f1": 0.9719235538656283,
+      "errors": 83
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_staircase_leadlag_d2_log/ridge",
+      "features": 563,
+      "accuracy": 0.9762470308788599,
+      "macro_f1": 0.9761924638672549,
+      "errors": 70
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_staircase_leadlag_d2_log/ridge",
+      "features": 663,
+      "accuracy": 0.9602986087546658,
+      "macro_f1": 0.9615220264922827,
+      "errors": 117
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_compact368/body_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1207,
+      "accuracy": 0.9708177807940278,
+      "macro_f1": 0.9705931318952387,
+      "errors": 86
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_pool803/body_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1471,
+      "accuracy": 0.9752290464879538,
+      "macro_f1": 0.9748808679906866,
+      "errors": 73
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_raw_uci903/body_paper_staircase_leadlag_d3_log/ridge",
+      "features": 1571,
+      "accuracy": 0.9552086868001357,
+      "macro_f1": 0.9558693998448918,
+      "errors": 132
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_spectral_compact368/none/ridge",
+      "features": 268,
+      "accuracy": 0.9677638276213099,
+      "macro_f1": 0.9681369856256571,
+      "errors": 95
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_tensor_d2/ridge",
+      "features": 308,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.975112727190348,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_log_d2/ridge",
+      "features": 288,
+      "accuracy": 0.9748897183576518,
+      "macro_f1": 0.975112727190348,
+      "errors": 74
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_tensor_d3/ridge",
+      "features": 428,
+      "accuracy": 0.9782829996606719,
+      "macro_f1": 0.9786674486876213,
+      "errors": 64
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_log_d3/ridge",
+      "features": 328,
+      "accuracy": 0.9779436715303699,
+      "macro_f1": 0.9782793445007848,
+      "errors": 65
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_tensor_d4/ridge",
+      "features": 708,
+      "accuracy": 0.9799796403121819,
+      "macro_f1": 0.9802358621401778,
+      "errors": 59
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_log_d4/ridge",
+      "features": 388,
+      "accuracy": 0.9782829996606719,
+      "macro_f1": 0.9786087998400461,
+      "errors": 64
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_integrated_d3_log__spectral_clock_log_d4/ridge",
+      "features": 356,
+      "accuracy": 0.9548693586698337,
+      "macro_f1": 0.9553197698454348,
+      "errors": 133
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_delay2_d2_log__spectral_clock_log_d4/ridge",
+      "features": 307,
+      "accuracy": 0.9640312181879878,
+      "macro_f1": 0.9647490422778547,
+      "errors": 106
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_tensor_d5/ridge",
+      "features": 1308,
+      "accuracy": 0.9782829996606719,
+      "macro_f1": 0.9786471169489377,
+      "errors": 64
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_log_d5/ridge",
+      "features": 508,
+      "accuracy": 0.9793009840515778,
+      "macro_f1": 0.9796607138356986,
+      "errors": 61
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_integrated_d3_log__spectral_clock_log_d5/ridge",
+      "features": 476,
+      "accuracy": 0.9572446555819477,
+      "macro_f1": 0.9579254484326133,
+      "errors": 126
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_delay2_d2_log__spectral_clock_log_d5/ridge",
+      "features": 427,
+      "accuracy": 0.9643705463182898,
+      "macro_f1": 0.9651460719867133,
+      "errors": 105
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_spectral_compact368/spectral_clock_d5_projected_pascal_P3/ridge",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_integrated_d3_log__spectral_clock_d5_projected_pascal_P3/ridge",
+      "features": 336,
+      "accuracy": 0.9558873430607397,
+      "macro_f1": 0.9562840910014554,
+      "errors": 130
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_joint_compact368/total_delay2_d2_log__spectral_clock_d5_projected_pascal_P3/ridge",
+      "features": 287,
+      "accuracy": 0.9630132337970818,
+      "macro_f1": 0.9638120319685174,
+      "errors": 109
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_trends_compact368/none/ridge",
+      "features": 353,
+      "accuracy": 0.9786223277909739,
+      "macro_f1": 0.978907316478831,
+      "errors": 63
+    },
+    {
+      "source": "consolidated_results",
+      "key": "ordinary_trends_compact368/closed_value_graph_xtt/ridge",
+      "features": 368,
+      "accuracy": 0.9803189684424839,
+      "macro_f1": 0.9805920818014835,
+      "errors": 58
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_amplitude40_compact368/none/ridge",
+      "features": 328,
+      "accuracy": 0.9714964370546318,
+      "macro_f1": 0.9712532130885546,
+      "errors": 84
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_cosine6_compact368/none/ridge",
+      "features": 362,
+      "accuracy": 0.9633525619273838,
+      "macro_f1": 0.9641576462270227,
+      "errors": 108
+    },
+    {
+      "source": "consolidated_results",
+      "key": "drop_invariant36_compact368/none/ridge",
+      "features": 332,
+      "accuracy": 0.9742110620970479,
+      "macro_f1": 0.9740294013686365,
+      "errors": 76
+    }
+  ],
+  "transfer_fixed_family_checks": [
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "dsads_all8",
+      "model": "asinh__joint_log",
+      "metric": "accuracy",
+      "value": 0.9282894736842106,
+      "reported": 92.83
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "dsads_all8",
+      "model": "asinh__joint_endpoints",
+      "metric": "accuracy",
+      "value": 0.8905701754385965,
+      "reported": 89.06
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "dsads_all8",
+      "model": "asinh__joint_p1",
+      "metric": "accuracy",
+      "value": 0.8915570175438596,
+      "reported": 89.16
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "dsads_all8",
+      "model": "baseline_prior_rich",
+      "metric": "accuracy",
+      "value": 0.925219298245614,
+      "reported": 92.52
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "ninapro_s1_reps10",
+      "model": "robust_identity__raw_log",
+      "metric": "rmse",
+      "value": 26.399627193415917,
+      "reported": 26.4
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "ninapro_s1_reps10",
+      "model": "robust_asinh__joint_log",
+      "metric": "rmse",
+      "value": 19.593008525122762,
+      "reported": 19.593
+    },
+    {
+      "file": "transfer/transforms/summary/dataset_overview.csv",
+      "unit": "kimore_macro",
+      "model": "baseline_prior_rich",
+      "metric": "rmse",
+      "value": 7.799049324713762,
+      "reported": 7.799
+    }
+  ]
+}

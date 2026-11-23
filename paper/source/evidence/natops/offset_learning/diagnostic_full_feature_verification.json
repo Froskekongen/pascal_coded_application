@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "independent_tensor_checks_per_representation": 8,
+  "tensor_formula": "sum_{r<s} inc_r tensor inc_s +0.5 sum_r inc_r tensor inc_r, minus0.5*s tensor s",
+  "maximum_absolute_tensor_errors": {
+    "ordinary": 4.0314973581701e-15,
+    "offset": 4.0314973581701e-15
+  },
+  "p0_projection_checks": 180,
+  "p0_projection_maximum_absolute_error": 0.0,
+  "coded_first_moment_maximum_absolute_error": 8.881784197001252e-16,
+  "dimensions": {
+    "ordinary_full": 325,
+    "ordinary_local": 73,
+    "offset_full": 1275,
+    "offset_local": 267,
+    "moments_only": 50,
+    "moments_plus_ordinary_local": 98,
+    "offset_clock_control": 171
+  },
+  "test_observations_used": false,
+  "diagnostic_dimensions": {
+    "full_moments_plus_ordinary": 350,
+    "full_coded_clock_control": 423
+  },
+  "both_controls_literal_subsets_of_offset_full": true
+}

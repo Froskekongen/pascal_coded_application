@@ -1,0 +1,23 @@
+[
+  {
+    "event": "diagnostic_started",
+    "utc": "2026-10-03T14:01:45.060243+00:00"
+  },
+  {
+    "event": "training_fetched_and_hash_verified",
+    "utc": "2026-10-03T14:01:48.391150+00:00"
+  },
+  {
+    "event": "both_diagnostic_cv_choices_saved_and_refit",
+    "utc": "2026-10-03T14:01:49.690636+00:00",
+    "cv_scores_sha256": "a40d4c2f3561598cfd2186bb33949cb4b9c1352cd4a009e05a4788d7ec35e3c2"
+  },
+  {
+    "event": "test_fetched_and_hash_verified_this_diagnostic",
+    "utc": "2026-10-03T14:01:54.921658+00:00"
+  },
+  {
+    "event": "diagnostic_complete",
+    "utc": "2026-10-03T14:01:54.939944+00:00"
+  }
+]

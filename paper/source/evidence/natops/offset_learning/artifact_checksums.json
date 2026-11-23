@@ -1,0 +1,15 @@
+{
+  "run_experiment.py": "d38d12dee3dc763589455e3eac4a1c67c267506804c34f8d3230d2f6b2e0466a",
+  "common.py": "de53540ad24ade6e048ef97ed22c349ac28d7c388f612dbde89f2b675f18b213",
+  "folds.json": "c8613470202051096de581672249a15c309056f957826df1f69fb75e2af055f2",
+  "models.json": "310dfcd533dd77da35b2190d3145a21148fa12b509acc2a0097656326c3520cd",
+  "requirements.txt": "a5b92ff11201c8bc75632288016338ae48e3b556e6a92ccd88740971c6dc1954",
+  "protocol.json": "3d2e6fc77c699b14f18cf480aa4966a7a9cf831f4ac7a36cd4b43a68b1f0e593",
+  "environment.json": "2f057ed342642be991da02b8ca6365d3ddd64bf524c67a2c9e16b5e5f865c798",
+  "feature_verification.json": "28dc2d0528ab16bd2dd1477b8aa631405582e8eb0100a8919a077bb07283a2c6",
+  "cv_scores.json": "04e4e5d8d4d7e0359b337c359f4ac58ff2d9cf1f0bfaf99449858b9f32f2a76d",
+  "training_covariate_diagnostics.json": "ec33dab0c2c1b8daeae213c9384e8faa8d88d5d979e1e5a57eef01f9ad184dd4",
+  "execution_events.json": "544b79f58ef10d444edf171fd1d21de5e0c3a2b2846ae8974b7abdb39cbf4d0c",
+  "test_predictions.csv": "fa656d48b36c939ae92bf13d9890e00072ac09ab99fa2ecd354dad96b950c9ab",
+  "results.json": "de2f5607acdc1c0b27c4f1e48c63bd35d0516e2525f8d2e5c57351765f049c10"
+}

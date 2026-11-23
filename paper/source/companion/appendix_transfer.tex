@@ -1,0 +1,190 @@
+\section{Cross-subject transfer, split protocols, and computational cost}
+\label{app:additional}
+
+This section brings together two additional studies that complement the UCI HAR
+and NATOPS experiments in~\cite{mainpaper}: a nested cross-participant study on
+a 15-sensor body-worn dataset (DSADS), and an examination of subject-mixed
+window splitting and single-thread CPU pipeline runtime on UCI HAR.
+
+\subsection{Held-out participants on DSADS}\label{app:transfer}
+Does combining QR-Pascal temporal and spectral logsignatures generalize to unseen
+participants on a multi-sensor wearable benchmark without smartphone-specific
+gravity decomposition or hand-tuned lag features? We evaluate a generic two-path
+per-sensor recipe on the Daily and Sports Activities Dataset (DSADS)~\cite{dsads},
+which records \(19\) activities across \(8\) participants in five-second segments
+of \(R = 125\) samples at \(25\,\mathrm{Hz}\) (\(60\) segments per participant and
+activity, totaling \(9{,}120\) segments, or \(1{,}140\) per participant). Five
+body-worn units (torso, right arm, left arm, right leg, and left leg) each carry
+a three-axis accelerometer, gyroscope, and magnetometer, yielding \(15\)
+three-axis sensors (\(45\) scalar channels).
+
+\paragraph{Generic two-path per-sensor representation.}
+Within each outer training split, every scalar channel is standardized using its
+training mean and training population standard deviation (floored at \(10^{-8}\)),
+and passed pointwise through the inverse hyperbolic sine. Writing \(a_r\) for a
+standardized reading, this gives
+\[
+ y_r = \arsinh(a_r) = \log\bigl(a_r + \sqrt{a_r^2 + 1}\bigr)
+ \qquad (0 \leq r < 125),
+\]
+which acts linearly near zero while logarithmically compressing heavy-tailed
+impact spikes without saturating to a finite bound. Grouping the \(45\) channels
+into their \(15\) physical three-axis sensors \(y_r^{(g)} \in \R^3\)
+(\(1 \leq g \leq 15\)), we construct two \(9\)-channel lifted paths per sensor
+using the \(P = 3\) orthonormal QR-Pascal weights \(q_p\) of Section~\ref{app:qr}:
+\begin{enumerate}
+\item \emph{Temporal sensor path:} Treating scaled readings
+\(y_r^{(g)} / 125 \in \R^3\) as increments over \(r = 0, \ldots, 124\) and
+lifting by \((q_0(r), q_1(r), q_2(r))\) produces \(9\) channels and
+\(9 + \binom{9}{2} = 45\) depth-two logsignature coordinates, preserving static
+sensor levels alongside within-sensor cross-axis temporal areas.
+\item \emph{Spectral sensor path:} For each of the three transformed axes of
+sensor \(g\), we compute Parseval-scaled one-sided Fourier bin powers over
+\(K = 63\) bins (\(k = 0, \ldots, 62\)) and normalize each axis by its sum of bin
+powers (setting all shares to zero if total axis power is at most \(10^{-20}\)).
+Lifting the three frequency-ordered share vectors jointly by
+\((q_0(k), q_1(k), q_2(k))\) produces \(9\) channels and \(45\) nominal depth-two
+logsignature coordinates (\(42\) after dropping the three constant-copy endpoints,
+which equal \(1/\sqrt{63}\) when all three axes have power above \(10^{-20}\)).
+\end{enumerate}
+Because spectral normalization removes amplitude scale, each sensor \(g\) also
+contributes one log-energy summary computed before standardization,
+\[
+ \log\Bigl(1 + \frac{E_g}{E_{g,\mathrm{train}}}\Bigr), \qquad
+ E_g = \frac{1}{125}\sum_{r=0}^{124} \|x_r^{(g)}\|^2,
+\]
+where \(x_r^{(g)} \in \R^3\) is the uncentered raw triad and \(E_{g,\mathrm{train}}\)
+is the training mean of \(E_g\) (with \(\sqrt{E_{g,\mathrm{train}}}\) floored at
+\(10^{-8}\)). Concatenating across all \(15\) sensors gives
+\(15 \times (45 + 42 + 1) = 1{,}320\) retained features (\(1{,}365\) nominal).
+
+\paragraph{Nested participant-disjoint evaluation and ablations.}
+Each of the eight participants serves in turn as the held-out outer test cohort
+(\(1{,}140\) segments), while the remaining seven participants (\(7{,}980\)
+segments) form the outer training set. Within each seven-person training cohort,
+leave-one-participant-out cross-validation (fitting on six people and validating
+on the seventh) selects the mean-squared-error ridge penalty
+\(\lambda \in \{10^{-8}, 10^{-7}, \ldots, 10^2, \infty\}\) (applied after
+training-only variance masking, column standardization, and \(1/\sqrt{d_{\mathrm{ret}}}\)
+width scaling) jointly with a binary indicator of whether query features are
+clipped to their training column ranges, before refitting on all seven training
+participants. Table~\ref{tab:dsads} compares the full \(P=3\) representation
+against two matched ablations that keep the identical \(\arsinh\) preprocessing,
+energy summaries, and nested tuning protocol: dropping all signed areas (retaining
+only coded endpoints and energy) and setting \(P = 1\) (retaining within-sensor
+cross-axis areas with only the constant weight \(q_0\)).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+DSADS representation (\(\arsinh\) + energy) & Features & Correct & Errors & Accuracy (\%) & SD (pp) \\
+\midrule
+Full \(P=3\) temporal + spectral logsignature & 1,320 & 8,466 & 654 & 92.83 & 1.20 \\
+Endpoints only (drop signed areas, \(P=3\)) & 240 & 8,122 & 998 & 89.06 & 3.75 \\
+Constant weight only (\(P=1\), keep areas) & 150 & 8,131 & 989 & 89.16 & 4.47 \\
+\bottomrule
+\end{tabular}
+\caption{Nested eight-participant leave-one-subject-out results on DSADS across
+all \(8 \times 1{,}140 = 9{,}120\) test segments. ``Features'' counts retained
+columns; ``SD (pp)'' is the sample standard deviation of test accuracy (in
+percentage points) across the eight held-out participants.}
+\label{tab:dsads}
+\end{table}
+
+Across all \(9{,}120\) held-out segments, the combined \(P = 3\) logsignature
+reaches \(92.83\%\) accuracy (\(654\) errors, between-participant SD \(1.20\)
+percentage points). Omitting signed areas lowers accuracy by \(3.77\) percentage
+points to \(89.06\%\) (\(998\) errors), while omitting the linear and quadratic
+position weights (\(P = 1\)) lowers accuracy by \(3.67\) percentage points to
+\(89.16\%\) (\(989\) errors), indicating that both ordered cross-channel areas and
+nonconstant position weights contribute materially on average across wearers. As
+documented in the archived transform study (\nolinkurl{evidence/har/transfer/transforms/}),
+this cohort had previously informed feature design, and selecting the
+representation family itself across a wider \(68\)-family candidate menu via the
+seven inner validation participants yields \(91.33\%\) pooled accuracy (\(791\)
+errors, SD \(3.93\) pp), reflecting ranking variability when choosing among many
+feature families from seven validation subjects.
+
+\subsection{Subject-mixed UCI HAR, SpikeDCL protocol, and pipeline runtime}
+\label{app:compute}
+Published activity-recognition benchmarks do not all evaluate on held-out
+participants, and comparing accuracies or runtimes across papers requires
+tracking both the data partition and the stages included in timing measurements.
+
+\paragraph{Subject-mixed random-window split versus held-out subjects.}
+Whereas Section~\ref{app:har} holds out nine of the \(30\) UCI HAR subjects,
+SpikeDCL---a spatio-temporal spiking neural network for activity
+recognition~\cite{spikedcl}---evaluates on a subject-mixed random-window
+partition. Its loader concatenates all \(7{,}352 + 2{,}947 = 10{,}299\) windows
+ordered by subject, draws \(20\%\) (\(2{,}060\) windows) at random without
+stratification (seed \(0\)) as the test set, and draws \(20\%\) of the remainder
+(\(1{,}648\) windows, seed \(0\)) for validation, leaving \(6{,}591\) training
+windows. Two consequences distinguish this protocol from subject-disjoint
+transfer: all \(30\) participants appear in every split, and because raw UCI HAR
+windows of length \(128\) advance with a \(50\%\) stride (\(64\) samples),
+adjacent windows placed in training and test partitions share half of their
+underlying sensor readings.
+
+Evaluating the unchanged \emph{compact368} representation on this exact
+\(6{,}591 / 2{,}060\) partition---fitting observation calibration, the variance
+mask, and feature standardization strictly on the \(6{,}591\) training windows,
+with fixed \(\alpha = 10\) and inverse-frequency sample weights
+\(6591 / (6 n_c)\) for class \(c\) matching the SpikeDCL loader's class
+balancing---achieves \(98.16\%\) test accuracy (\(38\) errors out of \(2{,}060\)
+windows). SpikeDCL reports \(98.86 \pm 0.28\%\) across five neural training
+seeds~\cite[Table~2]{spikedcl}. These subject-mixed numbers belong to a
+qualitatively easier generalization regime than the held-out-subject scores in
+Section~\ref{app:har}, and sharing a split does not equate model families,
+architectural inductive biases, or hyperparameter tuning budgets.
+
+\paragraph{Single-thread CPU runtime of the \emph{compact368} pipeline.}
+Because lifting \(C\) channels by \(P\) copies expands width to \(PC\), low
+signature truncation depth (\(m = 2\)) does not automatically guarantee fast
+extraction. Nevertheless, depth-two evaluation requires only a single linear pass
+of prefix sums and outer products per window, and fitting~\eqref{eq:har-ridge} is
+a single \(368 \times 368\) linear solve. To document concrete wall-clock costs
+on the \(6{,}591\)-train / \(2{,}060\)-test SpikeDCL partition, we timed every
+stage of \emph{compact368} on a single CPU thread (Apple M5 Pro, Python~3.13,
+PyTorch~2.13, NumPy~2.5, scikit-learn~1.9; one full warm-up run followed by five
+measured repeats, excluding disk I/O). An automated audit verified zero
+numerical discrepancy between the timed pipeline and the archived evaluation on
+all training features, test features, and test predictions.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\emph{compact368} pipeline stage (single CPU thread, milliseconds) & Median & Min--Max \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Training pipeline (\(6{,}591\) windows)}} \\
+Observation calibration and preprocessing & 174.47 & 162.10--179.85 \\
+Feature extraction (raw, spectral, and geometric branches) & 1,304.49 & 1,300.74--1,313.52 \\
+Variance mask and feature standardization & 7.88 & 7.79--8.51 \\
+Closed-form weighted ridge solve (\(\alpha = 10\)) & 4.49 & 4.43--4.75 \\
+Total training time & 1,491.17 & 1,488.76--1,493.80 \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Test inference (\(2{,}060\) windows)}} \\
+Observation preprocessing & 31.42 & 29.39--42.03 \\
+Feature extraction & 422.19 & 417.19--446.65 \\
+Frozen variance mask and feature standardization & 0.85 & 0.84--1.29 \\
+Linear score evaluation & 0.09 & 0.09--0.10 \\
+Total inference time & 456.94 & 447.52--479.46 \\
+\bottomrule
+\end{tabular}
+\caption{Single-thread CPU wall-clock times (in ms across five repeats after one
+warm-up, excluding disk archive loading of \(1{,}165.43\,\mathrm{ms}\)) for
+\emph{compact368} on the \(6{,}591 / 2{,}060\)-window HAR partition.}
+\label{tab:compute}
+\end{table}
+
+Table~\ref{tab:compute} shows that end-to-end training over \(6{,}591\) windows
+completes in a median of \(1.49\,\mathrm{s}\)---dominated by feature extraction
+(\(1.30\,\mathrm{s}\)), with the ridge solve itself requiring \(4.49\,\mathrm{ms}\)---and
+batch inference over all \(2{,}060\) test windows takes \(0.46\,\mathrm{s}\)
+(\(0.22\,\mathrm{ms}\) amortized per window). By contrast, SpikeDCL trains a
+spiking network for \(60\) gradient epochs across three candidate learning
+rates~\cite[Sec.~3.1]{spikedcl}. Reporting these batch CPU timings documents the
+practical cost of the coded signature pipeline without claiming a hardware-matched
+speedup or single-window embedded latency comparison against~\cite{spikedcl}.
+\FloatBarrier

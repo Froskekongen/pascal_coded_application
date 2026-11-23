@@ -1,0 +1,39 @@
+{
+  "diagnostic_protocol_sha256": "78379beb03c716d5ccd72406aafe8399d181ac1650319177c74717ad1ca66708",
+  "completed_utc": "2026-10-03T14:01:54.939319+00:00",
+  "elapsed_seconds": 9.879051957977936,
+  "models": {
+    "full_moments_plus_ordinary": {
+      "dimension": 350,
+      "correct": 166,
+      "total": 180,
+      "accuracy": 0.9222222222222223,
+      "selected_alpha": 10.0,
+      "selected_cv_accuracy": 0.9333333333333333
+    },
+    "full_coded_clock_control": {
+      "dimension": 423,
+      "correct": 163,
+      "total": 180,
+      "accuracy": 0.9055555555555556,
+      "selected_alpha": 100.0,
+      "selected_cv_accuracy": 0.9222222222222223
+    }
+  },
+  "descriptive_paired_counts_reference_offset_full": {
+    "full_moments_plus_ordinary": {
+      "offset_full_correct_control_wrong": 8,
+      "offset_full_wrong_control_correct": 1,
+      "both_correct": 165,
+      "both_wrong": 6
+    },
+    "full_coded_clock_control": {
+      "offset_full_correct_control_wrong": 11,
+      "offset_full_wrong_control_correct": 1,
+      "both_correct": 162,
+      "both_wrong": 6
+    }
+  },
+  "p_values_computed": false,
+  "post_offset_outcomes_diagnostic": true
+}

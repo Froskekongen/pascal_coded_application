@@ -1,0 +1,67 @@
+{
+  "all_checks_passed": true,
+  "scope": "Recalculation from existing saved confusion matrices and CSVs; no fitting or new accuracy experiment. Standalone rows use Compact368-matched logsignature branches.",
+  "rows": [
+    {
+      "identifier": "spectral_only/log/ridge",
+      "files": [
+        "pool_results/results.csv",
+        "pool_results/run.json"
+      ],
+      "features": 100,
+      "test_windows": 2947,
+      "correct": 2443,
+      "errors": 504,
+      "accuracy_percent": 82.89786223277909,
+      "macro_f1_percent": 82.90812754476676,
+      "ridge_alpha": 10,
+      "subject_disjoint": true
+    },
+    {
+      "identifier": "raw_only/log/ridge",
+      "files": [
+        "pool_results/results.csv",
+        "pool_results/run.json"
+      ],
+      "features": 171,
+      "test_windows": 2947,
+      "correct": 2416,
+      "errors": 531,
+      "accuracy_percent": 81.98167628096368,
+      "macro_f1_percent": 82.1867087454641,
+      "ridge_alpha": 10,
+      "subject_disjoint": true
+    },
+    {
+      "identifier": "engineered_561/uci_features/ridge",
+      "files": [
+        "consolidated_results/results.csv",
+        "consolidated_results/run.json"
+      ],
+      "features": 561,
+      "test_windows": 2947,
+      "correct": 2821,
+      "errors": 126,
+      "accuracy_percent": 95.72446555819477,
+      "macro_f1_percent": 95.8525077973242,
+      "ridge_alpha": 10,
+      "subject_disjoint": true
+    }
+  ],
+  "spikedcl": {
+    "accuracy_percent": 98.86,
+    "standard_deviation_percentage_points": 0.28,
+    "training_seeds": 5,
+    "train_validation_test_percent": [
+      64,
+      16,
+      20
+    ],
+    "protocol": "Published random-window protocol; not the official subject-disjoint split.",
+    "feature_count": null,
+    "single_error_count": null,
+    "source": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2023.1233037/full",
+    "location": "Sections 3.1 and 3.2, Table 2",
+    "checked": "2026-10-16"
+  }
+}

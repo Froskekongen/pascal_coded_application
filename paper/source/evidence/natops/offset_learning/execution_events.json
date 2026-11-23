@@ -1,0 +1,23 @@
+[
+  {
+    "event": "run_started",
+    "utc": "2026-10-03T13:54:50.348929+00:00"
+  },
+  {
+    "event": "training_fetched_and_hash_verified",
+    "utc": "2026-10-03T13:54:54.031894+00:00"
+  },
+  {
+    "event": "all_seven_cv_choices_saved_and_refit",
+    "utc": "2026-10-03T13:54:59.040840+00:00",
+    "cv_scores_sha256": "04e4e5d8d4d7e0359b337c359f4ac58ff2d9cf1f0bfaf99449858b9f32f2a76d"
+  },
+  {
+    "event": "test_first_fetched_and_hash_verified_this_run",
+    "utc": "2026-10-03T13:55:01.017422+00:00"
+  },
+  {
+    "event": "evaluation_complete",
+    "utc": "2026-10-03T13:55:01.040564+00:00"
+  }
+]

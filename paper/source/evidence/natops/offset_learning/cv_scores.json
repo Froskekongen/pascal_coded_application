@@ -1,0 +1,1780 @@
+{
+  "ordinary_full": {
+    "dimension": 325,
+    "selected_alpha": 10.0,
+    "selected_cv_accuracy": 0.9222222222222223,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          24,
+          19,
+          19,
+          21,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5944444444444444,
+        "exact_mean_accuracy": "107/180"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          24,
+          19,
+          19,
+          21,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5944444444444444,
+        "exact_mean_accuracy": "107/180"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          24,
+          19,
+          19,
+          21,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5944444444444444,
+        "exact_mean_accuracy": "107/180"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          24,
+          19,
+          19,
+          21,
+          25
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6,
+        "exact_mean_accuracy": "3/5"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          24,
+          19,
+          21,
+          22,
+          26
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6222222222222222,
+        "exact_mean_accuracy": "28/45"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          29,
+          24,
+          24,
+          22,
+          29
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7111111111111111,
+        "exact_mean_accuracy": "32/45"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          32,
+          30,
+          30,
+          32,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8666666666666667,
+        "exact_mean_accuracy": "13/15"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          35,
+          31,
+          33,
+          32,
+          35
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9222222222222223,
+        "exact_mean_accuracy": "83/90"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          34,
+          33,
+          28,
+          31,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8833333333333333,
+        "exact_mean_accuracy": "53/60"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          30,
+          33,
+          26,
+          29,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8388888888888889,
+        "exact_mean_accuracy": "151/180"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          27,
+          27,
+          23,
+          29,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7666666666666667,
+        "exact_mean_accuracy": "23/30"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          25,
+          27,
+          23,
+          26,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7388888888888889,
+        "exact_mean_accuracy": "133/180"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          25,
+          27,
+          23,
+          25,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7333333333333333,
+        "exact_mean_accuracy": "11/15"
+      }
+    ]
+  },
+  "ordinary_local": {
+    "dimension": 73,
+    "selected_alpha": 10.0,
+    "selected_cv_accuracy": 0.9277777777777778,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          34,
+          32,
+          34,
+          33,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8888888888888888,
+        "exact_mean_accuracy": "8/9"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          34,
+          32,
+          34,
+          33,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8888888888888888,
+        "exact_mean_accuracy": "8/9"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          34,
+          32,
+          34,
+          33,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8888888888888888,
+        "exact_mean_accuracy": "8/9"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          34,
+          32,
+          34,
+          33,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8888888888888888,
+        "exact_mean_accuracy": "8/9"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          33,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9,
+        "exact_mean_accuracy": "9/10"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          32,
+          30
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9055555555555556,
+        "exact_mean_accuracy": "163/180"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          35,
+          31,
+          33,
+          34,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9222222222222223,
+        "exact_mean_accuracy": "83/90"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          35,
+          31,
+          33,
+          34,
+          34
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9277777777777778,
+        "exact_mean_accuracy": "167/180"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          34,
+          30,
+          27,
+          31,
+          35
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8722222222222222,
+        "exact_mean_accuracy": "157/180"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          31,
+          29,
+          22,
+          26,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          30,
+          26,
+          20,
+          26,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7388888888888889,
+        "exact_mean_accuracy": "133/180"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          28,
+          26,
+          20,
+          26,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7277777777777777,
+        "exact_mean_accuracy": "131/180"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          28,
+          26,
+          20,
+          26,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7277777777777777,
+        "exact_mean_accuracy": "131/180"
+      }
+    ]
+  },
+  "offset_full": {
+    "dimension": 1275,
+    "selected_alpha": 10.0,
+    "selected_cv_accuracy": 0.9222222222222223,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          33,
+          26,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7722222222222223,
+        "exact_mean_accuracy": "139/180"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          33,
+          26,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7722222222222223,
+        "exact_mean_accuracy": "139/180"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          33,
+          26,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7722222222222223,
+        "exact_mean_accuracy": "139/180"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          33,
+          26,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7722222222222223,
+        "exact_mean_accuracy": "139/180"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          33,
+          27,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          33,
+          27,
+          28,
+          25,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          35,
+          30,
+          31,
+          32,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8833333333333333,
+        "exact_mean_accuracy": "53/60"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          36,
+          32,
+          33,
+          32,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9222222222222223,
+        "exact_mean_accuracy": "83/90"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          36,
+          32,
+          33,
+          32,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9222222222222223,
+        "exact_mean_accuracy": "83/90"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          34,
+          31,
+          31,
+          31,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8833333333333333,
+        "exact_mean_accuracy": "53/60"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          32,
+          32,
+          31,
+          29,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8666666666666667,
+        "exact_mean_accuracy": "13/15"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          30,
+          27,
+          25,
+          30,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8,
+        "exact_mean_accuracy": "4/5"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          29,
+          27,
+          25,
+          26,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7722222222222223,
+        "exact_mean_accuracy": "139/180"
+      }
+    ]
+  },
+  "offset_local": {
+    "dimension": 267,
+    "selected_alpha": 10.0,
+    "selected_cv_accuracy": 0.9388888888888889,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          23,
+          22,
+          21,
+          23,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6055555555555555,
+        "exact_mean_accuracy": "109/180"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          23,
+          22,
+          21,
+          23,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6055555555555555,
+        "exact_mean_accuracy": "109/180"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          23,
+          22,
+          21,
+          23,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6055555555555555,
+        "exact_mean_accuracy": "109/180"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          22,
+          22,
+          22,
+          23,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6055555555555555,
+        "exact_mean_accuracy": "109/180"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          23,
+          25,
+          24,
+          23,
+          22
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.65,
+        "exact_mean_accuracy": "13/20"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          28,
+          31,
+          30,
+          29,
+          29
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8166666666666667,
+        "exact_mean_accuracy": "49/60"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          33,
+          32,
+          34,
+          34,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9111111111111111,
+        "exact_mean_accuracy": "41/45"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          36,
+          30,
+          35,
+          34,
+          34
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9388888888888889,
+        "exact_mean_accuracy": "169/180"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          35,
+          30,
+          34,
+          33,
+          35
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9277777777777778,
+        "exact_mean_accuracy": "167/180"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          34,
+          32,
+          29,
+          29,
+          34
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8777777777777778,
+        "exact_mean_accuracy": "79/90"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          30,
+          30,
+          28,
+          27,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8166666666666667,
+        "exact_mean_accuracy": "49/60"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          30,
+          28,
+          24,
+          27,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7888888888888889,
+        "exact_mean_accuracy": "71/90"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          30,
+          28,
+          24,
+          27,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7888888888888889,
+        "exact_mean_accuracy": "71/90"
+      }
+    ]
+  },
+  "moments_only": {
+    "dimension": 50,
+    "selected_alpha": 0.1,
+    "selected_cv_accuracy": 0.7944444444444444,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          30,
+          27,
+          26,
+          29,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          30,
+          27,
+          26,
+          29,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          30,
+          27,
+          26,
+          29,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          30,
+          27,
+          26,
+          29,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          30,
+          27,
+          26,
+          29,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          31,
+          27,
+          27,
+          29,
+          29
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7944444444444444,
+        "exact_mean_accuracy": "143/180"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          32,
+          27,
+          28,
+          27,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7888888888888889,
+        "exact_mean_accuracy": "71/90"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          31,
+          25,
+          26,
+          23,
+          26
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7277777777777777,
+        "exact_mean_accuracy": "131/180"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          28,
+          24,
+          21,
+          20,
+          26
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6611111111111111,
+        "exact_mean_accuracy": "119/180"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          23,
+          22,
+          21,
+          20,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6111111111111112,
+        "exact_mean_accuracy": "11/18"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          18,
+          20,
+          20,
+          18,
+          21
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5388888888888889,
+        "exact_mean_accuracy": "97/180"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          18,
+          20,
+          20,
+          18,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5333333333333333,
+        "exact_mean_accuracy": "8/15"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          18,
+          20,
+          20,
+          18,
+          20
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5333333333333333,
+        "exact_mean_accuracy": "8/15"
+      }
+    ]
+  },
+  "moments_plus_ordinary_local": {
+    "dimension": 98,
+    "selected_alpha": 1.0,
+    "selected_cv_accuracy": 0.9277777777777778,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          28,
+          28,
+          34,
+          29,
+          26
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8055555555555556,
+        "exact_mean_accuracy": "29/36"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          31,
+          29,
+          33,
+          32,
+          26
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8388888888888889,
+        "exact_mean_accuracy": "151/180"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          32,
+          27
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8888888888888888,
+        "exact_mean_accuracy": "8/9"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          32,
+          29
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9,
+        "exact_mean_accuracy": "9/10"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          33,
+          28
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9,
+        "exact_mean_accuracy": "9/10"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          34,
+          33,
+          34,
+          32,
+          30
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9055555555555556,
+        "exact_mean_accuracy": "163/180"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          35,
+          32,
+          33,
+          34,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9277777777777778,
+        "exact_mean_accuracy": "167/180"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          35,
+          31,
+          33,
+          34,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9222222222222223,
+        "exact_mean_accuracy": "83/90"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          34,
+          31,
+          28,
+          32,
+          34
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8833333333333333,
+        "exact_mean_accuracy": "53/60"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          32,
+          30,
+          25,
+          28,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8166666666666667,
+        "exact_mean_accuracy": "49/60"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          30,
+          27,
+          21,
+          26,
+          30
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7444444444444445,
+        "exact_mean_accuracy": "67/90"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          29,
+          26,
+          21,
+          27,
+          30
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7388888888888889,
+        "exact_mean_accuracy": "133/180"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          28,
+          26,
+          21,
+          27,
+          30
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7333333333333333,
+        "exact_mean_accuracy": "11/15"
+      }
+    ]
+  },
+  "offset_clock_control": {
+    "dimension": 171,
+    "selected_alpha": 10.0,
+    "selected_cv_accuracy": 0.9388888888888889,
+    "candidates": [
+      {
+        "alpha": 1e-06,
+        "fold_correct": [
+          17,
+          16,
+          17,
+          15,
+          16
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.45,
+        "exact_mean_accuracy": "9/20"
+      },
+      {
+        "alpha": 1e-05,
+        "fold_correct": [
+          18,
+          20,
+          19,
+          22,
+          17
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.5333333333333333,
+        "exact_mean_accuracy": "8/15"
+      },
+      {
+        "alpha": 0.0001,
+        "fold_correct": [
+          23,
+          23,
+          23,
+          25,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.6555555555555556,
+        "exact_mean_accuracy": "59/90"
+      },
+      {
+        "alpha": 0.001,
+        "fold_correct": [
+          27,
+          27,
+          24,
+          26,
+          24
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7111111111111111,
+        "exact_mean_accuracy": "32/45"
+      },
+      {
+        "alpha": 0.01,
+        "fold_correct": [
+          30,
+          31,
+          32,
+          30,
+          29
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8444444444444444,
+        "exact_mean_accuracy": "38/45"
+      },
+      {
+        "alpha": 0.1,
+        "fold_correct": [
+          32,
+          32,
+          33,
+          33,
+          31
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8944444444444445,
+        "exact_mean_accuracy": "161/180"
+      },
+      {
+        "alpha": 1.0,
+        "fold_correct": [
+          34,
+          33,
+          35,
+          33,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9333333333333333,
+        "exact_mean_accuracy": "14/15"
+      },
+      {
+        "alpha": 10.0,
+        "fold_correct": [
+          35,
+          33,
+          34,
+          33,
+          34
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9388888888888889,
+        "exact_mean_accuracy": "169/180"
+      },
+      {
+        "alpha": 100.0,
+        "fold_correct": [
+          34,
+          33,
+          30,
+          33,
+          35
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.9166666666666666,
+        "exact_mean_accuracy": "11/12"
+      },
+      {
+        "alpha": 1000.0,
+        "fold_correct": [
+          31,
+          33,
+          28,
+          28,
+          35
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.8611111111111112,
+        "exact_mean_accuracy": "31/36"
+      },
+      {
+        "alpha": 10000.0,
+        "fold_correct": [
+          30,
+          28,
+          26,
+          27,
+          32
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7944444444444444,
+        "exact_mean_accuracy": "143/180"
+      },
+      {
+        "alpha": 100000.0,
+        "fold_correct": [
+          30,
+          27,
+          25,
+          27,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7888888888888889,
+        "exact_mean_accuracy": "71/90"
+      },
+      {
+        "alpha": 1000000.0,
+        "fold_correct": [
+          30,
+          25,
+          25,
+          27,
+          33
+        ],
+        "fold_sizes": [
+          36,
+          36,
+          36,
+          36,
+          36
+        ],
+        "mean_accuracy": 0.7777777777777778,
+        "exact_mean_accuracy": "7/9"
+      }
+    ]
+  }
+}

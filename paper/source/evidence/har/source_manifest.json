@@ -1,0 +1,212 @@
+[
+  {
+    "packaged": "retained_features.py",
+    "original": "examples/uci_har/retained_features.py",
+    "sha256": "388de0ddf26f3d99fd5b76ea565b7f74c8fd6c509eb64da6828afcbe3fdb62a7",
+    "bytes": 18450
+  },
+  {
+    "packaged": "benchmark.py",
+    "original": "examples/uci_har/benchmark.py",
+    "sha256": "711c97351f06aebb5624653f3a539ffae3ae4be3353520f7b26102c81b3b56da",
+    "bytes": 12252
+  },
+  {
+    "packaged": "uci_har.md",
+    "original": "examples/uci_har/uci_har.md",
+    "sha256": "18afec745982cb99b881f79a1090b7067ae0f5186894e38a0d7cccbfd100c6ba",
+    "bytes": 21247
+  },
+  {
+    "packaged": "uci_historical.md",
+    "original": "examples/uci_har/uci_historical.md",
+    "sha256": "14b12a77ade625c669cf7e4e14e89164faf2041e14e210b7198d47ccc4506dfd",
+    "bytes": 22748
+  },
+  {
+    "packaged": "historical_sources.zip",
+    "original": "examples/uci_har/historical_sources.zip",
+    "sha256": "11e982dfe94f71824785350d3de86e8aef95ff5427f72d0d14ec1ad238e323d7",
+    "bytes": 206496
+  },
+  {
+    "packaged": "retained_results/results.csv",
+    "original": "examples/uci_har/retained_results/results.csv",
+    "sha256": "9054a9a2fe426a16cf003278e78a9716e2a82cc3b9f604694149c8b088396785",
+    "bytes": 298
+  },
+  {
+    "packaged": "retained_results/run.json",
+    "original": "examples/uci_har/retained_results/run.json",
+    "sha256": "e2779ad1ddc322b889f1651d15a7b014e333492d80fd2e14a88f21647fe67083",
+    "bytes": 3544
+  },
+  {
+    "packaged": "consolidated_results/results.csv",
+    "original": "examples/uci_har/consolidated_results/results.csv",
+    "sha256": "908e9fe734b237fd7a8524ab091677434ecec753a00a018fa9f6d6691ddd6f83",
+    "bytes": 23251
+  },
+  {
+    "packaged": "consolidated_results/run.json",
+    "original": "examples/uci_har/consolidated_results/run.json",
+    "sha256": "41b591711db88eaf9295e202d4da5ba9af647dde207e7fc7ef0a77616538c115",
+    "bytes": 183246
+  },
+  {
+    "packaged": "historical_selected_sources/ordinary_controls.py",
+    "original": "examples/uci_har/historical_sources.zip!/ordinary_controls.py",
+    "sha256": "08a6fe38a5cdf2a8f5bf6ff69b40a6a3a4033c532d11908ef730811f4a996096",
+    "bytes": 9604
+  },
+  {
+    "packaged": "historical_selected_sources/ordinary_spectral.py",
+    "original": "examples/uci_har/historical_sources.zip!/ordinary_spectral.py",
+    "sha256": "3a9e0b64f82af713f027258450255a74a73b9aeb9757310b4eaf4360fc54c5f3",
+    "bytes": 7871
+  },
+  {
+    "packaged": "historical_selected_sources/consolidated.py",
+    "original": "examples/uci_har/historical_sources.zip!/consolidated.py",
+    "sha256": "cd393993d4e23150c146cba46e02ce40313b3e1b4001f282f4760a7fbf74ab57",
+    "bytes": 9668
+  },
+  {
+    "packaged": "historical_selected_sources/features.py",
+    "original": "examples/uci_har/historical_sources.zip!/features.py",
+    "sha256": "3f98e4ab77297944a6adea300467f91f1b55484a3d404c54529dfb7eb3d126b5",
+    "bytes": 20962
+  },
+  {
+    "packaged": "transfer/README.md",
+    "original": "examples/pascal_transfer/README.md",
+    "sha256": "5cea69f0fb67469d64cb43ba88f04299b2dbf2a53037be64276b730aa03ba3d5",
+    "bytes": 15836
+  },
+  {
+    "packaged": "transfer/followup/README.md",
+    "original": "examples/pascal_transfer/followup/README.md",
+    "sha256": "dcb0593face6f0812db2c897e5cc82fb76c74f4426f928c0f4a534b9acca3ee1",
+    "bytes": 15070
+  },
+  {
+    "packaged": "transfer/followup/results/old_selected_comparisons.json",
+    "original": "examples/pascal_transfer/followup/results/old_selected_comparisons.json",
+    "sha256": "e23edb33682c5edc8f0a1e5b3f809a84f8fbd088d54ec8f1630d0c4ba14dd43c",
+    "bytes": 11238,
+    "original_sha256": "d4f5cfdcf2cbcfa3c910aed7a56c47e06c54c8ec7c5d54a4f3aeb4d205793bc9",
+    "original_bytes": 11766
+  },
+  {
+    "packaged": "transfer/transforms/README.md",
+    "original": "examples/pascal_transfer/transforms/README.md",
+    "sha256": "fc9441b09bb1e954239d27f2217b356537b712ac3ffcf7a31b13bf7a5a69e1b0",
+    "bytes": 22802
+  },
+  {
+    "packaged": "transfer/transforms/protocol.json",
+    "original": "examples/pascal_transfer/transforms/protocol.json",
+    "sha256": "9e495d68d9053a6efd58dcd65f2245f74213f5e0b379290ff796947ef57d5628",
+    "bytes": 14810
+  },
+  {
+    "packaged": "transfer/transforms/protocol_initial.json",
+    "original": "examples/pascal_transfer/transforms/protocol_initial.json",
+    "sha256": "04d919895107c4fe91ae85937fc514197b93379d6b680641434ad28a0970402b",
+    "bytes": 12764
+  },
+  {
+    "packaged": "transfer/transforms/environment.json",
+    "original": "examples/pascal_transfer/transforms/environment.json",
+    "sha256": "33be3a2f24455ec60458dfd499e75516a8d1bae40669b477dca705133089df02",
+    "bytes": 2497,
+    "original_sha256": "0bdcab396b099b03aee83d0340157939bf47a8973c285391392c8d767ba2b5ea",
+    "original_bytes": 2563
+  },
+  {
+    "packaged": "transfer/transforms/source_snapshot.zip",
+    "original": "examples/pascal_transfer/transforms/source_snapshot.zip",
+    "sha256": "1ce79c4ad5bf67f9b82f91bbfd6b3a71cf72d5fd2d48867d8ea556f7c49c06b4",
+    "bytes": 74644
+  },
+  {
+    "packaged": "transfer/transforms/results/verification.json",
+    "original": "examples/pascal_transfer/transforms/results/verification.json",
+    "sha256": "32ad338c54c0c8c8b1ef6c62e755247bd6dafd8b28c106ed1dfeb55a239d10e5",
+    "bytes": 613284,
+    "original_sha256": "2497ad1107bab8ab53a7bb5903e0c3d022ea768467ed5986f8b38c05b08ff4ac",
+    "original_bytes": 695078
+  },
+  {
+    "packaged": "transfer/transforms/summary/selected_procedures.csv",
+    "original": "examples/pascal_transfer/transforms/summary/selected_procedures.csv",
+    "sha256": "0d2ce33b852c5c50ad7a5e4506bdc79f1c8ff3dd98e95e7a921ab67ba811a265",
+    "bytes": 8035
+  },
+  {
+    "packaged": "transfer/transforms/summary/dataset_overview.csv",
+    "original": "examples/pascal_transfer/transforms/summary/dataset_overview.csv",
+    "sha256": "bc6582567f2360d1117ceda6db3278097f7425854d77fa361d43737a53f667f5",
+    "bytes": 83352
+  },
+  {
+    "packaged": "transfer/transforms/summary/dsads_model_distribution.csv",
+    "original": "examples/pascal_transfer/transforms/summary/dsads_model_distribution.csv",
+    "sha256": "a84024bacf8f5f94842ac869d45ea8d3471de47ac0dc9654a8b562ea29d9e54b",
+    "bytes": 21202
+  },
+  {
+    "packaged": "transfer/transforms/summary/dsads_validation_test.csv",
+    "original": "examples/pascal_transfer/transforms/summary/dsads_validation_test.csv",
+    "sha256": "f5925ba1ba146fdc876fb1e335e389b10d39ebd9ce1a6db141c62bec36c83c59",
+    "bytes": 1747
+  },
+  {
+    "packaged": "transfer/results/summary.csv",
+    "original": "examples/pascal_transfer/results/summary.csv",
+    "sha256": "c90820b1dd97751c43a6dde45e8c09f4c74f4f70c07694b7676374a7781c66cb",
+    "bytes": 30619
+  },
+  {
+    "packaged": "transfer/followup/results/summary.csv",
+    "original": "examples/pascal_transfer/followup/results/summary.csv",
+    "sha256": "1d924267d986bd3b6634b1d4d296df4ee27699a9d78ef110b1a328aeb5c2c69b",
+    "bytes": 41849
+  },
+  {
+    "packaged": "pool_results/results.csv",
+    "original": "examples/uci_har/pool_results/results.csv",
+    "sha256": "1c0b6f674322e3a02cf8607168e442e6b6c60466df864d6d57a581e4cab70d50",
+    "bytes": 55297
+  },
+  {
+    "packaged": "pool_results/run.json",
+    "original": "examples/uci_har/pool_results/run.json",
+    "sha256": "fd421cbaa073392336cf1da050aa442dc7bd7ae0a0d63c9e49fe5bc1d9c2ea64",
+    "bytes": 334930
+  },
+  {
+    "packaged": "geometry57.py",
+    "original": "examples/uci_har/geometry57.py",
+    "sha256": "2838be42d93800a30a36c4668d8df4388d22254d00757c60002665d89119a5b7",
+    "bytes": 5185
+  },
+  {
+    "packaged": "geometry57_results/results.csv",
+    "original": "examples/uci_har/geometry57_results/results.csv",
+    "sha256": "faeb71d9e691b9d30eb3561b704295a8ca69fd5e5009942c8a8f854e2db191aa",
+    "bytes": 124
+  },
+  {
+    "packaged": "geometry57_results/run.json",
+    "original": "examples/uci_har/geometry57_results/run.json",
+    "sha256": "52098aea093ed68620a519e12393dd58cf1dfa8eb7d28dad664f15481ff31483",
+    "bytes": 2134
+  },
+  {
+    "packaged": "geometry57_results/predictions.npz",
+    "original": "examples/uci_har/geometry57_results/predictions.npz",
+    "sha256": "c0e3a5400d3091a3582442accacec61b46a8aa3fa47e506c68b79335990c428a",
+    "bytes": 1456
+  }
+]

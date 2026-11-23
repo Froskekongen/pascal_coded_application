@@ -1,0 +1,19 @@
+\input{common/macros.tex}
+% Disable margin protrusion to keep punctuation inside the ESANN printing area.
+\usepackage[protrusion=false]{microtype}
+\usepackage[hidelinks]{hyperref}
+% Stay within the centered official printing area, allowing for font overhangs.
+\setlength{\paperwidth}{21cm}\setlength{\paperheight}{29.7cm}
+\setlength{\textwidth}{12.1cm}\setlength{\textheight}{19.0cm}
+\setlength{\oddsidemargin}{1.91cm}\setlength{\evensidemargin}{1.91cm}
+\setlength{\topmargin}{2.76cm}\setlength{\headheight}{0cm}\setlength{\headsep}{0cm}
+\ifdefined\pdfpagewidth
+  \pdfpagewidth=\paperwidth\pdfpageheight=\paperheight
+\else
+  \special{papersize=210mm,297mm}
+\fi
+\ifdefined\pdfimageresolution\pdfimageresolution=600\fi
+\interfootnotelinepenalty=10000
+\brokenpenalty=10000
+\newtheorem{proposition}{Proposition}
+\hypersetup{pdftitle={Building Activity Representations with Pascal-Coded Signatures},pdfauthor={Erlend Aune; Fabian N. Harang},pdfsubject={ESANN 2027}}

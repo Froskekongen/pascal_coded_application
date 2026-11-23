@@ -1,0 +1,13 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "models.json": true,
+    "folds.json": true,
+    "cv_scores.json": true,
+    "test_predictions.csv": true,
+    "results.models": true,
+    "results.paired_tests": true,
+    "results.protocol_sha256": true
+  },
+  "note": "Timestamps and elapsed runtime are deliberately excluded from equality checks"
+}

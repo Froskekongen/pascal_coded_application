@@ -1,0 +1,16 @@
+/drafting/
+/*.zip
+/*.tar.gz
+
+/.DS_Store
+/source/build/
+/source/paper/main.pdf
+/source/companion/appendix.pdf
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.log
+*.synctex.gz
+*.toc
+*.xdv

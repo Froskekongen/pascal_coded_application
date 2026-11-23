@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-16",
+  "hardware": {
+    "chip_type": "Apple M5 Pro",
+    "machine_model": "Mac17,8",
+    "machine_name": "MacBook Pro",
+    "number_processors": "proc 18:6:12:0",
+    "physical_memory": "48 GB"
+  },
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.13.15",
+  "numpy": "2.5.2",
+  "sklearn": "1.9.1",
+  "torch": "2.13.0",
+  "torch_threads": 1,
+  "torch_interop_threads": 1,
+  "threadpools": [
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "../tensorsig/.venv/lib/python3.13/site-packages/sklearn/.dylibs/libomp.dylib",
+      "version": null
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "../tensorsig/.venv/lib/python3.13/site-packages/torch/lib/libomp.dylib",
+      "version": null
+    }
+  ],
+  "environment_thread_limits": {
+    "VECLIB_MAXIMUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "device": "CPU",
+  "cuda_available": false,
+  "mps_available": false,
+  "training_windows": 6591,
+  "validation_windows_not_timed": 1648,
+  "new_windows": 2060,
+  "batch_size": 256,
+  "warmup_complete_runs_per_model": 1,
+  "timing_repeats": 5,
+  "precision": "float64 observation/signature arithmetic; retained float32 raw/spectral tensor and pool storage; float64 graph features and ridge/scaling",
+  "boundaries": {
+    "archive_loading": "Warm OS-cache original loader, all 10299 windows plus labels, subjects and supplied561 (unused); excludes splitting and numerical work",
+    "observation_preprocessing": "Finite-input check, triad formation/differences, fit or apply axis means/stds and triad RMS, geometric streams/cosines",
+    "feature_extraction": "FFT/normalization and spectral summaries, requested signature/graph/pool blocks, QR plans, coordinate assembly; no trained weights",
+    "feature_scaling": "Training constant-column mask and unweighted StandardScaler fit/transform, or frozen mask/transform",
+    "ridge_fit": "Balanced targets/centering/weights, Gram formation, alpha10 LU solve, intercept; excludes StandardScaler",
+    "prediction": "Scaled feature-matrix multiplication, intercept, argmax only",
+    "total": "Sum of the four corresponding timed stages; train excludes archive loading and validation selection; apply includes preprocessing through prediction"
+  },
+  "implementation_scope": "Single requested model; retains rf.spectrum helper's pooled-summary computation even when compact discards that pool. No deployment kernel optimization. Reference generation and correctness checks are outside timing.",
+  "timing_scope": "Wall-clock warmed process, five sequential repeats, one numerical thread, no accelerator, no enforced CPU affinity or exclusive host reservation; min/max describes timing variation, not accuracy uncertainty.",
+  "selection_budget": "No new selection. Saved comparison chose between two frozen models at alpha10 using validation; five deterministic seeds and companion heads were historical checks, not independent accuracy samples.",
+  "dataset_sha256": "c00b803081a5c797cd5e4b83700a9810b38d53d9d84e01917e090e1fdbc81031",
+  "source_sha256": {
+    "paper_revision_16/source/evidence/timing/benchmark_pipeline.py": "7591b3c48a51737221e8058931590bda1de19f366560f903ebcfe0e5ff00163d",
+    "examples/uci_har/retained_features.py": "388de0ddf26f3d99fd5b76ea565b7f74c8fd6c509eb64da6828afcbe3fdb62a7",
+    "examples/uci_har/benchmark.py": "711c97351f06aebb5624653f3a539ffae3ae4be3353520f7b26102c81b3b56da",
+    "examples/uci_har/spikedcl_benchmark.py": "52b43199efd4b33df82c0bbf4972abf9c715f290efc26307b285aaa73a72f2a3"
+  },
+  "historical_prediction_sha256": "94a3c826ed1962c388f9bc2ca6d223d1a0bf9c0d4a54a0b1818c161835b016ec",
+  "split_indices_sha256": {
+    "train": "d3b56067c978b72941eec93eb9cffa7e641efbd8f9d1104b27e325449f863726",
+    "validation": "05cf364a628bcb2c8344f51d4a3070f9afd9a04cea764c325061585d966f9fd4",
+    "test": "a474a82c6c888bbabebfe9551bf5eff98682b4417dc2ed1057037ecea92c90c5"
+  },
+  "verification": {
+    "compact368": {
+      "retained_coordinates": 368,
+      "raw_coordinates": 388,
+      "train_max_absolute_feature_difference": 0.0,
+      "test_max_absolute_feature_difference": 0.0,
+      "saved_prediction_mismatches": 0,
+      "test_errors": 38,
+      "prediction_sha256": "0f9860dc6b93204a28506bd6893fc04148d661001b3d6f59063a6eda768b185c"
+    },
+    "pool803": {
+      "retained_coordinates": 803,
+      "raw_coordinates": 804,
+      "train_max_absolute_feature_difference": 0.0,
+      "test_max_absolute_feature_difference": 0.0,
+      "saved_prediction_mismatches": 0,
+      "test_errors": 32,
+      "prediction_sha256": "af2b035acdabc693d9687e64062a0357bcb159f4e1f38674acec94988fd972c1"
+    }
+  }
+}

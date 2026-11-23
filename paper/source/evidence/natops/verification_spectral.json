@@ -1,0 +1,30 @@
+{
+  "all_checks_passed": true,
+  "cases": [
+    {
+      "samples": 127,
+      "bins": 64,
+      "mass": "distributed",
+      "qr_separation_absolute_error": 2.6020852139652106e-18
+    },
+    {
+      "samples": 127,
+      "bins": 64,
+      "mass": "single_bin",
+      "qr_separation_absolute_error": 0.0
+    },
+    {
+      "samples": 128,
+      "bins": 65,
+      "mass": "distributed",
+      "qr_separation_absolute_error": 8.673617379884035e-19
+    },
+    {
+      "samples": 128,
+      "bins": 65,
+      "mass": "single_bin",
+      "qr_separation_absolute_error": 0.0
+    }
+  ],
+  "scope": "QR first-column scale, spectral pair separation, odd/even frequency conversion, amplitude-energy identity; no dataset or learning"
+}

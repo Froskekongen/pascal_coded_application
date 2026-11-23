@@ -1,0 +1,11 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "diagnostic_full_cv_scores.json": true,
+    "diagnostic_full_predictions.csv": true,
+    "diagnostic_full_results.models": true,
+    "diagnostic_full_results.descriptive_paired_counts_reference_offset_full": true,
+    "diagnostic_full_results.diagnostic_protocol_sha256": true
+  },
+  "note": "Timestamps and elapsed runtime are deliberately excluded from equality checks"
+}

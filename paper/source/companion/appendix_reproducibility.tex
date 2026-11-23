@@ -1,0 +1,76 @@
+\phantomsection
+\section*{Reproducing the results}\label{app:reproducibility}
+\addcontentsline{toc}{section}{Reproducing the results}
+
+The repository
+\href{https://github.com/Froskekongen/pascal_coded_application}{\nolinkurl{github.com/Froskekongen/pascal_coded_application}}
+organizes verification and empirical evidence into two complementary tiers:
+\begin{enumerate}
+\item \emph{Clean-room executable reproduction (\nolinkurl{reproduction/}):}
+Documented step by step in
+\href{https://github.com/Froskekongen/pascal_coded_application/blob/main/reproduction/README.md}{\nolinkurl{reproduction/README.md}}
+and locked via \nolinkurl{pyproject.toml} and \nolinkurl{uv.lock} using
+\texttt{tensorsig}~\cite{tensorsig}. Running \texttt{uv sync --locked},
+\texttt{uv run python -m reproduction.checks},
+\texttt{uv run python -m reproduction.uci\_har --download}, and
+\texttt{uv run python -m reproduction.natops --download} from the repository root
+runs offline feature-identity checks, verifies SHA-256 dataset checksums, refits
+the three primary official-split UCI HAR models (\emph{compact368},
+\emph{geometry57}, and the \(561\)-feature baseline) and all nine NATOPS models
+from scratch, and compares confusion matrices, test prediction vectors, and all
+\(585\) NATOPS cross-validation fold counts against frozen expected outputs in
+the \nolinkurl{reproduction/reference/} directory.
+\item \emph{Mathematical checks and archived study records}
+(\nolinkurl{paper/source/evidence/}). Standard-library Python scripts check
+identities from Part~I without datasets or fitted models, using rational
+arithmetic for the Pascal and offset checks and binary64 for the spectral
+checks. Packaged CSV/JSON records, source snapshots, and audit scripts preserve the
+\(187\)-configuration HAR conventional-signature comparison, the nested
+eight-participant DSADS transfer study, and the single-thread CPU timing
+benchmark.
+\end{enumerate}
+
+Table~\ref{tab:repro-index} maps every figure, theorem, and empirical table across
+the main paper~\cite{mainpaper} and this companion to its corresponding
+code and evidence files.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{6.1cm}@{}}
+\toprule
+Paper / companion item & Executable script or source & Archived evidence / verification record \\
+\midrule
+Main Fig.~1; Companion Fig.~\ref{fig:comp-movement} \& Ex.~\ref{ex:two-rises} (two-rise schedules, \(1/2\) vs.\ \(1/6\))
+  & \nolinkurl{evidence/natops/make_movement_figure.py}; \nolinkurl{reproduction/checks.py}
+  & \nolinkurl{evidence/natops/verify_offset.py}; \nolinkurl{evidence/natops/verification_offset.json} \\[4pt]
+Companion Sec.~\ref{app:offsets}, Props.~\ref{prop:qr-uniqueness}--\ref{prop:nilpotent} (QR, shifts, twisted Chen)
+  & \nolinkurl{evidence/natops/verify_pascal.py}; \nolinkurl{evidence/natops/verify_spectral.py}
+  & \nolinkurl{evidence/natops/verification_pascal.json}; \nolinkurl{evidence/natops/verification_spectral.json} \\[4pt]
+Companion Sec.~\ref{app:depth-and-ridge}, Ex.~\ref{ex:depth-three-collision}, Thm.~\ref{prop:staircase-projection} (depth-3 collision \& staircase projection)
+  & \nolinkurl{evidence/natops/verify_offset.py}; \nolinkurl{evidence/har/historical_selected_sources/ordinary_spectral.py}
+  & \nolinkurl{evidence/natops/verification_offset.json}; \nolinkurl{evidence/har/consolidated_results/results.csv} \\[4pt]
+Main Table~1 (\emph{compact368}, supplied 561); Companion Tables~\ref{tab:compact-blocks}--\ref{tab:har-standalone} (\emph{geometry57})
+  & \nolinkurl{reproduction/uci_har.py}; \nolinkurl{evidence/har/retained_features.py}; \nolinkurl{evidence/har/geometry57.py}
+  & \nolinkurl{reproduction/reference/har.json}; \nolinkurl{evidence/har/retained_results/}; \nolinkurl{evidence/har/geometry57_results/} \\[4pt]
+Main Table~1 (controls); Companion Tables~\ref{tab:har-standalone}--\ref{tab:ordinary-spectral} (standalone, deletions, raw \& staircase controls)
+  & \nolinkurl{evidence/har/historical_selected_sources/ordinary_controls.py}; \nolinkurl{ordinary_spectral.py}
+  & \nolinkurl{evidence/har/pool_results/results.csv}; \nolinkurl{evidence/har/consolidated_results/results.csv}; \nolinkurl{saved_metrics_verification.json} \\[4pt]
+Main Table~2; Companion Sec.~\ref{app:natops}, Tables~\ref{tab:natops-maps}--\ref{tab:natops-results} (nine NATOPS maps, CV \& McNemar)
+  & \nolinkurl{reproduction/natops.py}; \nolinkurl{evidence/natops/offset_learning/reproduce.py}
+  & \nolinkurl{reproduction/reference/natops.json}; \nolinkurl{evidence/natops/offset_learning/results.json}; \nolinkurl{diagnostic_full_results.json} \\[4pt]
+Companion Sec.~\ref{app:transfer}, Table~\ref{tab:dsads} (nested 8-participant DSADS transfer \& ablations)
+  & \nolinkurl{evidence/har/transfer/transforms/source_snapshot.zip} (\nolinkurl{streams.py}, \nolinkurl{study.py})
+  & \nolinkurl{evidence/har/transfer/transforms/summary/dataset_overview.csv}; \nolinkurl{dsads_model_distribution.csv}; \nolinkurl{results/verification.json} \\[4pt]
+Companion Sec.~\ref{app:compute}, Table~\ref{tab:compute} (SpikeDCL random-window split \& CPU runtime)
+  & \nolinkurl{evidence/timing/benchmark_pipeline.py}; \nolinkurl{evidence/timing/frozen_accuracy/sources/}
+  & \nolinkurl{evidence/timing/summary.csv}; \nolinkurl{evidence/timing/timings.csv}; \nolinkurl{evidence/timing/frozen_accuracy/run.json} \\
+\bottomrule
+\end{tabular}
+\caption{Index connecting figures, mathematical checks, and experimental tables in
+the main paper~\cite{mainpaper} and this companion to executable scripts and
+archived verification records (paths under \nolinkurl{evidence/} are relative to
+\nolinkurl{paper/source/}).}
+\label{tab:repro-index}
+\end{table}
+\FloatBarrier

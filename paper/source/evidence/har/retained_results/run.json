@@ -1,0 +1,242 @@
+{
+  "dataset_url": "https://archive.ics.uci.edu/static/public/240/human+activity+recognition+using+smartphones.zip",
+  "smoke": false,
+  "train_windows": 7352,
+  "test_windows": 2947,
+  "train_subjects": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    8,
+    11,
+    14,
+    15,
+    16,
+    17,
+    19,
+    21,
+    22,
+    23,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "test_subjects": [
+    2,
+    4,
+    9,
+    10,
+    12,
+    13,
+    18,
+    20,
+    24
+  ],
+  "activities": [
+    "walking",
+    "upstairs",
+    "downstairs",
+    "sitting",
+    "standing",
+    "lying"
+  ],
+  "python": "3.13.15",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "numpy": "2.5.2",
+  "torch": "2.13.0",
+  "sklearn": "1.9.1",
+  "settings": {
+    "ridge_alpha": 10,
+    "code": "Pascal QR",
+    "P": 3,
+    "depth": 2,
+    "graph_trend_P": 2,
+    "seed": 2025,
+    "numerical_threads": 1,
+    "batch_size": 256,
+    "feature_scaling": "Training-only StandardScaler",
+    "constant_mask": "Training std > 1e-6 * maximum training absolute value"
+  },
+  "models": {
+    "compact368": "Raw/spectral Pascal logsignatures + calibrated graph moments and trends",
+    "pool803": "Reduced spectral/rotation pool + raw Pascal",
+    "uci903": "561 + raw Pascal P3/depth 2"
+  },
+  "confusion_matrices": {
+    "compact368": [
+      [
+        496,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        464,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        1,
+        417,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        456,
+        35,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        12,
+        519,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        537
+      ]
+    ],
+    "pool803": [
+      [
+        496,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        467,
+        3,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        418,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        456,
+        34,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        15,
+        517,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        537
+      ]
+    ],
+    "uci903": [
+      [
+        491,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        464,
+        5,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        3,
+        417,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        1,
+        438,
+        50,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        17,
+        515,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        537
+      ]
+    ]
+  },
+  "constant_columns_removed": {
+    "compact368": 20,
+    "pool803": 1,
+    "uci903": 0
+  },
+  "timing_note": "Feature preparation is shared across all three models. Supplied 561 extraction is unmeasured. Wall time includes ZIP loading.",
+  "feature_blocks": {
+    "shared_preparation_s": 2.8664665420074016,
+    "raw_preparation_s": 0.3278753340127878,
+    "raw_tensor": 342,
+    "raw_log": 171,
+    "spectral_log_before_constant_removal": 120,
+    "amplitude_moments": 40,
+    "cosine_moments": 6,
+    "invariant_moments": 36,
+    "graph_trends": 15,
+    "spectral_pool_before_constant_removal": 360,
+    "rotation_pool": 102
+  },
+  "wall_s": 4.312838833007845
+}

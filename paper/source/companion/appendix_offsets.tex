@@ -1,0 +1,345 @@
+\section{Polynomial bases, shift equivariance, and Volterra structure}
+\label{app:offsets}
+
+Polynomial position weighting does not single out one coordinate basis on the
+space of polynomials of degree below \(P\). Separating the subspace of position
+summaries retained by the lift from the choice of basis clarifies three points
+needed later: why \(P\) copies interpolate between unweighted signatures and full
+sequence reconstruction, why positive-diagonal QR orthonormalization produces a
+canonical discrete orthogonal basis for HAR and DSADS, and why the binomial
+Pascal basis itself admits an exact triangular shift law and a position-only
+Volterra representation.
+We record standard polynomial basis and translation identities in the notation
+needed for these coded signatures.
+
+\subsection{From exact slot labels to polynomial moments}
+An uncompressed representation of discrete positions would keep every time step
+in its own dedicated block of \(C\) channels. Let \(e_0, \ldots, e_{R-1}\) denote
+the standard basis of \(\R^R\). Assigning \(e_r \otimes z_r \in \R^R \otimes \R^C \cong \R^{RC}\)
+to step \(r\) records both the increment \(z_r\) and its exact index \(r\), at
+the cost of \(RC\) channels. Any linear code \(\mathcal A : \R^R \to \R^P\)
+compresses these \(R\)-dimensional slot indicators into \(P\)-dimensional code
+vectors \(\mathcal A e_r = b(r) \in \R^P\):
+\begin{equation}\label{eq:offset-code}
+ \mathcal A e_r = b(r), \qquad
+ (\mathcal A \otimes I_C)(e_r \otimes z_r) = b(r) \otimes z_r = v_r,
+\end{equation}
+where we order coordinates copy-major so \(b(r) \otimes z_r = (b_0(r) z_r, \ldots, b_{P-1}(r) z_r)^\top\).
+Position is compressed linearly within each step without shifting the sequence
+in time.
+
+Let \(S_{\mathrm{exact}}(z)\) denote the signature of the piecewise-linear path
+in \(\R^{RC}\) accumulated from the exact-slot increments \(e_r \otimes z_r\).
+Because the accumulated coded path satisfies \(y(t) = (\mathcal A \otimes I_C) x_{\mathrm{exact}}(t)\),
+multilinearity of the iterated integrals~\eqref{eq:app-general-signature} makes
+each level \(S^k_{\mathcal A}(z) = S^k(y)\) a linear image of the exact-slot
+signature:
+\begin{equation}\label{eq:offset-projection}
+ S^k_{\mathcal A}(z) = (\mathcal A \otimes I_C)^{\otimes k} S^k_{\mathrm{exact}}(z),
+ \qquad 1 \leq k \leq m.
+\end{equation}
+
+For the normalized Pascal weights \(b_p(r) = \binom{r}{p} / \binom{R-1}{p}\) of
+Definition~\ref{def:pascal-lift}, the numerators \(\binom{r}{p} = r(r-1)\cdots(r-p+1)/p!\)
+(\(0 \leq p < P\)) form the Newton falling-factorial basis for polynomials of
+degree at most \(P-1\). Because a nonzero polynomial of degree below \(P\) can
+have at most \(P-1\) roots, every \(P \times P\) minor of the \(P \times R\)
+code matrix \(\mathcal A\) is nonzero. At \(P = 1\), \(b_0(r) = 1\) collapses all
+slot labels and recovers the ordinary signature of \(z\). For \(1 < P < R\), the
+first signature level retains \(P\) polynomial moments per input channel,
+\begin{equation}\label{eq:offset-moments}
+ s_{c_p} = \sum_{r=0}^{R-1} b_p(r) z_r^c,
+\end{equation}
+allowing a linear readout to express any degree-\((P-1)\) temporal weighting
+\(\sum_{p=0}^{P-1} \beta_{pc} b_p(r)\), while level two adds polynomially
+weighted ordered pairs. At the full rank \(P = R\), \(\mathcal A \in \R^{R \times R}\)
+is invertible---indeed lower triangular up to column indices, with explicit
+binomial inverse
+\[
+ z_r^c = \sum_{p=r}^{R-1} (-1)^{p-r} \binom{p}{r}\binom{R-1}{p} s_{c_p}
+ \qquad (0 \leq r < R)
+\]
+---so the first-level coded endpoints alone reconstruct the entire sequence
+\(z_0, \ldots, z_{R-1}\) linearly.
+
+\subsection{Basis equivalence and the canonical QR orthogonal basis}\label{app:qr}
+On the normalized grid \(u_r = r/(R-1)\) (\(R \geq 2\)), each Pascal weight
+\(b_p(r)\) is a degree-\(p\) polynomial in \(u_r\) with strictly positive
+leading coefficient \((R-1)^p / \bigl(p!\binom{R-1}{p}\bigr)\). For the first
+three copies (\(R \geq 3\)),
+\[
+ b_0(r) = 1, \qquad
+ b_1(r) = u_r, \qquad
+ b_2(r) = \frac{(R-1)u_r^2 - u_r}{R-2}.
+\]
+Although \(b_2(r)\) differs from the pure square \(u_r^2\) by a linear term,
+the functions \(b_0, \ldots, b_{P-1}\) span the exact same \(P\)-dimensional
+polynomial space on \(\{0, \ldots, R-1\}\) as the ascending monomials
+\(1, u_r, \ldots, u_r^{P-1}\).
+
+More generally, if \(\widetilde b(r) = L b(r)\) for an invertible transition
+matrix \(L \in \R^{P \times P}\), then in copy-major channel order the lifted
+path transforms by \(\widetilde y(t) = F y(t)\) with \(F = L \otimes I_C\), and
+multilinearity gives
+\begin{equation}\label{eq:basis-naturality}
+ S^k(\widetilde y) = F^{\otimes k} S^k(y) \quad (1 \leq k \leq m), \qquad
+ \widetilde s = F s, \qquad
+ \widetilde J = F J F^\top.
+\end{equation}
+Thus any invertible change of polynomial basis induces an invertible linear
+transformation on each complete tensor signature level and on the complete
+depth-two logsignature \((s, J)\). Two caveats accompany~\eqref{eq:basis-naturality}:
+an invertible basis change need not map a restricted coordinate subset into
+itself, and a change of basis can alter the feature Gram matrix governing ridge
+regression, even after columnwise standardization
+(Subsection~\ref{app:fixed-endpoints}).
+
+Sampled Pascal or monomial columns become increasingly collinear on \([0,1]\) as
+\(P\) grows. For the UCI HAR and DSADS representations we therefore orthonormalize
+the sampled weights across sequence positions. Let \(A \in \R^{R \times P}\) have
+unnormalized binomial entries \(A_{rp} = \binom{r}{p}\) and set
+\(D = \operatorname{diag}_p\binom{R-1}{p}\). A thin QR factorization uniquely
+writes
+\[
+ A = Q H, \qquad Q^\top Q = I_P, \qquad H_{pp} > 0 \quad (0 \leq p < P),
+\]
+where \(Q \in \R^{R \times P}\) has orthonormal columns and \(H \in \R^{P \times P}\)
+is upper triangular. Requiring a strictly positive diagonal \(H_{pp} > 0\)
+removes the sign ambiguity of the orthonormal columns (the entries
+\(q_p(r) = Q_{rp}\) themselves change sign across \(r\) for \(p \geq 1\)). Since
+row \(r\) of \(A\) is \(b(r)^\top D\), the orthonormal weight vector satisfies
+\(q(r) = (D H^{-1})^\top b(r)\), an explicit invertible basis change of the
+form~\eqref{eq:basis-naturality}.
+
+The following is the usual uniqueness of discrete polynomial orthogonalization,
+expressed through positive-diagonal QR; see~\cite{discreteqr} for the connection
+between discrete orthogonal polynomials and Vandermonde QR factorizations.
+\begin{proposition}[Canonical discrete orthogonal basis under positive-diagonal QR]
+\label{prop:qr-uniqueness}
+For any \(R \geq 2\) and \(1 \leq P \leq R\), let \(U \in \R^{R \times P}\) have
+ascending monomial columns \(U_{rp} = u_r^p\) with \(u_r = r/(R-1)\). In exact
+arithmetic, the positive-diagonal thin QR factorizations of \(A\), of the
+normalized Pascal matrix \(W = A D^{-1}\), and of \(U\) all have the identical
+orthonormal factor \(Q\).
+\end{proposition}
+\begin{proof}
+Because \(b_p(r)\) is a degree-\(p\) polynomial in \(u_r\) with positive leading
+coefficient, column \(p\) of \(A\) is a linear combination of columns
+\(0, \ldots, p\) of \(U\) with a strictly positive coefficient on \(u_r^p\).
+Hence \(A = U R_0\) for an upper-triangular matrix \(R_0 \in \R^{P \times P}\)
+with positive diagonal entries. Substituting \(A = Q H\) gives
+\(U = Q (H R_0^{-1})\) and \(W = Q (H D^{-1})\). Since upper-triangular matrices
+with positive diagonals form a group under multiplication and inversion, both
+\(H R_0^{-1}\) and \(H D^{-1}\) are upper triangular with positive diagonals.
+Uniqueness of the thin QR factorization with positive diagonal entries implies
+that all three matrices share the orthonormal factor \(Q\).
+\end{proof}
+
+Proposition~\ref{prop:qr-uniqueness} identifies the columns of \(Q\) as the
+normalized discrete Legendre polynomials on \(\{0, \ldots, R-1\}\). Applying
+Gram--Schmidt to the first two columns \(1\) and \(u_r\) gives their closed form:
+\begin{equation}\label{eq:qr-first-two}
+ q_0(r) = \frac{1}{\sqrt R}, \qquad
+ q_1(r) = \frac{u_r - 1/2}{d_R}, \qquad
+ d_R = \sqrt{\sum_{r=0}^{R-1} \Bigl(u_r - \frac{1}{2}\Bigr)^2}
+     = \sqrt{\frac{R(R+1)}{12(R-1)}}.
+\end{equation}
+Under scaled sensor readings \(z_r = a_r / R\), the \(p=0\) endpoint
+\(\sum_{r=0}^{R-1} q_0(r) z_r = \bar a / \sqrt R\) preserves the window mean up
+to \(R^{-1/2}\). (Ordering channels by sensor axis first and QR copy second, as
+in the HAR and DSADS code, simply conjugates \(F\) in~\eqref{eq:basis-naturality}
+by a fixed permutation matrix.)
+
+For a unit-sum power spectrum \(p_0, \ldots, p_{K-1}\) on \(K\) equally spaced
+frequency bins \(u_k = k/(K-1)\),~\eqref{eq:qr-first-two} also determines the
+exact scale of the QR spectral spread coordinate. Because \(J\) is alternating,
+subtracting \(\tfrac12 q_0(k)\sqrt K = 1/2\) from \(u_k\) adds a multiple of the
+constant column \(q_0\) to \(q_1\) and contributes zero signed area. Hence the
+stored HAR spectral area \(\sqrt 2\,J^Q_{01} = (B^Q_{01} - B^Q_{10})/\sqrt 2\) is
+an exact positive multiple of the Gini mean difference~\eqref{eq:spectral-separation}:
+\begin{equation}\label{eq:spectral-qr-scale}
+ \sqrt 2\,J^Q_{01}
+   = \frac{\sqrt 2}{\sqrt K\,d_K} J^{(1,u)}_{01}
+   = \frac{\sqrt 2}{4\sqrt K\,d_K}\,\E|U - V|,
+ \qquad d_K = \sqrt{\frac{K(K+1)}{12(K-1)}},
+\end{equation}
+where \(U, V\) are independent draws on \(\{u_0, \ldots, u_{K-1}\}\) with
+\(\Pr(U = u_k) = p_k\). For an \(N\)-sample time window, physical frequency as a
+fraction of the Nyquist rate is \(F = 2k/N = \frac{2(K-1)}{N} U\); thus \(F = U\)
+for even \(N = 128\) (\(K = 65\)), and \(F = \frac{126}{127} U\) for
+first-difference signals of odd length \(N = 127\) (\(K = 64\)).
+
+\subsection{Shift equivariance and concatenation of locally coded segments}
+If positive-diagonal QR supplies the best-conditioned basis on a fixed grid, the
+distinctive algebraic virtue of the binomial basis is how it transforms under
+index translations: when separately coded adjacent segments are concatenated, the
+later segment's local origin must be shifted forward, and in binomial coordinates
+that shift is unit lower triangular with integer entries.
+
+Let \(a(r) = \bigl(\binom{r}{0}, \ldots, \binom{r}{P-1}\bigr)^\top \in \R^P\),
+where for arbitrary integers \(h \in \Z\) we use the falling-factorial polynomial
+\(\binom{h}{p} = h(h-1)\cdots(h-p+1)/p!\) for \(p \geq 1\) and \(\binom{h}{0} = 1\).
+(On nonnegative integers \(r \geq 0\), this coincides with setting
+\(\binom{r}{p} = 0\) for \(r < p\) in~\eqref{eq:app-pascal} while extending
+smoothly to negative shifts.) By Vandermonde's polynomial identity
+\(\binom{r+h}{p} = \sum_{q=0}^p \binom{h}{p-q}\binom{r}{q}\), every integer shift
+\(h \in \Z\) acts linearly on \(a(r)\):
+\begin{equation}\label{eq:offset-shift}
+ a(r + h) = T_h a(r), \qquad
+ (T_h)_{pq} = \begin{cases}
+   \binom{h}{p-q}, & 0 \leq q \leq p < P,\\
+   0, & 0 \leq p < q < P.
+ \end{cases}
+\end{equation}
+The matrices \(\{T_h\}_{h \in \Z}\) are unit lower triangular and form an exact
+one-parameter abelian group: \(T_0 = I_P\), \(T_h T_k = T_{h+k}\), and
+\(T_h^{-1} = T_{-h}\). For \(P = 3\), advancing the step index by \(h = 1\)
+applies
+\[
+ T_1 = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{pmatrix},
+ \qquad
+ T_1 a(2) = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{pmatrix}
+            \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}
+          = \begin{pmatrix} 1 \\ 3 \\ 3 \end{pmatrix} = a(3).
+\]
+Because translating the index before coding equals applying \(T_h\) after coding,
+the Pascal lift is \emph{shift equivariant}. In normalized Pascal coordinates
+\(b(r) = D^{-1} a(r)\) with \(D = \operatorname{diag}_p\binom{R-1}{p}\), or after
+a further invertible basis map \(L\) such as QR, the shift operator conjugates to
+\(D^{-1} T_h D\) or \(L D^{-1} T_h D L^{-1}\).
+
+Combining shift equivariance with Chen's identity~\cite{chen} yields a
+concatenation rule for locally coded segments without revisiting raw increments.
+For any segment \(z = (z_0, \ldots, z_{\ell-1})\) of
+length \(\ell \geq 1\) coded from its own local origin \(j = 0, \ldots, \ell-1\)
+in unnormalized Pascal coordinates, its truncated depth-\(m\) tensor signature is
+\begin{equation}\label{eq:reset-signature}
+ G(z) = \prod_{j=0}^{\ell-1} \exp_\otimes\bigl(a(j) \otimes z_j\bigr).
+\end{equation}
+Let \(\Theta_h\) denote the truncated tensor-algebra automorphism that applies
+\(T_h \otimes I_C\) to each tensor factor:
+\(\Theta_h|_{(\R^{PC})^{\otimes k}} = (T_h \otimes I_C)^{\otimes k}\). Since
+\((T_\ell \otimes I_C)\bigl(a(j) \otimes z_j\bigr) = a(\ell + j) \otimes z_j\)
+and \(\exp_\otimes\) commutes with linear maps, concatenating \(z\) with a second
+locally coded segment \(w = (w_0, \ldots, w_{q-1})\) satisfies the
+\emph{twisted Chen identity}
+\begin{equation}\label{eq:reset-chen}
+ G(z \mathbin\Vert w) = G(z)\,\Theta_\ell\bigl(G(w)\bigr).
+\end{equation}
+Associativity across multiple blocks follows immediately from the group law
+\(\Theta_\ell \Theta_q = \Theta_{\ell+q}\) and associativity of the truncated
+tensor product. If segments of different lengths \(\ell\) were normalized
+independently by their own denominators \(\binom{\ell-1}{q}\) (using
+\(K = \min(P, \ell)\) local copies so even a singleton step \(\ell = 1\) avoids
+division by zero), applying the \(P \times K\) rebasing map
+\(H_{pq} = \binom{h}{p-q}\binom{\ell-1}{q}/\binom{R-1}{p}\) (\(q \leq p\)) to a
+block starting at global index \(h\) embeds its local signature directly into the
+global normalized signature \(S_{\leq m}(y)\). Under uniform sampling, integer
+index shifts correspond to physical time translations.
+
+\begin{remark}[Online sliding-window updates and comparison with SigAdapt]
+\label{app:sigadapt}
+Equation~\eqref{eq:reset-chen} also clarifies how representation choices differ
+from online readout adaptation, such as SigAdapt~\cite{sigadapt} for sliding-window
+time-series forecasting. For each look-back length, SigAdapt computes ordinary
+tensor signatures (at depths four to six in its reported experiments) of
+time- and basepoint-augmented history and covariate paths, fits a joint ridge
+model, updates multipliers of its per-level signature contributions online via a
+Kalman filter, and aggregates across window lengths. Its sliding-window signature
+updates drop the oldest step and append the newest step via Chen's identity and basepoint
+correction. Performing an analogous sliding update on locally indexed Pascal
+signatures additionally applies \(\Theta_{-1}\) after left-multiplying by
+\(\exp_\otimes\bigl(-a(0)\otimes z_0\bigr)\) so all remaining step indices shift
+down by one before the new step is multiplied on the right at \(a(R-1)\).
+Polynomial coding and online state-space adaptation address orthogonal parts of a
+modelling pipeline and have not been combined here; moreover, algebraic update
+identities for raw signature blocks do not determine end-to-end cost when a
+representation also recomputes windowed Fourier transforms or lagged geometric
+streams (Sections~\ref{app:har} and~\ref{app:compute}).
+\end{remark}
+
+\subsection{Nilpotent generator and Volterra signature specialization}
+\label{app:nilpotent}
+Because \(\{T_h\}_{h \in \Z}\) is a unipotent lower-triangular group, the Pascal
+weights arise from a nilpotent matrix exponential, and the entire coded signature
+embeds into the Volterra signature framework~\cite{volterra}. It is instructive
+to derive both descriptions and keep their scopes distinct: the first is an
+identity for single-step weights, whereas the second identifies iterated
+integrals across all signature depths.
+
+\begin{proposition}[Nilpotent generator of Pascal weights]\label{prop:nilpotent}
+Let \(N \in \R^{P \times P}\) have ones on its first subdiagonal
+(\(N_{p, p-1} = 1\) for \(1 \leq p < P\)) and zeros elsewhere, let \(e_0\) be the
+first standard basis vector of \(\R^P\), and define the finite matrix logarithm
+\[
+ H = \log(I_P + N) = \sum_{j=1}^{P-1} \frac{(-1)^{j+1}}{j} N^j.
+\]
+Then \(T_h = e^{hH}\) and \(a(r) = e^{rH} e_0\) for every integer \(h, r \in \Z\).
+In particular, relative to any fixed terminal index \(T \in \Z\),
+\begin{equation}\label{eq:nilpotent-endpoint}
+ e^{-(T - r) H} e_0 = e^{-T H} a(r).
+\end{equation}
+\end{proposition}
+\begin{proof}
+Because \(N^P = 0\), the power series for \(\log(I_P + N)\) and \(\exp(hH)\)
+truncate at degree \(P - 1\), and formal power-series composition holds exactly:
+\(e^H = I_P + N\) and \(e^{hH} = (I_P + N)^h\). By the generalized binomial
+theorem for nilpotent perturbations,
+\[
+ (I_P + N)^h = \sum_{k=0}^{P-1} \binom{h}{k} N^k \qquad (h \in \Z).
+\]
+Since \((N^k)_{pq} = \mathbf 1_{\{p - q = k\}}\), entry \((p, q)\) of
+\((I_P + N)^h\) equals \(\binom{h}{p-q}\) for \(q \leq p\) and \(0\) otherwise,
+which is \(T_h\) in~\eqref{eq:offset-shift}. Evaluating \(T_r e_0\) selects column
+\(q = 0\) and gives \(a(r)\); left-multiplying by \(e^{-TH}\) yields~\eqref{eq:nilpotent-endpoint}.
+\end{proof}
+
+Polynomial memory from nilpotent generators is treated within exponentially
+weighted signatures (EWS) in~\cite[Prop.~2]{ews}. EWS also identifies its
+fixed-horizon iterated integrals with the ordinary signature of a reweighted
+path~\cite[Prop.~3]{ews}. For the present discrete lift, holding the clock at
+index \(r\) during signal increment \(z_r\) makes the terminal-weighted increments
+in~\eqref{eq:nilpotent-endpoint} a fixed linear transform of the Pascal increments;
+the corresponding signatures then transform level by level. This comparison
+uses that clock convention, rather than simultaneous linear clock and signal
+interpolation.
+
+To place the coded signature within the Volterra signature~\cite{volterra} at
+every truncation level, recall that a Volterra signature replaces ordinary path
+differentials by integrals against a measurable matrix-valued kernel \(K(t, s)\)
+satisfying \(\sup_{t \in [0, R]} \int_0^t \|K(t, s)\|\,ds < \infty\). Let
+\(x:[0, R]\to\R^C\) be the piecewise-linear path with increments \(z_r\) on
+\([r, r+1]\), and define the piecewise-constant, position-only kernel
+\[
+ A(s) = b(r) \otimes I_C \quad (r \leq s < r + 1,\ 0 \leq r < R), \qquad
+ K(t, s) = A(s) \quad (0 \leq s \leq t \leq R),
+\]
+with \(A(R) = b(R-1) \otimes I_C\). Because \(K\) is bounded on \([0, R]^2\), it
+is Volterra admissible, and integrating \(A(s)\,dx_s\) on \([0, t]\) produces the
+exact piecewise-linear lifted path \(y_t = \int_0^t A(s)\,dx_s\) of
+Definition~\ref{def:pascal-lift}. At signature level \(k \geq 1\), the Volterra
+iterated integral~\cite[Def.~2.14]{volterra} over the simplex
+\(0 < r_1 < \cdots < r_k < t\) with terminal horizon \(r_{k+1} = \tau \geq t\)
+forms the tensor product of factors \(K(r_{\ell+1}, r_\ell)\,dx_{r_\ell}\).
+Because \(K(r_{\ell+1}, r_\ell) = A(r_\ell)\) is independent of its first time
+argument \(r_{\ell+1}\), the \(\ell\)th differential simplifies to
+\(A(r_\ell)\,dx_{r_\ell} = dy_{r_\ell}\), yielding exact equality at all levels:
+\[
+ \VSig(x; K)^{\tau}_{0, t} = \Sig(y)_{0, t} \qquad (0 \leq t \leq \tau \leq R).
+\]
+Subsequent rescaling or QR orthonormalization applies a fixed linear map
+\(F^{\otimes k}\) to each level. Because \(K(t, s)\) depends only on \(s\), this
+specialization preserves the classical Chen concatenation and shuffle identities
+of ordinary signatures.
+
+By contrast, while~\eqref{eq:nilpotent-endpoint} shows that weighting discrete
+increments by the terminal-lag exponential \(e^{-(T-r)H} e_0\) differs from
+\(a(r) \otimes z_r\) only by the fixed invertible transformation
+\(e^{-TH} \otimes I_C\), that relation does \emph{not} identify higher levels of
+the Pascal-coded signature with a convolution Volterra signature
+\(K(t, s) = \widetilde K(t - s)\). In a genuine two-time convolution kernel, the
+\(\ell\)th Volterra factor \(K(r_{\ell+1}, r_\ell)\) weights step \(r_\ell\) by
+its lag relative to the \emph{next} integration variable \(r_{\ell+1}\), rather
+than referencing all factors to a single terminal endpoint \(T\). This distinction
+between fixed-terminal EWS and convolution Volterra weighting is also discussed
+in~\cite[App.~D.2]{ews}.

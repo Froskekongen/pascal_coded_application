@@ -1,0 +1,210 @@
+{
+  "status": "passed",
+  "verified_at_utc": "2026-10-11T19:29:31.307414+00:00",
+  "methodology": {
+    "classifier": "sklearn.pipeline.make_pipeline(StandardScaler(), RidgeClassifier(alpha=10, solver='lsqr', tol=1e-12))",
+    "independence": "Rebuilt frozen features from the official archive; fitted sklearn LSQR independently of benchmark.ridge_predict and compared all validation and test labels.",
+    "weights": "None for retained_unweighted; n_train/(6*training_class_count) for balanced, passed only to RidgeClassifier.",
+    "split": "Independent concatenate-by-subject implementation and sklearn train_test_split(test_size=.2,random_state=0) twice; matched all saved indices.",
+    "numerical_threads": 1,
+    "metric_comparison_atol": 1e-15,
+    "prediction_comparison": "Exact array equality, all examples and all five saved training seeds."
+  },
+  "versions": {
+    "numpy": "2.5.2",
+    "torch": "2.13.0",
+    "sklearn": "1.9.1"
+  },
+  "hash_verification": {
+    "dataset": true,
+    "source_files": {
+      "spikedcl_benchmark.py": true,
+      "benchmark.py": true,
+      "retained_features.py": true
+    },
+    "evidence_files": {
+      "results.csv": true,
+      "summary.csv": true,
+      "predictions.npz": true
+    }
+  },
+  "partition_sizes": {
+    "train": 6591,
+    "validation": 1648,
+    "test": 2060
+  },
+  "models": [
+    {
+      "model": "compact368",
+      "head": "balanced",
+      "features": 368,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9799757281553398,
+        "test_accuracy": 0.9815533980582525,
+        "test_macro_f1": 0.9823513888245715,
+        "test_errors": 38
+      }
+    },
+    {
+      "model": "compact368",
+      "head": "retained_unweighted",
+      "features": 368,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9781553398058253,
+        "test_accuracy": 0.9815533980582525,
+        "test_macro_f1": 0.9822699543673976,
+        "test_errors": 38
+      }
+    },
+    {
+      "model": "pool803",
+      "head": "balanced",
+      "features": 803,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9805825242718447,
+        "test_accuracy": 0.9844660194174757,
+        "test_macro_f1": 0.9856390665038707,
+        "test_errors": 32
+      }
+    },
+    {
+      "model": "pool803",
+      "head": "retained_unweighted",
+      "features": 803,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9811893203883495,
+        "test_accuracy": 0.9844660194174757,
+        "test_macro_f1": 0.9855585113984776,
+        "test_errors": 32
+      }
+    },
+    {
+      "model": "uci903",
+      "head": "balanced",
+      "features": 903,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9787621359223301,
+        "test_accuracy": 0.9805825242718447,
+        "test_macro_f1": 0.9816496233885169,
+        "test_errors": 40
+      }
+    },
+    {
+      "model": "uci903",
+      "head": "retained_unweighted",
+      "features": 903,
+      "validation_predictions_compared": 1648,
+      "test_predictions_compared": 2060,
+      "saved_seed_repetitions": 5,
+      "validation_mismatches": 0,
+      "test_mismatches": 0,
+      "metrics_match": true,
+      "confusion_matrices_match": true,
+      "metrics": {
+        "validation_accuracy": 0.9787621359223301,
+        "test_accuracy": 0.9810679611650486,
+        "test_macro_f1": 0.9820972148804845,
+        "test_errors": 39
+      }
+    }
+  ],
+  "held_out_perturbation_check": {
+    "training_windows": 8,
+    "held_out_windows": 4,
+    "sensor_perturbation": "x -> 3*x+2 on held-out windows only",
+    "supplied_feature_perturbation": "x -> -2*x+3 on held-out windows only",
+    "models": {
+      "compact368": {
+        "training_features_exactly_unchanged": true,
+        "constant_mask_and_retained_training_features_unchanged": true
+      },
+      "pool803": {
+        "training_features_exactly_unchanged": true,
+        "constant_mask_and_retained_training_features_unchanged": true
+      },
+      "uci903": {
+        "training_features_exactly_unchanged": true,
+        "constant_mask_and_retained_training_features_unchanged": true
+      }
+    }
+  },
+  "csv_and_selection_checks": {
+    "result_rows": 30,
+    "summary_rows": 8,
+    "all_metrics_recomputed": true,
+    "population_std_ddof": 0,
+    "all_seed_predictions_identical": true,
+    "validation_only_selections_match": true,
+    "note": "Stored standard deviations of about 1e-16 are floating-point roundoff; repeated predictions and per-run metrics are identical."
+  },
+  "original_protocol_regression": {
+    "status": "passed",
+    "methodology": "Compared parent-produced fresh original-protocol run against retained results; exact metrics, feature counts, errors, confusion matrices and constant removals.",
+    "retained_results_path": "examples/uci_har/retained_results",
+    "fresh_run_path": "/tmp/pascal-har-original-regression",
+    "fresh_evidence_sha256": {
+      "results.csv": "b26c373292300306b84c39a492b77546f37590a0d58c10c86a93d402b1044693",
+      "run.json": "1c9a40a892cfb5a8734bf96210db0eaca33d7a07dd4bfd1ebcf79e994f65765a"
+    },
+    "models": [
+      {
+        "model": "compact368",
+        "features": "368",
+        "accuracy": "0.9803189684424839",
+        "macro_f1": "0.9805920818014835",
+        "errors": "58"
+      },
+      {
+        "model": "pool803",
+        "features": "803",
+        "accuracy": "0.9809976247030879",
+        "macro_f1": "0.9813981683337065",
+        "errors": "56"
+      },
+      {
+        "model": "uci903",
+        "features": "903",
+        "accuracy": "0.9711571089243298",
+        "macro_f1": "0.9715558326700959",
+        "errors": "85"
+      }
+    ]
+  },
+  "wall_s": 21.751356416993076,
+  "verification_script_sha256": "cef054a13e6f36b5bb98e36ceec39e56713a7d93078d03843f63541afbb66072"
+}

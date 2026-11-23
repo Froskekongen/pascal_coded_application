@@ -1,0 +1,270 @@
+\section{Ordinary signature depth, staircase projection, and ridge geometry}
+\label{app:depth-and-ridge}
+
+Appending a clock or frequency coordinate to an uncoded path makes positional
+information available in the full infinite signature. Two mathematical questions
+connect that fact to the depth-two Pascal lift. First, when does a bounded-depth
+ordinary signature recover the depth-two Pascal coordinates linearly? Second,
+when two signature representations span the exact same affine linear function
+space on a dataset, why can a linear ridge classifier still make different
+predictions? We answer both questions in turn.
+
+\subsection{Clocked paths at depth three and the interpolation correction}
+In Example~\ref{ex:two-rises}, the uncoded clock-augmented paths \((T, x)\) for
+the spread schedule \(a = (1, 0, 0, 1)\) and central schedule \(b = (0, 1, 1, 0)\)
+had identical coordinates through depth two, while the two-copy Pascal area
+\(J_{01}\), between the original and weighted copies with increments
+\((z_r,u_r z_r)\), separated them as \(1/2\) versus \(1/6\). Moving one level higher
+in the ordinary signature of \((T, x)\) on \([0, 1]\) exposes the space--time--space
+iterated integral:
+\[
+ S^{xTx} = \int_{0 < t_1 < t_2 < t_3 < 1} dx_{t_1}\,dT_{t_2}\,dx_{t_3}
+         = \int_0^1 \Bigl(\int_0^{t_2} dx_{t_1}\Bigr)\Bigl(\int_{t_2}^1 dx_{t_3}\Bigr)\,dt_2
+         = \int_0^1 x_t (s_x - x_t)\,dt,
+\]
+since \(dT_t = dt\) and \(x_0 = 0\). With total rise \(s_x = 2\) and four uniform
+clock steps of \(1/4\), integrating \(x_t(2 - x_t)\) across the four piecewise-linear
+segments gives
+\[
+ S^{xTx}(a) = \frac{5}{6}, \qquad S^{xTx}(b) = \frac{1}{3},
+\]
+and the corresponding degree-three logsignature coefficients of the word \(xTx\)
+are \(1/6\) for \(a\) and \(-1/3\) for \(b\). The ordinary clocked path therefore
+first distinguishes the two schedules at depth three.
+
+To see the exact relationship between \(S^{xTx}\) and the discrete separation
+area \(J_{01}\) for an arbitrary scalar increment sequence
+\(z=(z_r)_{r=0}^{R-1}\), with \(z_r\in\R\), over \(R \geq 2\) uniform clock steps
+\(\Delta T_r = 1/R\), decompose \(S^{xTx}\) over the segment indices
+\(r, m, t \in \{0, \ldots, R-1\}\) in which the three integration times
+\(t_1 < t_2 < t_3\) fall:
+\begin{itemize}
+\item \emph{Distinct spatial segments (\(r < t\)):} If \(t_2\) falls in a
+strictly intermediate segment \(r < m < t\) (of which there are \(t - r - 1\)),
+the integral contributes \(\frac{1}{R} z_r z_t\) per segment. If \(t_2\) falls in
+segment \(r\) with \(t_1 < t_2\), the ordered \(2\)-simplex on segment \(r\)
+contributes \(\frac{1}{2R} z_r z_t\); symmetrically, \(t_2 < t_3\) in segment
+\(t\) contributes another \(\frac{1}{2R} z_r z_t\). Summing these three cases
+yields \(\bigl((t - r - 1) + \tfrac12 + \tfrac12\bigr)\frac{1}{R} z_r z_t = \frac{t - r}{R} z_r z_t\).
+\item \emph{Within-segment triples (\(r = m = t\)):} When all three integration
+variables fall inside the same segment \(r\), linear traversal of
+\((\Delta T_r, z_r) = (1/R, z_r)\) over the ordered \(3\)-simplex of volume
+\(1/3! = 1/6\) contributes \(\frac{1}{6R} z_r^2\).
+\end{itemize}
+Summing over all segments and comparing with
+\(J_{01} = \frac{1}{2(R-1)}\sum_{r < t}(t - r) z_r z_t\) from~\eqref{eq:app-separation}
+establishes the exact identity
+\begin{equation}\label{eq:discrete-depth-correction}
+ J_{01} = \frac{R}{2(R-1)} S^{xTx}
+             - \frac{1}{12(R-1)} \sum_{r=0}^{R-1} z_r^2.
+\end{equation}
+For both \(a\) and \(b\), \(\sum_{r=0}^3 z_r^2 = 2\), so the within-segment
+interpolation correction is \(2/(12 \cdot 3) = 1/18\), confirming
+\(\frac{4}{6}\cdot\frac{5}{6} - \frac{1}{18} = \frac{1}{2}\) and
+\(\frac{4}{6}\cdot\frac{1}{3} - \frac{1}{18} = \frac{1}{6}\).
+
+\begin{example}[Depth-three collision under simultaneous linear interpolation]
+\label{ex:depth-three-collision}
+Because the within-step sum of squares \(\sum_{r=0}^{R-1} z_r^2\) is not a
+function of the ordinary depth-three signature of \((T, x)\),
+identity~\eqref{eq:discrete-depth-correction} prevents any universal recovery of
+\(J_{01}\) from clocked depth-three coordinates. Explicitly, on the
+four-step uniform clock \(\Delta T_r = 1/4\), consider the two scalar increment
+sequences
+\[
+ z^{(1)} = (2, 1, 1, 1), \qquad
+ z^{(2)} = \Bigl(\frac{17}{8},\, \frac{5}{8},\, \frac{11}{8},\, \frac{7}{8}\Bigr).
+\]
+Direct evaluation of the concatenated segment exponentials shows that the clocked
+paths of \(z^{(1)}\) and \(z^{(2)}\) have \emph{identical} ordinary tensor
+signatures at every word of length zero, one, two, and three (all \(15\) tensor
+coordinates coincide, with \(s = (1, 5)\) and \(S^{xTx} = 103/24\)). Yet their sum
+of squared increments differs (\(7\) versus \(121/16\)), so~\eqref{eq:discrete-depth-correction}
+assigns them distinct depth-two Pascal areas:
+\[
+ J_{01}\bigl(z^{(1)}\bigr) = \frac{8}{3} = \frac{512}{192}, \qquad
+ J_{01}\bigl(z^{(2)}\bigr) = \frac{509}{192}.
+\]
+Conversely, discrete index coding depends on how steps are segmented and
+anchored: prepending an idle zero step \((0, 0)\) to \(a\) and \(b\) leaves the
+geometric curve \((T, x)\) and all of its ordinary signature coordinates
+unchanged, while changing the five-step Pascal grid to \(u_r = r/4\) and
+rescaling their coded areas from \((1/2, 1/6)\) to \((3/8, 1/8)\).
+\end{example}
+
+\subsection{Exact scalar projection from a frequency--mass staircase}
+\label{app:staircase-projection}
+The discrepancy in~\eqref{eq:discrete-depth-correction} arose because \(T\) and
+\(x\) changed simultaneously within each piecewise-linear segment. When a
+one-dimensional sequence \(p_0, \ldots, p_{K-1}\) is instead embedded into \(\R^2\)
+as a \emph{staircase} that holds the position coordinate constant during each
+data jump and advances position only between jumps, within-step position changes
+vanish identically, and every scalar Pascal-coded coordinate becomes an exact
+linear combination of higher-depth staircase signature coordinates.
+
+Let \(K \geq 3\) and \(u_k = k/(K-1)\) for \(0 \leq k < K\). Construct the
+two-channel frequency--mass staircase \((F, M)\) starting at \((0, 0)\) as
+follows: at bin \(k = 0\), traverse a vertical step \(\Delta M = p_0\) while
+\(F = u_0 = 0\) remains fixed; for each \(k = 0, \ldots, K-2\), move horizontally
+by \(\Delta F = u_{k+1} - u_k = 1/(K-1)\) with \(\Delta M = 0\), then traverse
+the vertical mass step \(\Delta M = p_{k+1}\) at fixed \(F = u_{k+1}\). No
+horizontal step follows the final jump \(p_{K-1}\) at \(u_{K-1} = 1\), so for a
+unit-sum spectrum the endpoint is \((F_{\mathrm{end}}, M_{\mathrm{end}}) = (1, 1)\).
+
+In signature words over the alphabet \(\{F, M\}\), let \(F^a\) denote \(a\)
+consecutive \(F\) letters (with \(F^0\) the empty word). Write \(s_a\) and
+\(B_{ab}\) for the first- and second-level coordinates of the scalar lift with
+monomial increment copies \(u_k^a p_k\) and \(u_k^b p_k\), and set
+\(J_{ab} = \tfrac12(B_{ab} - B_{ba})\). Here \(a,b\) label polynomial copies,
+while \(k\) indexes frequency bins; in particular, \(J_{01}\) pairs the original
+copy with the linearly weighted copy.
+
+The following result specializes the standard polynomial one-form representation
+of iterated integrals as signature functionals~\cite[Lem.~4.1]{polynomialoneforms},
+applied to \(F^a\,dM\). We give explicit coefficients and the sufficient scalar
+depth bound \(2P-1\).
+
+\begin{theorem}[Exact scalar staircase projection]\label{prop:staircase-projection}
+Along the \((F, M)\) staircase on \(K \geq 3\) bins, the monomial-coded endpoints
+and signed areas for degrees \(0, 1, 2\) satisfy
+\begin{align}
+ s_0 &= S^M, & s_1 &= S^{FM}, & s_2 &= 2 S^{FFM}, \label{eq:staircase-endpoints}\\
+ J_{01} &= \frac{1}{2} S^{MFM}, &&& \label{eq:staircase-area01}\\
+ J_{02} &= S^{FMFM} + S^{MFFM}, &&& \label{eq:staircase-area02}\\
+ J_{12} &= S^{FFMFM} + S^{FMFFM}. &&& \label{eq:staircase-area12}
+\end{align}
+Consequently, at any fixed \(K \geq 3\), all depth-two endpoints and signed areas
+of the \(P = 3\) Pascal lift---as well as its positive-diagonal QR version
+(Section~\ref{app:qr}) and \(\sqrt 2\)-scaled spectral areas---are fixed,
+data-independent linear projections of the ordinary staircase tensor signature
+through depth five. More generally, for \(2 \leq P \leq K\) scalar polynomial
+copies of degrees below \(P\), ordinary staircase depth \(2P - 1\) suffices.
+\end{theorem}
+\begin{proof}
+During the \(k\)th vertical segment, \(dM\) integrates to \(p_k\) at constant
+frequency \(F_t = u_k\), whereas \(dM = 0\) on every horizontal segment. Since
+\(F_0 = 0\), the ordered \(a\)-fold integral of \(dF\) from \(0\) up to time
+\(t\) equals \(F_t^a / a!\). Integrating against \(dM_t\) therefore yields
+\[
+ a!\,S^{F^a M} = \int_0^T F_t^a\,dM_t = \sum_{k=0}^{K-1} u_k^a p_k = s_a,
+\]
+which gives~\eqref{eq:staircase-endpoints} for \(a = 0, 1, 2\).
+
+For the second-level coordinate \(B_{ab} = \int_{0 < s < t < T} F_s^a F_t^b\,dM_s\,dM_t\)
+(notice that because \(F\) is constant within each vertical mass step, integrating
+\(F_s^a F_t^b\,dM_s\,dM_t\) over \(s < t\) inside the \(k\)th vertical segment
+produces \(\tfrac12 u_k^{a+b} p_k^2\), matching the piecewise-linear diagonal
+term in~\eqref{eq:app-depth-two}), expand \(F_t^b = \bigl(F_s + (F_t - F_s)\bigr)^b\)
+by the binomial theorem:
+\[
+ F_s^a F_t^b = \sum_{j=0}^b \binom{b}{j} F_s^{a+b-j} (F_t - F_s)^j.
+\]
+For \(0 < s < t\), \(F_s^{a+b-j} / (a+b-j)!\) is the \((a+b-j)\)-fold iterated
+integral of \(dF\) over \((0, s)\), and \((F_t - F_s)^j / j!\) is the \(j\)-fold
+iterated integral of \(dF\) over \((s, t)\). Interleaving these \(dF\) factors
+with \(dM_s\) and \(dM_t\) yields, for all integers \(a, b \geq 0\),
+\begin{equation}\label{eq:staircase-general}
+ B_{ab} = \sum_{j=0}^b \binom{b}{j} (a + b - j)!\,j!\,S^{F^{a+b-j} M F^j M}.
+\end{equation}
+Notice that the \(j = 0\) term \((a+b)!\,S^{F^{a+b} M M}\) is symmetric in \(a\)
+and \(b\) and cancels upon forming \(J_{ab} = \tfrac12(B_{ab} - B_{ba})\).
+Evaluating~\eqref{eq:staircase-general} at \((a, b) = (0, 1), (0, 2), (1, 2)\)
+and subtracting \(B_{ba}\) gives:
+\begin{align*}
+ B_{01} - B_{10} &= (S^{FMM} + S^{MFM}) - S^{FMM} = S^{MFM}, \\
+ B_{02} - B_{20} &= (2S^{FFMM} + 2S^{FMFM} + 2S^{MFFM}) - 2S^{FFMM}
+                  = 2(S^{FMFM} + S^{MFFM}), \\
+ B_{12} - B_{21} &= (6S^{FFFMM} + 4S^{FFMFM} + 2S^{FMFFM})
+                  - (6S^{FFFMM} + 2S^{FFMFM}) \\
+                 &= 2(S^{FFMFM} + S^{FMFFM}),
+\end{align*}
+proving~\eqref{eq:staircase-area01}--\eqref{eq:staircase-area12}.
+
+Finally, any degree-\((P-1)\) polynomial basis \(c_p(u) = \sum_{a=0}^{P-1} L_{pa} u^a\)
+transforms endpoints and areas linearly via \(s^c = L s\) and \(J^c = L J L^\top\)
+by~\eqref{eq:basis-naturality}, including the normalized Pascal weights, the
+orthonormal QR weights \(q(k) = (D H^{-1})^\top b(k)\) of Section~\ref{app:qr},
+and multiplication of areas by \(\sqrt 2\). For \(0 \leq a < b \leq P - 1\), the
+words in~\eqref{eq:staircase-general} have length \((a + b - j) + 1 + j + 1 = a + b + 2 \leq (P - 2) + (P - 1) + 2 = 2P - 1\),
+while endpoint words \(F^a M\) have length \(a + 1 \leq P < 2P - 1\) for
+\(P \geq 2\).
+\end{proof}
+
+\begin{remark}[Scope of the staircase construction]
+Every word appearing in~\eqref{eq:staircase-endpoints}--\eqref{eq:staircase-general}
+ends in the letter \(M\). Appending an extra horizontal step after the last mass
+jump would change \(S^F\) and words ending in \(F\), while leaving every formula
+in Theorem~\ref{prop:staircase-projection} intact. By contrast, replacing the
+axis-aligned staircase with diagonal segments that increment \(F\) and \(M\)
+simultaneously reintroduces within-bin interpolation terms analogous
+to~\eqref{eq:discrete-depth-correction}. Likewise, Theorem~\ref{prop:staircase-projection}
+exploits the scalar structure of \(M\) (where same-degree areas \(J_{aa}\) vanish)
+and does not assert an identical depth-\((2P-1)\) projection for general
+multichannel temporal paths.
+\end{remark}
+
+\subsection{Fixed endpoints, affine spans, and ridge regularization}
+\label{app:fixed-endpoints}
+Theorem~\ref{prop:staircase-projection} shows that the five nonconstant \(P=3\)
+spectral Pascal coordinates lie inside the linear span of the staircase tensor
+signature through depth five. When comparing candidate representations empirically
+with a regularized linear classifier, however, matching or enlarging the linear
+span is not equivalent to preserving ridge predictions.
+
+The standard tensor exponential and logarithm identities~\cite{chen} show that,
+even at depth three, fixed endpoints create exact affine equivalences between
+tensor and logsignature coordinates. Writing \(\ell_1 = s\), \(\ell_2 = J\), and
+\(\ell_3\) for the homogeneous components of the tensor logarithm
+\(\log_\otimes S_{\leq 3}(y)\) through degree three, expanding the tensor
+exponential \(S_{\leq 3}(y) = \exp_\otimes(\ell_1 + \ell_2 + \ell_3)\) gives
+\begin{equation}\label{eq:fixed-endpoint-span}
+ S^2 = J + \frac{1}{2} s^{\otimes 2}, \qquad
+ S^3 = \ell_3 + \frac{1}{2}(s \otimes J + J \otimes s) + \frac{1}{6} s^{\otimes 3}.
+\end{equation}
+On a family of paths whose endpoint \(s\) is identical for every observation---such
+as the unit-sum normalized \((F, M)\) staircases of Subsection~\ref{app:staircase-projection},
+all of which share \(s = (1, 1)\)---the relations~\eqref{eq:fixed-endpoint-span}
+and their Lie-series inverses are \emph{affine linear} in the remaining
+coordinates \((J, \ell_3)\) and \((S^2, S^3)\). Consequently, through depth three,
+staircase tensor features and staircase logsignature features span the exact same
+affine linear function space on unit-sum spectra. (At depth four, the exponential
+expansion of \(S^4\) introduces the quadratic area product \(\tfrac12 J \otimes J\),
+so fixed endpoints alone no longer guarantee affine equivalence with the
+depth-four logsignature.)
+
+Why, then, can two feature maps with the same affine span produce different
+classifications under a linear ridge model? Suppose \(Z \in \R^{N \times d_1}\)
+and \(\widetilde Z \in \R^{N \times d_2}\) are two column-standardized training
+feature matrices having the exact same column space \(\operatorname{col}(Z) = \operatorname{col}(\widetilde Z) \subseteq \{u \in \R^N : \mathbf 1^\top u = 0\}\).
+For centered targets \(\widetilde Y = Y - \mathbf 1 \bar y^\top\) and ridge
+penalty \(\alpha > 0\), solving
+\[
+ \min_{W} \|\widetilde Y - Z W\|_F^2 + \alpha \|W\|_F^2
+\]
+yields the standard dual ridge predictions~\cite{ridge}
+\(\widehat Y = Z(Z^\top Z + \alpha I_{d_1})^{-1} Z^\top \widetilde Y = K(K + \alpha I_N)^{-1} \widetilde Y\),
+determined entirely by the Gram matrix \(K = Z Z^\top\). At fixed \(\alpha\),
+the two training prediction operators agree for all centered targets exactly
+when \(K = \widetilde K = \widetilde Z \widetilde Z^\top\). For test features
+\(Z_*\) standardized using the training statistics, the scores are
+\(Z_* Z^\top (K + \alpha I_N)^{-1}\widetilde Y + \mathbf 1\bar y^\top\).
+Columnwise standardization gives each nonconstant training column norm
+\(\sqrt N\), while the Gram matrices can still differ.
+\begin{enumerate}
+\item \emph{Redundant or linearly dependent coordinates:} If \(\widetilde Z\)
+repeats a standardized column \(k\) times (for example, when \(S^{FM}\) and
+\(S^{MF} = 1 - S^{FM}\) both standardize to \(\pm z_1\) on unit-endpoint
+staircases), that direction receives \(k\) times larger weight in
+\(\widetilde Z \widetilde Z^\top\), effectively dividing its ridge penalty by
+\(k\) relative to unrepeated directions.
+\item \emph{Non-orthogonal basis transforms and unprojected ambient dimensions:}
+Replacing \(P=3\) QR-Pascal coordinates by unorthogonalized monomials can alter
+the singular values of \(Z\) without changing its column space. Fitting ridge
+directly to all \(1{,}040\) depth-five staircase tensor columns can also add
+directions beyond the \(100\) projected Pascal features under the same isotropic
+penalty \(\alpha \|W\|_F^2\).
+\end{enumerate}
+Part~II's empirical comparisons---especially the staircase depth table in
+Section~\ref{app:har} and the width-varying interaction controls in
+Section~\ref{app:natops}---directly reflect this interplay between expressive span
+and ridge metric geometry.

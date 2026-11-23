@@ -1,0 +1,35 @@
+{
+  "python": "3.13.15 (main, Aug  7 2026, 02:15:21) [Clang 22.1.3 ]",
+  "executable": "../tensorsig/.venv/bin/python",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.13.0",
+    "threadpoolctl": "3.7.0"
+  },
+  "thread_environment": {
+    "OMP_NUM_THREADS": 1,
+    "VECLIB_MAXIMUM_THREADS": 1,
+    "torch_num_threads": 1
+  },
+  "source_sha256": {
+    "examples/pascal_transfer/transforms/streams.py": "b5a3b46c50d8f329f83589039969084948ee482e678be0bc40a46419743535e6",
+    "examples/pascal_transfer/transforms/emg_observations.py": "90db186689967e39c5bce2123a6e2755edb8c5ac5cc119d6f9d3fc6eab46bb0a",
+    "examples/pascal_transfer/transforms/outer_worker.py": "ffce7f2784185d53787777566ad4ec48189e4916f258cd700e94b17a97cc5898",
+    "examples/pascal_transfer/transforms/data_diagnostics.py": "ac7fb17b3bdf6951fed40416c02dc4346508437582c8927b5bbe43a19c7fe837",
+    "examples/pascal_transfer/transforms/summarize.py": "ffa9ca77429a5fcc2d3f5d305bc58222819f16ac85bcfe8fa7c651179c4944e1",
+    "examples/pascal_transfer/transforms/pair_worker.py": "cc0c24de03f153b20f4904031256b5d98175706daabe75d37ef76b6c068effe1",
+    "examples/pascal_transfer/transforms/verify.py": "aa5681467c301073c09300b8c6ec8ff6794e57640de519da1b11e26c52eee97f",
+    "examples/pascal_transfer/transforms/study.py": "08072e6d0fd75c3c3107a5345fa801bb972d21bf316d5c52ee462dbd7dbb48a1",
+    "examples/pascal_transfer/features.py": "eaa7e5fa694119b464a5dc9ad36cc774c819ac71130a73d506dc0e46af95df7f",
+    "examples/pascal_transfer/datasets.py": "cabaa5efbf6c0b37f83e5ce21c711efe08f0e501aa3d52887f1ed03615b2239d",
+    "examples/pascal_transfer/regression_datasets.py": "a65a9fa7697322cd0484932c34d4f756934640a67cc202df77063b2e0f059b5f",
+    "examples/pascal_transfer/benchmark.py": "e869daecfccad83b664d6ea0a1a687fa1eb9785d57892f0d99de402cc40c3b5b",
+    "examples/pascal_transfer/followup/run.py": "1d95648489c1973ceb8ee02492de1dd727aeb2623d184afefc9d016dd43a3add",
+    "examples/pascal_transfer/followup/observable_features.py": "bac8bbafcb082216d48d662a0b237ad8f3f18c566586f1ef864b9142380cd2e1",
+    "examples/uci_har/retained_features.py": "388de0ddf26f3d99fd5b76ea565b7f74c8fd6c509eb64da6828afcbe3fdb62a7"
+  },
+  "note": "Snapshot created after all predictions and independent audit; frozen extraction/readout source hashes are checked against every unit protocol. Plotting uses a separate temporary matplotlib runtime."
+}
